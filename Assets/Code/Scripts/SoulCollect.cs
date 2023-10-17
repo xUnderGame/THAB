@@ -5,16 +5,23 @@ using UnityEngine;
 public class SoulCollect : MonoBehaviour
 {
     [SerializeField] private int value;
-    private bool hasTriggered;
+    
+
+    private GameManager soulManager;
+
+    private void Start()
+    {
+        soulManager = GameManager.instance;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameManager.Instance.souls += 1;
-        if (collision.CompareTag("Player") && !hasTriggered)
+        GameManager.instance.souls += 1;
+        if (collision.CompareTag("Player"))
         {
-            hasTriggered = true;
             //Da el alma al jugador
-            Destroy(gameObject);
+            soulManager.ChangeSouls(value);
         }
+            Destroy(gameObject);
     }
 }
