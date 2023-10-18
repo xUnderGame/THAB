@@ -7,7 +7,6 @@ public class SceneLoaderGameOver : MonoBehaviour
 {
     public void LoadScene(string sceneName)
     {
-        Debug.Log("ok");
         SceneManager.LoadScene(sceneName);
     }
 }
