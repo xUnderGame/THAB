@@ -1,31 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    public GameObject topPlayer;
+    public GameObject bottomPlayer;
 
-    public static GameManager instance;
+    private bool currentLane;
     public int souls;
-    [SerializeField] private TMP_Text soulsDisplay;
 
     void Awake()
     {
         // Only one GameManager on scene.
-        if (!instance) instance = this;
+        if (!Instance) Instance = this;
         else { Destroy(gameObject); return; }
+
+        // Setting stuff up
+        currentLane = false; // (Starts as bottom lane)
+        topPlayer.SetActive(false);
         souls = 0;
     }
 
-    private void OnGUI()
+    // Swap current lanes
+    public void SwapLane() 
     {
-        soulsDisplay.text = souls.ToString();
+        bottomPlayer.SetActive(currentLane);
+        topPlayer.SetActive(!currentLane);
+        currentLane = !currentLane;
     }
 
+    // Adds to the player amount of souls
     public void ChangeSouls(int amount)
     {
         souls += amount;
     }
-
 }
