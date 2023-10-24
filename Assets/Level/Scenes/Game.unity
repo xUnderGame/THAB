@@ -547,6 +547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topPlayer: {fileID: 1573417269}
   bottomPlayer: {fileID: 470930963}
+  fireballPrefab: {fileID: 7566975623693098253, guid: 442b421b813d99f488a0bf60bf00a6d5, type: 3}
   souls: 0
 --- !u!4 &466934685
 Transform:

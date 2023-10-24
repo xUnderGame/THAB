@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameObject topPlayer;
     public GameObject bottomPlayer;
+    public GameObject fireballPrefab;
 
     private bool currentLane;
     public int souls;
@@ -36,5 +37,10 @@ public class GameManager : MonoBehaviour
     public void ChangeSouls(int amount)
     {
         souls += amount;
+    }
+
+    public void ShootFireball()
+    {
+        Instantiate(fireballPrefab, GameObject.Find("ShootingPoint").transform.position, Quaternion.identity);
     }
 }

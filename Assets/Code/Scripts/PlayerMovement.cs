@@ -38,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Switch lanes
         if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.SwapLane();
+
+        // Shoot fireballs
+        if (Input.GetKeyDown(KeyCode.Space)) GameManager.Instance.ShootFireball();
     }
 
     // Checks if the player is grounded.
