@@ -4,25 +4,15 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
+    public float fbSpeed = 0.5f;
 
-    public float fbSpeed = 1f;
-    private Rigidbody2D fireballRB;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        fireballRB = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
-        //Impulsa la bala hacia la derecha, se usa un FixedUpdate para que sus
-        //frames sean fijos en todo momento
-
-        //fireballRB.AddForce(Vector2.right * fbSpeed, ForceMode2D.Impulse);
+        // Impulsa la bala hacia la derecha, se usa un FixedUpdate para que sus frames sean fijos en todo momento
         gameObject.transform.Translate(Vector2.right * fbSpeed);
     }
+
+    // Borrar bala al salir de la pantalla (solo funciona en game/build mode)
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
     public GameObject topPlayer;
     public GameObject bottomPlayer;
     public GameObject fireballPrefab;
-
+    
+    private readonly float fireballCD = 0.75f;
+    private float cdTime;
     private bool currentLane;
     public int souls;
 
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
         // Setting stuff up
         currentLane = false; // (Starts as bottom lane)
         topPlayer.SetActive(false);
+        cdTime = Time.time;
         souls = 0;
     }
 
@@ -39,8 +42,14 @@ public class GameManager : MonoBehaviour
         souls += amount;
     }
 
+    // Shoots a fireball to the right
     public void ShootFireball()
     {
-        Instantiate(fireballPrefab, GameObject.Find("ShootingPoint").transform.position, Quaternion.identity);
+        // Cooldown before shooting
+        if (cdTime <= Time.time)
+        {
+            Instantiate(fireballPrefab, GameObject.Find("ShootingPoint").transform.position, Quaternion.identity);
+            cdTime = Time.time + fireballCD;
+        }
     }
 }
