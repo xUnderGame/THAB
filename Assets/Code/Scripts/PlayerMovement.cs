@@ -40,7 +40,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.SwapLane();
 
         // Shoot fireballs
-        if (Input.GetKeyDown(KeyCode.Space)) GameManager.Instance.ShootFireball();
+        if (Input.GetKeyDown(KeyCode.Space)) { 
+            GameManager.Instance.player.fireballCD = GameManager.Instance.SpawnBullet(GameManager.Instance.player.fireballCD, GameManager.Instance.player.fireballPrefab, gameObject.transform.GetChild(0).transform.position);
+        }
     }
 
     // Checks if the player is grounded.

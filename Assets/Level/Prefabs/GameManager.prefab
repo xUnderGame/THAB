@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027b767920ce49943a7bd959bfc59366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 11400000, guid: 43f05ecda872d7e4a8ea729f0e7c01c7, type: 2}
   topPlayer: {fileID: 0}
   bottomPlayer: {fileID: 0}
   fireballPrefab: {fileID: 7566975623693098253, guid: 442b421b813d99f488a0bf60bf00a6d5, type: 3}
