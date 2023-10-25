@@ -29,18 +29,19 @@ public class SpawnObstacle : MonoBehaviour
     }
     private void makeObstacle()
     {
-        int obs = Random.Range(0, 3);
-        switch (obs)
+        int obs = Random.Range(0, 301);
+        if (obs == 0)
+            Instantiate(lane, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        else if (obs <= 100)
+            Instantiate(jump, transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
+        else if (obs <= 200)
+            Instantiate(duck, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        else if (obs <= 300)
         {
-            case 0:
-                Instantiate(jump, new Vector3(20, 0.5f, 0), Quaternion.identity);
-                break;
-            case 1:
-                Instantiate(duck, new Vector3(20, 4, 0), Quaternion.identity);
-                break;
-            case 2:
-                Instantiate(lane, new Vector3(20, 3, 0), Quaternion.identity);
-                break;
+            GameObject sol = Instantiate(soul, transform.position + new Vector3(0, 2.3f, 0), Quaternion.identity, soul.transform.parent);
+            sol.transform.localScale = new Vector3(3f, 3f, 3f);
+            //sol.soulsDisplay = score;
         }
+
     }
 }
