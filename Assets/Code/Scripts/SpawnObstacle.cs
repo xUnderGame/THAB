@@ -9,6 +9,7 @@ public class SpawnObstacle : MonoBehaviour
     public GameObject duck;
     public GameObject jump;
     public GameObject lane;
+    public GameObject soul;
     private int frameCounter;
     // Start is called before the first frame update
     void Start()
