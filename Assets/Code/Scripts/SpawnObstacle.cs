@@ -30,17 +30,26 @@ public class SpawnObstacle : MonoBehaviour
     }
     private void makeObstacle()
     {
-        int obs = Random.Range(0, 301);
-        if (obs == 0)
-            Instantiate(lane, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        else if (obs <= 100)
-            Instantiate(jump, transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
+        int obs = Random.Range(0, 401);
+        if (obs <= 100)
+        { 
+            GameObject lan = Instantiate(lane, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            lan.transform.localScale = new Vector3(4f, 6f, 1f);
+        }
         else if (obs <= 200)
-            Instantiate(duck, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        {
+            GameObject jum = Instantiate(jump, transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
+            jum.transform.localScale = new Vector3(1f, 2f, 1f);
+        }
         else if (obs <= 300)
         {
-            GameObject sol = Instantiate(soul, transform.position + new Vector3(0, 2.3f, 0), Quaternion.identity, soul.transform.parent);
-            sol.transform.localScale = new Vector3(3f, 3f, 3f);
+            GameObject duc = Instantiate(duck, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+            duc.transform.localScale = new Vector3(3f, 3f, 1f);
+        }
+        else if (obs <= 400)
+        {
+            GameObject sol = Instantiate(soul, transform.position + new Vector3(0, 0, 0), Quaternion.identity, soul.transform.parent);
+            sol.transform.localScale = new Vector3(3f, 3f, 1f);
             //sol.soulsDisplay = score;
         }
 

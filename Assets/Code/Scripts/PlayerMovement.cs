@@ -64,4 +64,14 @@ public class PlayerMovement : MonoBehaviour
 
     // Checks if the player is grounded.
     bool IsGrounded() { return rb.velocity.y == 0; }
+
+    //collects powerups
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Powerup")) return;
+
+        powerup = 1;
+        powertimer = 720;
+        Destroy(collision.gameObject);
+    }
 }
