@@ -1,45 +1,59 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpawnObstacle : MonoBehaviour
 {
+    public GameObject soulPrefab;
+    public GameObject duckPrefab;
+    public GameObject jumpPrefab;
+    public GameObject lanePrefab;
+    [DoNotSerialize] public float frameCounter;
+    [DoNotSerialize] public float defaultCounter;
 
-    public GameObject duck;
-    public GameObject jump;
-    public GameObject lane;
-    private int frameCounter;
-    // Start is called before the first frame update
     void Start()
     {
-        frameCounter = 300;
+        defaultCounter = 3.0f;
+        frameCounter = defaultCounter;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        frameCounter--;
         if (frameCounter <= 0)
         {
-            int tim = Random.Range(0,271);
-            makeObstacle();
-            frameCounter = 210 + tim;
+            MakeObstacle();
+            frameCounter = defaultCounter + Random.Range(0, 1);
         }
+        frameCounter -= Time.deltaTime;
     }
-    private void makeObstacle()
+
+    // Creates an obstacle on a randomly chosen lane
+    private void MakeObstacle()
     {
-        int obs = Random.Range(0, 3);
-        switch (obs)
-        {
+        int obs = Random.Range(0, 4);
+        switch(obs) {
+            // Wall
             case 0:
-                Instantiate(jump, new Vector3(20, 0.5f, 0), Quaternion.identity);
+                Instantiate(lanePrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 break;
+
+            // Object to jump
             case 1:
-                Instantiate(duck, new Vector3(20, 4, 0), Quaternion.identity);
+                Instantiate(jumpPrefab, transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
                 break;
+
+            // Object to duck
             case 2:
-                Instantiate(lane, new Vector3(20, 3, 0), Quaternion.identity);
+                Instantiate(duckPrefab, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+                break;
+
+            // Spawns a soul
+            case 3:
+                GameObject soulObject = Instantiate(soulPrefab, transform.position + new Vector3(0, 2.3f, 0), Quaternion.identity, soulPrefab.transform.parent);
+                soulObject.transform.localScale = new Vector3(3f, 3f, 3f);
+                //soulObject.soulsDisplay = score;
                 break;
         }
     }
