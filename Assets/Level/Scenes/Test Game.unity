@@ -531,7 +531,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  
+--- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -725,23 +725,6 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1273676998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273676998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e15f9d29cb2adb34eb4ea22c66707d37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 7603108980107105783, guid: d031a8fb3e0a0ff4a8adc5efa851eec4, type: 3}
-  duckPrefab: {fileID: 3964369467209769770, guid: 8eb6df801887ec64987c0ce393c4dc58, type: 3}
-  jumpPrefab: {fileID: 4272970574644620646, guid: a9f2fc6621fad4f4b8efffbddd355533, type: 3}
-  lanePrefab: {fileID: 8065942969631824406, guid: 6183d7655901d724da572d1204629a6e, type: 3}
-  frameCounter: 0
-  defaultCounter: 3
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
