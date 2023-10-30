@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -32,28 +31,31 @@ public class SpawnObstacle : MonoBehaviour
     // Creates an obstacle on a randomly chosen lane
     private void MakeObstacle()
     {
-        int obs = Random.Range(0, 4);
-        switch(obs) {
+        int obstacle = Random.Range(0, 4);
+        switch(obstacle) {
             // Wall
             case 0:
-                Instantiate(lanePrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                GameObject tempLane = Instantiate(lanePrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                tempLane.transform.localScale = new Vector3(4f, 6f, 1f);
                 break;
 
             // Object to jump
             case 1:
-                Instantiate(jumpPrefab, transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
+                GameObject tempJump = Instantiate(jumpPrefab, transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
+                tempJump.transform.localScale = new Vector3(1f, 2f, 1f);
                 break;
 
             // Object to duck
             case 2:
-                Instantiate(duckPrefab, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+                GameObject tempDuck = Instantiate(duckPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+                tempDuck.transform.localScale = new Vector3(3f, 3f, 1f);
                 break;
 
             // Spawns a soul
             case 3:
-                GameObject soulObject = Instantiate(soulPrefab, transform.position + new Vector3(0, 2.3f, 0), Quaternion.identity, soulPrefab.transform.parent);
-                soulObject.transform.localScale = new Vector3(3f, 3f, 3f);
-                //soulObject.soulsDisplay = score;
+                GameObject tempSoul = Instantiate(soulPrefab, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+                tempSoul.transform.localScale = new Vector3(3f, 3f, 1f);
+                //tempSoul.soulsDisplay = score;
                 break;
         }
     }
