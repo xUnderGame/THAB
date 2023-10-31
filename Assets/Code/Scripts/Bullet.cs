@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Fireball : MonoBehaviour
@@ -16,7 +15,7 @@ public class Fireball : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Impulsa la bala hacia la derecha, se usa un FixedUpdate para que sus frames sean fijos en todo momento
+        // Impulsa la bala hacia una direccion, se usa un FixedUpdate para que sus frames sean fijos en todo momento
         if (direction) gameObject.transform.Translate(Vector2.right * fbSpeed);
         else gameObject.transform.Translate(Vector2.left * fbSpeed);
     }
@@ -27,6 +26,7 @@ public class Fireball : MonoBehaviour
         Destroy(gameObject);
     }
     
+    // Deletes the GameObject it collides with, bullets can collide into eachother!
     void OnTriggerEnter2D(Collider2D col) {
         Destroy(col.attachedRigidbody.gameObject);
         Destroy(gameObject);
