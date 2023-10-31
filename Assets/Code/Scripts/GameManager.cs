@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
     public TMP_Text soulsDisplay;
 
     private readonly float shootingCD = 0.75f;
-    private readonly float fireballCD = 0.75f;
-    private float cdTime;
     private bool currentLane;
     public int souls;
 
