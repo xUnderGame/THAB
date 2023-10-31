@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public PlayerScriptable player;
+    
     public GameObject topPlayer;
     public GameObject bottomPlayer;
     public GameObject fireballPrefab;
     public TMP_Text soulsDisplay;
 
-
+    private readonly float shootingCD = 0.75f;
     private readonly float fireballCD = 0.75f;
     private float cdTime;
     private bool currentLane;
@@ -24,19 +25,23 @@ public class GameManager : MonoBehaviour
         if (!Instance) Instance = this;
         else { Destroy(gameObject); return; }
 
+        // Scriptables
+        player.top = GameObject.Find("Player 2");
+        player.bottom = GameObject.Find("Player 1");
+        player.fireballCD = Time.time;
+
         // Setting stuff up
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
         currentLane = false; // (Starts as bottom lane)
-        topPlayer.SetActive(false);
-        cdTime = Time.time;
+        player.top.SetActive(false);
         souls = 0;
     }
 
     // Swap current lanes
     public void SwapLane() 
     {
-        bottomPlayer.SetActive(currentLane);
-        topPlayer.SetActive(!currentLane);
+        player.bottom.SetActive(currentLane);
+        player.top.SetActive(!currentLane);
         currentLane = !currentLane;
     }
 
@@ -46,14 +51,15 @@ public class GameManager : MonoBehaviour
         souls += amount;
     }
 
-    // Shoots a fireball to the right
-    public void ShootFireball()
+    // Shoots a bullet with a cooldown
+    public float SpawnBullet(float cooldown, GameObject projectile, Vector3 shootingPoint)
     {
         // Cooldown before shooting
-        if (cdTime <= Time.time)
+        if (cooldown <= Time.time)
         {
-            Instantiate(fireballPrefab, GameObject.Find("ShootingPoint").transform.position, Quaternion.identity);
-            cdTime = Time.time + fireballCD;
+            Instantiate(projectile, shootingPoint, Quaternion.identity);
+            return Time.time + shootingCD;
         }
+        return cooldown;
     }
 }
