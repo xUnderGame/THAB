@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
     
+    public GameObject topPlayer;
+    public GameObject bottomPlayer;
+    public GameObject fireballPrefab;
+    public TMP_Text soulsDisplay;
+
     private readonly float shootingCD = 0.75f;
+    private readonly float fireballCD = 0.75f;
+    private float cdTime;
     private bool currentLane;
     public int souls;
 
@@ -23,6 +31,7 @@ public class GameManager : MonoBehaviour
         player.fireballCD = Time.time;
 
         // Setting stuff up
+        soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
         currentLane = false; // (Starts as bottom lane)
         player.top.SetActive(false);
         souls = 0;

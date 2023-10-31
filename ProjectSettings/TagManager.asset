@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Obstacle
   - DestroyObstacles
+  - Coin
+  - Powerup
   layers:
   - Default
   - TransparentFX
