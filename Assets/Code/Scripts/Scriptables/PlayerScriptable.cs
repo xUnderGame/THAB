@@ -6,8 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Player Scriptable", menuName = "Player Scriptable")]
 public class PlayerScriptable : ScriptableObject
 {
-    [DoNotSerialize] public GameObject top;
-    [DoNotSerialize] public GameObject bottom;
+    [DoNotSerialize] public GameObject playerObject;
+    [DoNotSerialize] public Rigidbody2D playerRB;
     public GameObject fireballPrefab;
     public float fireballCD;
 }

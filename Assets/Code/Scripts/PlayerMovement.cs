@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public int force = 20;
-    private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     private int powerup = 0;
     private int powertimer = 0;
@@ -14,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        rb = GetComponent<Rigidbody2D>();
+        GameManager.Instance.player.playerRB = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -22,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Jump
         if (Input.GetKey(KeyCode.UpArrow) && IsGrounded()) {
-            rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+            GameManager.Instance.player.playerRB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         }
         // Makes the player "slide"
         if (Input.GetKey(KeyCode.DownArrow) && IsGrounded()) {
@@ -41,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
         // Switch lanes
         if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.SwapLane();
 
-
         //temporary powerup test
         if (Input.GetKeyDown(KeyCode.P)) { powerup = 1; powertimer = 720; }
         if (powerup == 1)
@@ -50,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
             foreach (GameObject soul in souls)
             {
                 Vector3 direction = transform.position - soul.transform.position;
-                direction = direction / 10;
+                direction /= 10;
                 soul.transform.position = soul.transform.position + direction;
 
             }
@@ -65,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Checks if the player is grounded.
-    bool IsGrounded() { return rb.velocity.y == 0; }
+    bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; }
 
     //collects powerups
     private void OnTriggerEnter2D(Collider2D collision)

@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
-    
-    public GameObject topPlayer;
-    public GameObject bottomPlayer;
     public GameObject fireballPrefab;
-    public TMP_Text soulsDisplay;
+    [DoNotSerialize] public TMP_Text soulsDisplay;
 
     private readonly float shootingCD = 0.75f;
     private bool currentLane;
@@ -24,29 +22,41 @@ public class GameManager : MonoBehaviour
         else { Destroy(gameObject); return; }
 
         // Scriptables
-        player.top = GameObject.Find("Player 2");
-        player.bottom = GameObject.Find("Player 1");
+        player.playerObject = GameObject.Find("Player");
         player.fireballCD = Time.time;
 
         // Setting stuff up
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
-        currentLane = false; // (Starts as bottom lane)
-        player.top.SetActive(false);
         souls = 0;
     }
 
     // Swap current lanes
     public void SwapLane() 
     {
-        player.bottom.SetActive(currentLane);
-        player.top.SetActive(!currentLane);
         currentLane = !currentLane;
+
+        // Change to top lane
+        if (currentLane) {
+            player.playerRB.mass = 0.7f;
+            player.playerObject.layer = 7; // Top layer
+            player.playerObject.transform.localScale = new Vector3(1f, 1f, 1f);
+            player.playerObject.transform.position = new Vector3(-5f, 2.5f, 4f);
+        } 
+
+        // Change to bottom lane
+        else {
+            player.playerRB.mass = 0.5f;
+            player.playerObject.layer = 6; // Bottom layer
+            player.playerObject.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
+            player.playerObject.transform.position = new Vector3(-8f, -5f, 0f);
+        }
     }
 
     // Adds to the player amount of souls
-    public void ChangeSouls(int amount)
+    public void ChangeSouls(int amount, bool forceSet = false)
     {
-        souls += amount;
+        if (forceSet) souls = amount;
+        else souls += amount;
     }
 
     // Shoots a bullet with a cooldown
