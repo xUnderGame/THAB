@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    public Sprite bulletSprite;
     public float fbSpeed = 0.5f;
     public bool direction = true;
-
-    // void Start()
-    // {
-    //     gameObject.GetComponent<SpriteRenderer>().sprite = bulletSprite;
-    // }
+    public bool targetPlayer = false;
 
     void FixedUpdate()
     {
@@ -26,9 +21,12 @@ public class Fireball : MonoBehaviour
         Destroy(gameObject);
     }
     
-    // Deletes the GameObject it collides with, bullets can collide into eachother!
+    // Destroys itself upon touching an enemy/player, bullets cannot collide into eachother (for now)!
     void OnTriggerEnter2D(Collider2D col) {
-        Destroy(col.attachedRigidbody.gameObject);
+        if (col.CompareTag("Player") && targetPlayer) GameManager.Instance.player.Kill();
+        else if (col.CompareTag("Enemy")) GameManager.Instance.KillEnemy(col.gameObject);
+
+        // Destroys itself
         Destroy(gameObject);
     }
 }
