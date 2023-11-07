@@ -44,16 +44,25 @@ public class PlayerMovement : MonoBehaviour
 
         //temporary powerup test
         if (Input.GetKeyDown(KeyCode.P)) { powerup = 1; powertimer = 720; }
-        if (powerup == 1)
-        {
-            GameObject[] souls = GameObject.FindGameObjectsWithTag("Coin");
-            foreach (GameObject soul in souls)
-            {
-                Vector3 direction = transform.position - soul.transform.position;
-                direction = direction / 10;
-                soul.transform.position = soul.transform.position + direction;
+        //temporary powerup test
+        if (Input.GetKeyDown(KeyCode.P)) { powerup = 1; powertimer = 720; }
+        switch (powerup) {
+            case 1:
+                GameObject[] souls = GameObject.FindGameObjectsWithTag("Coin");
+                foreach (GameObject soul in souls)
+                {
+                    Vector3 direction = transform.position - soul.transform.position;
+                    direction = direction / 10;
+                    soul.transform.position = soul.transform.position + direction;
 
-            }
+                }
+                break;
+            case 2:
+
+                break;
+            case 3:
+                break;
+
         }
         if (powertimer > 0) powertimer--;
         else if (powerup != 0) powerup = 0;

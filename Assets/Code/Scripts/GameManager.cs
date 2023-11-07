@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
-    
+
     public GameObject topPlayer;
     public GameObject bottomPlayer;
+    public GameObject topShield;
+    public GameObject bottomShield;
     public GameObject fireballPrefab;
     public TMP_Text soulsDisplay;
 
@@ -42,9 +44,37 @@ public class GameManager : MonoBehaviour
     {
         player.bottom.SetActive(currentLane);
         player.top.SetActive(!currentLane);
+        if (topShield.activeSelf || bottomShield.activeSelf)
+        {
+            bottomShield.SetActive(currentLane);
+            topShield.SetActive(!currentLane);
+        }
+        /*
+        if (topShield.activeSelf)
+        {
+            //topShield.frameCounter = bottomShield.frameCounter;
+        }
+        else if (bottomShield.activeSelf)
+        {
+            //bottomShield.frameCounter = topShield.frameCounter;
+        }
+        */
         currentLane = !currentLane;
     }
-
+    public void EnableShield()
+    {
+        bottomShield.SetActive(!currentLane);
+        topShield.SetActive(currentLane);
+        //topShield.frameCounter = 60;
+        //topShield.frameCounter = 60;
+    }
+    public void DisableShield()
+    {
+        bottomShield.SetActive(false);
+        topShield.SetActive(false);
+        //topShield.frameCounter = 0;
+        //topShield.frameCounter = 0;
+    }
     // Adds to the player amount of souls
     public void ChangeSouls(int amount)
     {

@@ -28,7 +28,9 @@ public class Fireball : MonoBehaviour
     
     // Deletes the GameObject it collides with, bullets can collide into eachother!
     void OnTriggerEnter2D(Collider2D col) {
-        Destroy(col.attachedRigidbody.gameObject);
-        Destroy(gameObject);
+        if (!col.CompareTag("DestroyObstacles")) {
+            Destroy(col.attachedRigidbody.gameObject);
+            Destroy(gameObject);
+        }
     }
 }
