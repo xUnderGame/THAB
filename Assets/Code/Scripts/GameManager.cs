@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using Unity.VisualScripting;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public PlayerScriptable player;
     public GameObject fireballPrefab;
     [DoNotSerialize] public TMP_Text soulsDisplay;
+    [DoNotSerialize] public float gameSpeed;
 
-    private readonly float shootingCD = 0.75f;
+    private readonly float globalCD = 0.5f;
     private bool currentLane;
     public int souls;
 
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
 
         // Setting stuff up
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
+        gameSpeed = 0.5f;
         souls = 0;
     }
 
@@ -66,8 +68,14 @@ public class GameManager : MonoBehaviour
         if (cooldown <= Time.time)
         {
             Instantiate(projectile, shootingPoint, Quaternion.identity);
-            return Time.time + shootingCD;
+            return Time.time + globalCD;
         }
         return cooldown;
+    }
+
+    // Kills an enemy
+    public void KillEnemy(GameObject enemy) {
+        Debug.Log($"{enemy.name} was killed!");
+        Destroy(enemy);
     }
 }

@@ -6,8 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public int force = 20;
     private BoxCollider2D boxCollider;
-    private int powerup = 0;
-    private int powertimer = 0;
+    private int magnetTimer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -40,21 +39,19 @@ public class PlayerMovement : MonoBehaviour
         // Switch lanes
         if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.SwapLane();
 
-        //temporary powerup test
-        if (Input.GetKeyDown(KeyCode.P)) { powerup = 1; powertimer = 720; }
-        if (powerup == 1)
+        // Temporary magnet powerup test (Should move this to fixedUpdate!)
+        if (Input.GetKeyDown(KeyCode.P)) { magnetTimer = 720; }
+        if (magnetTimer > 0)
         {
+            magnetTimer--;
             GameObject[] souls = GameObject.FindGameObjectsWithTag("Coin");
             foreach (GameObject soul in souls)
             {
                 Vector3 direction = transform.position - soul.transform.position;
                 direction /= 10;
                 soul.transform.position = soul.transform.position + direction;
-
             }
         }
-        if (powertimer > 0) powertimer--;
-        else if (powerup != 0) powerup = 0;
 
         // Shoot fireballs
         if (Input.GetKeyDown(KeyCode.Space)) { 
@@ -65,13 +62,11 @@ public class PlayerMovement : MonoBehaviour
     // Checks if the player is grounded.
     bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; }
 
-    //collects powerups
+    // Collects powerups
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Powerup")) return;
-
-        powerup = 1;
-        powertimer = 720;
+        magnetTimer = 720;
         Destroy(collision.gameObject);
     }
 }

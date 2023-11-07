@@ -7,18 +7,11 @@ public class StillEnemy : MonoBehaviour
     [SerializeField] private GameObject projectile;
     private float shootCD;
 
-    private Rigidbody2D rb;
+    void Start() { shootCD = Time.time; }
 
-    // Start is called before the first frame update
-    void Start()
+    void FixedUpdate()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        shootCD = Time.time;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        // Makes the enemy shoot every x seconds, depending on the cooldown 
         shootCD = GameManager.Instance.SpawnBullet(shootCD, projectile, gameObject.transform.GetChild(0).transform.position);
     }
 }
