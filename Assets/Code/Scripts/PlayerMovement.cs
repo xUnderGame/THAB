@@ -5,16 +5,14 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public int force = 20;
-    private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
-    private int powerup = 0;
-    private int powertimer = 0;
+    private int magnetTimer = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        rb = GetComponent<Rigidbody2D>();
+        GameManager.Instance.player.playerRB = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -22,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Jump
         if (Input.GetKey(KeyCode.UpArrow) && IsGrounded()) {
-            rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+            GameManager.Instance.player.playerRB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         }
         // Makes the player "slide"
         if (Input.GetKey(KeyCode.DownArrow) && IsGrounded()) {
@@ -41,31 +39,20 @@ public class PlayerMovement : MonoBehaviour
         // Switch lanes
         if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.SwapLane();
 
-
-        //temporary powerup test
-        if (Input.GetKeyDown(KeyCode.P)) { powerup = 1; powertimer = 720; }
-        //temporary powerup test
-        if (Input.GetKeyDown(KeyCode.P)) { powerup = 1; powertimer = 720; }
-        switch (powerup) {
-            case 1:
-                GameObject[] souls = GameObject.FindGameObjectsWithTag("Coin");
-                foreach (GameObject soul in souls)
-                {
-                    Vector3 direction = transform.position - soul.transform.position;
-                    direction = direction / 10;
-                    soul.transform.position = soul.transform.position + direction;
-
-                }
-                break;
-            case 2:
-
-                break;
-            case 3:
-                break;
-
+        // Temporary magnet powerup test (Should move this to fixedUpdate!)
+        if (Input.GetKeyDown(KeyCode.P)) { magnetTimer = 720; }
+        if (magnetTimer > 0)
+        {
+            magnetTimer--;
+            GameObject[] souls = GameObject.FindGameObjectsWithTag("Coin");
+            foreach (GameObject soul in souls)
+            {
+                Vector3 direction = transform.position - soul.transform.position;
+                direction /= 10;
+                soul.layer = GameManager.Instance.player.playerObject.layer;
+                soul.transform.position = soul.transform.position + direction;
+            }
         }
-        if (powertimer > 0) powertimer--;
-        else if (powerup != 0) powerup = 0;
 
         // Shoot fireballs
         if (Input.GetKeyDown(KeyCode.Space)) { 
@@ -74,15 +61,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Checks if the player is grounded.
-    bool IsGrounded() { return rb.velocity.y == 0; }
+    bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; }
 
-    //collects powerups
+    // Collects powerups
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Powerup")) return;
-
-        powerup = 1;
-        powertimer = 720;
+        magnetTimer = 720;
         Destroy(collision.gameObject);
     }
 }
