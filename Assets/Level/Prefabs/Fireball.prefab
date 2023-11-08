@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -3131616801039328808}
   m_Layer: 0
   m_Name: Fireball
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,7 +151,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 1.25}
+    oldSize: {x: 6.4, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -172,9 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372f5aa2196378c4cb21dfc705583143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSprite: {fileID: 0}
   fbSpeed: 0.5
   direction: 1
+  targetPlayer: 0
 --- !u!95 &-3131616801039328808
 Animator:
   serializedVersion: 5

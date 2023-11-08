@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
+    public GameObject shieldObject;
     public GameObject fireballPrefab;
     [DoNotSerialize] public TMP_Text soulsDisplay;
     [DoNotSerialize] public float gameSpeed;
@@ -24,9 +25,12 @@ public class GameManager : MonoBehaviour
 
         // Scriptables
         player.playerObject = GameObject.Find("Player");
+        player.shield = player.playerObject.transform.Find("Shield").gameObject;
+        player.isShieldEnabled = false;
         player.fireballCD = Time.time;
 
         // Setting stuff up
+        DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
         gameSpeed = 0.5f;
         souls = 0;
@@ -54,6 +58,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Turns on the player shield
+    public void EnableShield() { player.isShieldEnabled = true; player.shield.SetActive(true); }
+
+    // Turns off the player shield
+    public void DisableShield() { player.isShieldEnabled = false; player.shield.SetActive(false); }
+    
     // Adds to the player amount of souls
     public void ChangeSouls(int amount, bool forceSet = false)
     {
