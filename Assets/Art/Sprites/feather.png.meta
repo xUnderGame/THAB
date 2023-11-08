@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 51d4bb9cc51d38a4c9ce29cb7449d6cc
+guid: 2ff8369fe3cbf9f4589da1a629e95783
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FB1
+      name: Feather1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 35
-        width: 64
-        height: 20
+        x: 5
+        y: 41
+        width: 18
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e86729d1777f6549a0caf31efd16546
-      internalID: -2048660207
+      spriteID: a4ebd4ecf3e441c42b3536b5ae4e8395
+      internalID: 1848113541
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FB2
+      name: Feather2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 35
-        width: 64
-        height: 20
+        x: 5
+        y: 9
+        width: 18
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,29 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1acee1909f58f13498c797cfe5755f61
-      internalID: 1232823479
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FB3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 5
-        width: 64
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0f7ddbb6ade34d24d89e8b52dac595b6
-      internalID: 667487886
+      spriteID: 0bbad4d20ec56cd41906181a2d28e900
+      internalID: 1086608671
       vertices: []
       indices: 
       edges: []
@@ -196,9 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      FB1: -2048660207
-      FB2: 1232823479
-      FB3: 667487886
+      Feather1: 1848113541
+      Feather2: 1086608671
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Vector3 direction = transform.position - soul.transform.position;
                 direction /= 10;
+                soul.layer = GameManager.Instance.player.playerObject.layer;
                 soul.transform.position = soul.transform.position + direction;
             }
         }

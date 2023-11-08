@@ -12,6 +12,6 @@ public class StillEnemy : MonoBehaviour
     void FixedUpdate()
     {
         // Makes the enemy shoot every x seconds, depending on the cooldown 
-        shootCD = GameManager.Instance.SpawnBullet(shootCD, projectile, gameObject.transform.GetChild(0).transform.position);
+        shootCD = GameManager.Instance.SpawnBullet(shootCD, projectile, gameObject.transform.GetChild(0).transform.position, projectile.transform);
     }
 }
