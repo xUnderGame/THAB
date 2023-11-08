@@ -11,8 +11,8 @@ public class Fireball : MonoBehaviour
     void FixedUpdate()
     {
         // Impulsa la bala hacia una direccion, se usa un FixedUpdate para que sus frames sean fijos en todo momento
-        if (direction) gameObject.transform.Translate(Vector2.right * fbSpeed);
-        else gameObject.transform.Translate(Vector2.left * fbSpeed);
+        if (direction) gameObject.transform.Translate(Vector2.right * fbSpeed, Space.World);
+        else gameObject.transform.Translate(Vector2.left * fbSpeed, Space.World);
     }
 
     // Borrar bala al salir de la pantalla (solo funciona en game/build mode)

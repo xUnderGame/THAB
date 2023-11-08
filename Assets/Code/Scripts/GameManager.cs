@@ -62,12 +62,13 @@ public class GameManager : MonoBehaviour
     }
 
     // Shoots a bullet with a cooldown
-    public float SpawnBullet(float cooldown, GameObject projectile, Vector3 shootingPoint)
+    public float SpawnBullet(float cooldown, GameObject projectile, Vector3 shootingPoint, Transform rotateFragment = null)
     {
         // Cooldown before shooting
         if (cooldown <= Time.time)
         {
-            Instantiate(projectile, shootingPoint, Quaternion.identity);
+            GameObject fragment = Instantiate(projectile, shootingPoint, Quaternion.identity);
+            if (rotateFragment) fragment.transform.rotation = rotateFragment.rotation;
             return Time.time + globalCD;
         }
         return cooldown;
