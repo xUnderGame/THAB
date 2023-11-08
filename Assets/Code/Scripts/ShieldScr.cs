@@ -4,30 +4,15 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    public int frameCounter;
-    public GameObject refpoint;
+    private float frameCounter;
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-        frameCounter = 60;
-    }
-    // Update is called once per frame
+    // Resets the timer after its enabled
+    void OnEnable() { frameCounter = 240f; }
+
     void FixedUpdate()
     {
+        // Disable shield after x "frames"
         if (frameCounter > 0) frameCounter--;
-        transform.position = refpoint.transform.position;
-
-    }
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("Obstacle"))
-        {
-            Destroy(col.gameObject);
-            if (frameCounter==0)
-            {
-                GameManager.Instance.DisableShield();
-            }
-        }
+        else GameManager.Instance.DisableShield();
     }
 }

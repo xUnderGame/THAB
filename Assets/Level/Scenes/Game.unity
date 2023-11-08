@@ -932,6 +932,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 219830098541508390, guid: a8feb7b9c29e90748805eccfbfb541ca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1870693310157409852, guid: a8feb7b9c29e90748805eccfbfb541ca, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -991,6 +995,14 @@ PrefabInstance:
     - target: {fileID: 2431610711035416553, guid: a8feb7b9c29e90748805eccfbfb541ca, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119099465093930822, guid: a8feb7b9c29e90748805eccfbfb541ca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119099465093930822, guid: a8feb7b9c29e90748805eccfbfb541ca, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1263,6 +1275,10 @@ PrefabInstance:
     - target: {fileID: 958000768899361759, guid: 6d26a9b30c0203244abe3664ee90384e, type: 3}
       propertyPath: m_Name
       value: StillEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 958000768899361759, guid: 6d26a9b30c0203244abe3664ee90384e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1218603132283898802, guid: 6d26a9b30c0203244abe3664ee90384e, type: 3}
       propertyPath: m_LocalPosition.x

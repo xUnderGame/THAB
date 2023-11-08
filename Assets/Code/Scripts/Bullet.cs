@@ -16,17 +16,27 @@ public class Fireball : MonoBehaviour
     }
 
     // Borrar bala al salir de la pantalla (solo funciona en game/build mode)
-    private void OnBecameInvisible()
-    {
-        Destroy(gameObject);
-    }
-    
-    // Destroys itself upon touching an enemy/player, bullets cannot collide into eachother (for now)!
-    void OnTriggerEnter2D(Collider2D col) {
-        if (col.CompareTag("Player") && targetPlayer) GameManager.Instance.player.Kill();
-        else if (col.CompareTag("Enemy")) GameManager.Instance.KillEnemy(col.gameObject);
+    private void OnBecameInvisible() { Destroy(gameObject); }
 
-        // Destroys itself
-        Destroy(gameObject);
+    // Destroys itself upon touching anything and kills enemies!
+    void OnTriggerEnter2D(Collider2D col) {
+        // Ignore player shooting a fireball
+        if (!targetPlayer && col.CompareTag("Player") || col.name == "Shield") return;
+
+        // Kills an enemy
+        if (col.CompareTag("Enemy")) {
+            GameManager.Instance.KillEnemy(col.gameObject);
+            Destroy(col.gameObject);
+            Destroy(gameObject);
+        }
+
+        // Destroy all bullets when colliding with an obstacle
+        else if (col.CompareTag("Obstacle")) { Destroy(col.gameObject); Destroy(gameObject); }
+        else { Destroy(gameObject); } // Destroy itself anyways
+
+        // // Destroy other bullets coming your way (not working)
+        // else if (col.CompareTag("Bullet")) {
+        //     Destroy(col);
+        // }
     }
 }

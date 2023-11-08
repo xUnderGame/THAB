@@ -71,7 +71,6 @@ public class SpawnObstacle : MonoBehaviour
                 tempSoul.layer = laneTag[laneNum];
                 //tempSoul.soulsDisplay = score;
                 break;
-
         }
     }
 }

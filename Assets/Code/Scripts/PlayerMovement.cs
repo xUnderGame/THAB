@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public int force = 20;
+
     private BoxCollider2D boxCollider;
     private int magnetTimer = 0;
 
@@ -54,6 +55,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        // Enable forcefield
+        if (Input.GetKeyDown(KeyCode.U)) {
+            GameManager.Instance.EnableShield();
+        }
+
         // Shoot fireballs
         if (Input.GetKeyDown(KeyCode.Space)) { 
             GameManager.Instance.player.fireballCD = GameManager.Instance.SpawnBullet(GameManager.Instance.player.fireballCD, GameManager.Instance.player.fireballPrefab, gameObject.transform.GetChild(0).transform.position);
@@ -63,11 +69,23 @@ public class PlayerMovement : MonoBehaviour
     // Checks if the player is grounded.
     bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; }
 
-    // Collects powerups
+    // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Powerup")) return;
-        magnetTimer = 720;
-        Destroy(collision.gameObject);
+        // Powerups
+        if (collision.CompareTag("Powerup")) {
+            magnetTimer = 720;
+            Destroy(collision.gameObject);
+        }
+
+        // Bullets
+        else if (collision.CompareTag("Bullet")) {
+            GameManager.Instance.player.HurtPlayer(collision, "Fireball");
+        }
+
+        // Obstacles
+        else if (collision.CompareTag("Obstacle")) {
+            GameManager.Instance.player.HurtPlayer(collision);
+        }
     }
 }

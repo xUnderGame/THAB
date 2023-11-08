@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d068c6fc959479e45b8e7b2e4839d80f, type: 3}
   m_Name: Player Scriptable
   m_EditorClassIdentifier: 
+  isShieldEnabled: 0
+  playerObject: {fileID: 0}
+  playerRB: {fileID: 0}
+  shield: {fileID: 0}
   fireballPrefab: {fileID: 7566975623693098253, guid: 442b421b813d99f488a0bf60bf00a6d5, type: 3}
-  fireballCD: 1
-  top: {fileID: 0}
-  bottom: {fileID: 0}
+  fireballCD: 14.370306
