@@ -67,7 +67,7 @@ public class SpawnObstacle : MonoBehaviour
             // Spawns a soul
             case 3:
                 GameObject tempSoul = Instantiate(soulPrefab, lanes[laneNum].transform.position, Quaternion.identity, lanes[laneNum].transform);
-                tempSoul.transform.localScale = new Vector3(3f, 3f, 1f);
+                tempSoul.transform.localScale = new Vector3(1f, 1f, 1f);
                 tempSoul.layer = laneTag[laneNum];
                 //tempSoul.soulsDisplay = score;
                 break;

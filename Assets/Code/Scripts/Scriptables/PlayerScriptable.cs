@@ -17,8 +17,8 @@ public class PlayerScriptable : ScriptableObject
 
     // Checks if you are allowed to kill the player or disable the shield
     public void HurtPlayer(Collider2D collision, string tag = null) {
-        if (!collision.name.Contains("Fireball") && !GameManager.Instance.player.isShieldEnabled) GameManager.Instance.player.Kill();
-        else if (!collision.name.Contains("Fireball") && GameManager.Instance.player.isShieldEnabled) GameManager.Instance.DisableShield();
+        if (!collision.name.Contains("Fireball") && !GameManager.Instance.player.isShieldEnabled) { Destroy(collision.gameObject); GameManager.Instance.player.Kill(); }
+        else if (!collision.name.Contains("Fireball") && GameManager.Instance.player.isShieldEnabled) { Destroy(collision.gameObject); GameManager.Instance.DisableShield(); }
     }
 
     // Kills the player and optionally shows the game over GUI
