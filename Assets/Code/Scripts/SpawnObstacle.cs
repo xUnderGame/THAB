@@ -1,45 +1,75 @@
-
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpawnObstacle : MonoBehaviour
 {
+    public GameObject soulPrefab;
+    public GameObject duckPrefab;
+    public GameObject jumpPrefab;
+    public GameObject lanePrefab;
+    [DoNotSerialize] public float frameCounter;
+    [DoNotSerialize] public float defaultCounter;
 
-    public GameObject duck;
-    public GameObject jump;
-    public GameObject lane;
-    private int frameCounter;
-    // Start is called before the first frame update
+    private List<GameObject> lanes = new();
+    private readonly int[] laneTag = { 8, 9 };
+
     void Start()
     {
-        frameCounter = 300;
+        // Add lanes where to spawn
+        lanes.Add(GameObject.Find("Spawns Top"));
+        lanes.Add(GameObject.Find("Spawns Bottom"));
+        
+        // Other vars
+        defaultCounter = 3.0f;
+        frameCounter = defaultCounter;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        frameCounter--;
         if (frameCounter <= 0)
         {
-            int tim = Random.Range(0,271);
-            makeObstacle();
-            frameCounter = 210 + tim;
+            MakeObstacle();
+            frameCounter = defaultCounter + Random.Range(0, 1);
         }
+        frameCounter -= Time.deltaTime;
     }
-    private void makeObstacle()
+
+    // Creates an obstacle on a randomly chosen lane
+    private void MakeObstacle()
     {
-        int obs = Random.Range(0, 3);
-        switch (obs)
-        {
+        int obstacle = Random.Range(0, 4);
+        int laneNum = Random.Range(0, 2);
+
+        switch(obstacle) {
+            // Wall
             case 0:
-                Instantiate(jump, new Vector3(20, 0.5f, 0), Quaternion.identity);
+                GameObject tempLane = Instantiate(lanePrefab, lanes[laneNum].transform.position, Quaternion.identity, lanes[laneNum].transform);
+                tempLane.transform.localScale = new Vector3(4f, 6f, 1f);
+                tempLane.layer = laneTag[laneNum];
                 break;
+
+            // Object to jump
             case 1:
-                Instantiate(duck, new Vector3(20, 4, 0), Quaternion.identity);
+                GameObject tempJump = Instantiate(jumpPrefab, lanes[laneNum].transform.position, Quaternion.identity, lanes[laneNum].transform);
+                tempJump.transform.localScale = new Vector3(1f, 2f, 1f);
+                tempJump.layer = laneTag[laneNum];
                 break;
+
+            // Object to duck
             case 2:
-                Instantiate(lane, new Vector3(20, 3, 0), Quaternion.identity);
+                GameObject tempDuck = Instantiate(duckPrefab, lanes[laneNum].transform.position, Quaternion.identity, lanes[laneNum].transform);
+                tempDuck.transform.localScale = new Vector3(3f, 3f, 1f);
+                tempDuck.layer = laneTag[laneNum];
+                break;
+
+            // Spawns a soul
+            case 3:
+                GameObject tempSoul = Instantiate(soulPrefab, lanes[laneNum].transform.position, Quaternion.identity, lanes[laneNum].transform);
+                tempSoul.transform.localScale = new Vector3(1f, 1f, 1f);
+                tempSoul.layer = laneTag[laneNum];
+                //tempSoul.soulsDisplay = score;
                 break;
         }
     }
