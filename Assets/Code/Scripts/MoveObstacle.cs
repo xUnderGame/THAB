@@ -8,5 +8,5 @@ public class MoveObstacle : MonoBehaviour
     void FixedUpdate() { transform.Translate(-GameManager.Instance.gameSpeed, 0, 0, Space.World); }
 
     // Destroys GameObject after it leaves the screen (only works in build/game mode)
-    public void OnBecameInvisible() { Destroy(gameObject); }
+    public void OnBecameInvisible() { if (!gameObject.CompareTag("Fire")) Destroy(gameObject); }
 }

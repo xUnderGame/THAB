@@ -34,6 +34,19 @@ public class GameManager : MonoBehaviour
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
         gameSpeed = 0.5f;
         souls = 0;
+
+        // Game speed corroutine, can change later
+        StartCoroutine(SpeedUp(1.5f));
+    }
+
+    // Enumerator for the corroutine
+    IEnumerator SpeedUp(float maxSpeed)
+    {
+        while (gameSpeed < maxSpeed)
+        {
+            gameSpeed += 0.10f;
+            yield return new WaitForSeconds(2f);
+        }
     }
 
     // Swap current lanes

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3984418986505413679}
   - component: {fileID: 4450033039894841511}
+  - component: {fileID: 8297857947923325849}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,7 +46,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 11400000, guid: 43f05ecda872d7e4a8ea729f0e7c01c7, type: 2}
-  topPlayer: {fileID: 0}
-  bottomPlayer: {fileID: 0}
+  shieldObject: {fileID: 0}
   fireballPrefab: {fileID: 7566975623693098253, guid: 442b421b813d99f488a0bf60bf00a6d5, type: 3}
+  soulsDisplay: {fileID: 0}
+  gameSpeed: 0
   souls: 0
+--- !u!114 &8297857947923325849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4965776230141255807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 043987f123a1b904d8c38d530a7b473f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planes: []

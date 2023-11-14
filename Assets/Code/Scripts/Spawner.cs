@@ -9,7 +9,8 @@ public class SpawnObstacle : MonoBehaviour
     public GameObject duckPrefab;
     public GameObject jumpPrefab;
     public GameObject lanePrefab;
-    [DoNotSerialize] public float frameCounter;
+    [DoNotSerialize] public float obstaclesFrameCounter;
+    [DoNotSerialize] public float platformsFrameCounter;
     [DoNotSerialize] public float defaultCounter;
 
     private List<GameObject> lanes = new();
@@ -23,17 +24,20 @@ public class SpawnObstacle : MonoBehaviour
         
         // Other vars
         defaultCounter = 3.0f;
-        frameCounter = defaultCounter;
+        obstaclesFrameCounter = defaultCounter;
+        platformsFrameCounter = defaultCounter;
     }
 
+    // Spawns an obstacle/platform every x seconds
     void FixedUpdate()
     {
-        if (frameCounter <= 0)
+        // Spawns an obstacle
+        if (obstaclesFrameCounter <= 0)
         {
             MakeObstacle();
-            frameCounter = defaultCounter + Random.Range(0, 1);
+            obstaclesFrameCounter = defaultCounter - (GameManager.Instance.gameSpeed * 2) + Random.Range(0.2f, 1.5f);
         }
-        frameCounter -= Time.deltaTime;
+        obstaclesFrameCounter -= Time.deltaTime;
     }
 
     // Creates an obstacle on a randomly chosen lane
