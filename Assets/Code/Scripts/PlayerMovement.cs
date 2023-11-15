@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public int force = 20;
+    public float fallForce = 0.5f;
 
     private BoxCollider2D boxCollider;
     private int magnetTimer = 0;
@@ -29,6 +30,14 @@ public class PlayerMovement : MonoBehaviour
             boxCollider.offset = new Vector2(boxCollider.offset.x, -0.5f);
             boxCollider.size = new Vector2(boxCollider.size.x, 1);
         }
+
+        // Fast fall
+        if (Input.GetKey(KeyCode.DownArrow) && !IsGrounded())
+        {
+            // Increase gravity while player is on air
+            GameManager.Instance.player.playerRB.AddForce(Vector2.down * fallForce, ForceMode2D.Impulse);
+        }
+         
 
         // Revert back from sliding
         if (!Input.GetKey(KeyCode.DownArrow)) {
@@ -63,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         // Shoot fireballs
         if (Input.GetKeyDown(KeyCode.Space)) { 
             GameManager.Instance.player.fireballCD = GameManager.Instance.SpawnBullet(GameManager.Instance.player.fireballCD, GameManager.Instance.player.fireballPrefab, gameObject.transform.GetChild(0).transform.position);
-        }
+        }      
     }
 
     // Checks if the player is grounded.
