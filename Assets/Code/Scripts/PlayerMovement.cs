@@ -87,5 +87,10 @@ public class PlayerMovement : MonoBehaviour
         else if (collision.CompareTag("Obstacle")) {
             GameManager.Instance.player.HurtPlayer(collision);
         }
+
+        // Fire
+        else if (collision.CompareTag("Fire")) {
+            GameManager.Instance.player.Kill();
+        }
     }
 }

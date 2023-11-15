@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         souls = 0;
 
         // Game speed corroutine, can change later
-        StartCoroutine(SpeedUp(1.5f));
+        // StartCoroutine(SpeedUp(1.5f));
     }
 
     // Enumerator for the corroutine
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
         // Change to top lane
         if (currentLane) {
-            player.playerRB.mass = 0.7f;
+            player.playerRB.mass = 0.6f;
             player.playerObject.layer = 7; // Top layer
             player.playerObject.transform.localScale = new Vector3(1f, 1f, 1f);
             player.playerObject.transform.position = new Vector3(-5f, 2.5f, 4f);

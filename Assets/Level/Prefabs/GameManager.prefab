@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3984418986505413679}
   - component: {fileID: 4450033039894841511}
-  - component: {fileID: 8297857947923325849}
+  - component: {fileID: 2660657952552351274}
+  - component: {fileID: 3779494366347034895}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -51,7 +52,7 @@ MonoBehaviour:
   soulsDisplay: {fileID: 0}
   gameSpeed: 0
   souls: 0
---- !u!114 &8297857947923325849
+--- !u!114 &2660657952552351274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,3 +65,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planes: []
+--- !u!114 &3779494366347034895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4965776230141255807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15f9d29cb2adb34eb4ea22c66707d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameCounter: 0
+  defaultCounter: 0
+  grids: []
