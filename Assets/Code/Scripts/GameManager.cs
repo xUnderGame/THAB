@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject fireballPrefab;
     [DoNotSerialize] public TMP_Text soulsDisplay;
     [DoNotSerialize] public float gameSpeed;
+    [DoNotSerialize] public float spawningGap;
 
     private readonly float globalCD = 0.5f;
     private bool currentLane;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         // Setting stuff up
         DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
+        spawningGap = 15;
         gameSpeed = 0.5f;
         souls = 0;
 

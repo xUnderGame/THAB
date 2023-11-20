@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -9199625889555100288}
   m_Layer: 0
   m_Name: Uppies
-  m_TagString: Untagged
+  m_TagString: Marked
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
