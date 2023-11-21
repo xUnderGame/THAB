@@ -12,20 +12,17 @@ public class PlayerScriptable : ScriptableObject
     [DoNotSerialize] public Rigidbody2D playerRB;
     [DoNotSerialize] public GameObject shield;
 
-    public GameObject fireballPrefab;
-    public float fireballCD;
-
     // Checks if you are allowed to kill the player or disable the shield
-    public void HurtPlayer(Collider2D collision, string tag = null) {
-        if (!collision.name.Contains("Fireball") && !GameManager.Instance.player.isShieldEnabled) { Destroy(collision.gameObject); GameManager.Instance.player.Kill(); }
-        else if (!collision.name.Contains("Fireball") && GameManager.Instance.player.isShieldEnabled) { Destroy(collision.gameObject); GameManager.Instance.DisableShield(); }
+    public void HurtPlayer(Collider2D collision) {
+        if (!collision.name.Contains("Fireball") && !isShieldEnabled) { Destroy(collision.gameObject); GameManager.Instance.player.Kill(); }
+        else if (!collision.name.Contains("Fireball") && isShieldEnabled) { Destroy(collision.gameObject); DisableShield(); }
     }
 
     // Kills the player and optionally shows the game over GUI
     public void Kill(bool showGUI = false) {
         Debug.Log("Player was killed!");
 
-        // //Play death animation
+        // // Play death animation
         //playerObject.GetComponent<Animator>().Play("Death");
         
         // Toggle GameOver GUI
@@ -37,4 +34,10 @@ public class PlayerScriptable : ScriptableObject
         Time.timeScale = 0;
         throw new NotImplementedException();
     }
+
+    // Turns on the player shield
+    public void EnableShield() { isShieldEnabled = true; shield.SetActive(true); }
+
+    // Turns off the player shield
+    public void DisableShield() { isShieldEnabled = false; shield.SetActive(false); }
 }

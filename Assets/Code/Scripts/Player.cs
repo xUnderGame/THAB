@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public int force = 20;
 
     private BoxCollider2D boxCollider;
     private int magnetTimer = 0;
+    private Gun gun;
 
     // Start is called before the first frame update
     void Start()
     {
+        gun = GetComponent<Gun>();
+        gun.cooldown = Time.time;
         boxCollider = GetComponent<BoxCollider2D>();
         GameManager.Instance.player.playerRB = GetComponent<Rigidbody2D>();
+        gun.projectile = Resources.Load<GameObject>("Projectiles/Fireball");
     }
 
     // Update is called once per frame
@@ -23,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow) && IsGrounded()) {
             GameManager.Instance.player.playerRB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         }
+
         // Makes the player "slide"
         if (Input.GetKey(KeyCode.DownArrow) && IsGrounded()) {
             // Resizes hitbox to be lower
@@ -57,12 +62,12 @@ public class PlayerMovement : MonoBehaviour
 
         // Enable forcefield
         if (Input.GetKeyDown(KeyCode.U)) {
-            GameManager.Instance.EnableShield();
+            GameManager.Instance.player.EnableShield();
         }
 
         // Shoot fireballs
         if (Input.GetKeyDown(KeyCode.Space)) { 
-            GameManager.Instance.player.fireballCD = GameManager.Instance.SpawnBullet(GameManager.Instance.player.fireballCD, GameManager.Instance.player.fireballPrefab, gameObject.transform.GetChild(0).transform.position);
+            gun.cooldown = gun.Shoot(gun.cooldown, gun.projectile, gameObject.transform.GetChild(0).transform.position);
         }
     }
 
@@ -80,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Bullets
         else if (collision.CompareTag("Bullet")) {
-            GameManager.Instance.player.HurtPlayer(collision, "Fireball");
+            GameManager.Instance.player.HurtPlayer(collision);
         }
 
         // Obstacles

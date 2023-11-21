@@ -8,13 +8,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
-    public GameObject shieldObject;
-    public GameObject fireballPrefab;
+    [DoNotSerialize] public readonly float globalCD = 0.5f;
     [DoNotSerialize] public TMP_Text soulsDisplay;
     [DoNotSerialize] public float gameSpeed;
     [DoNotSerialize] public float spawningGap;
 
-    private readonly float globalCD = 0.5f;
     private bool currentLane;
     public int souls;
 
@@ -28,10 +26,9 @@ public class GameManager : MonoBehaviour
         player.playerObject = GameObject.Find("Player");
         player.shield = player.playerObject.transform.Find("Shield").gameObject;
         player.isShieldEnabled = false;
-        player.fireballCD = Time.time;
 
         // Setting stuff up
-        DisableShield();
+        player.DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
         spawningGap = 15;
         gameSpeed = 0.5f;
@@ -73,30 +70,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Turns on the player shield
-    public void EnableShield() { player.isShieldEnabled = true; player.shield.SetActive(true); }
-
-    // Turns off the player shield
-    public void DisableShield() { player.isShieldEnabled = false; player.shield.SetActive(false); }
-    
     // Adds to the player amount of souls
     public void ChangeSouls(int amount, bool forceSet = false)
     {
         if (forceSet) souls = amount;
         else souls += amount;
-    }
-
-    // Shoots a bullet with a cooldown
-    public float SpawnBullet(float cooldown, GameObject projectile, Vector3 shootingPoint, Transform rotateFragment = null)
-    {
-        // Cooldown before shooting
-        if (cooldown <= Time.time)
-        {
-            GameObject fragment = Instantiate(projectile, shootingPoint, Quaternion.identity);
-            if (rotateFragment) fragment.transform.rotation = rotateFragment.rotation;
-            return Time.time + globalCD;
-        }
-        return cooldown;
     }
 
     // Kills an enemy

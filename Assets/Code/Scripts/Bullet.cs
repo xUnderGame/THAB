@@ -33,10 +33,5 @@ public class Fireball : MonoBehaviour
         // Destroy all bullets when colliding with an obstacle
         else if (col.CompareTag("Obstacle")) { Destroy(col.gameObject); Destroy(gameObject); }
         else { Destroy(gameObject); } // Destroy itself
-
-        // // Destroy other bullets coming your way (not working)
-        // else if (col.CompareTag("Bullet")) {
-        //     Destroy(col);
-        // }
     }
 }
