@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class ShootingBehaviour : MonoBehaviour
 {
     [DoNotSerialize] public GameObject projectile;
     [DoNotSerialize] public float cooldown;

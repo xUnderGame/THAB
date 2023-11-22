@@ -76,10 +76,9 @@ public class GameManager : MonoBehaviour
         if (forceSet) souls = amount;
         else souls += amount;
     }
+}
 
-    // Kills an enemy
-    public void KillEnemy(GameObject enemy) {
-        Debug.Log($"{enemy.name} was killed!");
-        Destroy(enemy);
-    }
+// Kill interface
+interface IHurtable {
+    public void Kill();
 }

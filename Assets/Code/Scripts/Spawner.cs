@@ -49,6 +49,7 @@ public class Spawner : MonoBehaviour
             // Top platform
             rand = Random.Range(0, platformPrefabs.Count - 1);
             tempPlatform = Instantiate(platformPrefabs[rand], new Vector3(30, 2, 2), Quaternion.identity, grids[0].transform);
+            // tempPlatform.transform.localScale = new Vector3(0.8f, 0.8f, tempPlatform.transform.localScale.z);
             tempPlatform.GetComponent<TilemapRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
             tempPlatform.layer = laneTags[0];
         } else {

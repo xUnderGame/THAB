@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public int force = 20;
 
     private BoxCollider2D boxCollider;
     private int magnetTimer = 0;
-    private Gun gun;
+    private ShootingBehaviour gun;
 
     // Start is called before the first frame update
     void Start()
     {
-        gun = GetComponent<Gun>();
+        gun = GetComponent<ShootingBehaviour>();
         gun.cooldown = Time.time;
         boxCollider = GetComponent<BoxCollider2D>();
         GameManager.Instance.player.playerRB = GetComponent<Rigidbody2D>();

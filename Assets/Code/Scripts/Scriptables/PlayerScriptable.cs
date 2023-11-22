@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player Scriptable", menuName = "Player Scriptable")]
-public class PlayerScriptable : ScriptableObject
+public class PlayerScriptable : ScriptableObject, IHurtable
 {
     public bool isShieldEnabled;
     [DoNotSerialize] public GameObject playerObject;
@@ -19,14 +19,14 @@ public class PlayerScriptable : ScriptableObject
     }
 
     // Kills the player and optionally shows the game over GUI
-    public void Kill(bool showGUI = false) {
+    public void Kill() {
         Debug.Log("Player was killed!");
 
         // // Play death animation
         //playerObject.GetComponent<Animator>().Play("Death");
         
         // Toggle GameOver GUI
-        if (showGUI) ToggleGameOverGUI();
+        ToggleGameOverGUI();
     }
 
     // Toggles ON/OFF the game over GUI
