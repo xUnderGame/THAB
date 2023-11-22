@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player Scriptable", menuName = "Player Scriptable")]
-public class PlayerScriptable : ScriptableObject, IHurtable
+public class PlayerScriptable : ScriptableObject, ICollission
 {
     public bool isShieldEnabled;
     [DoNotSerialize] public GameObject playerObject;
@@ -31,8 +31,8 @@ public class PlayerScriptable : ScriptableObject, IHurtable
 
     // Toggles ON/OFF the game over GUI
     public void ToggleGameOverGUI() {
-        Time.timeScale = 0;
-        throw new NotImplementedException();
+        // Time.timeScale = 0;
+        // throw new NotImplementedException();
     }
 
     // Turns on the player shield

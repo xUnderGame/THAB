@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             player.playerRB.mass = 0.6f;
             player.playerObject.layer = 7; // Top layer
             player.playerObject.transform.localScale = new Vector3(1f, 1f, 1f);
-            player.playerObject.transform.position = new Vector3(-5f, 2.5f, 4f);
+            player.playerObject.transform.position = new Vector3(-6f, 2.5f, 4f);
         } 
 
         // Change to bottom lane
@@ -79,6 +79,6 @@ public class GameManager : MonoBehaviour
 }
 
 // Kill interface
-interface IHurtable {
+interface ICollission {
     public void Kill();
 }

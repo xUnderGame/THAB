@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StillEnemy : MonoBehaviour, IHurtable
+public class StillEnemy : MonoBehaviour, ICollission
 {
     private ShootingBehaviour gun;
 
