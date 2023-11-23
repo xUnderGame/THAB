@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         player.DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
         spawningGap = 15;
-        gameSpeed = 0.5f;
+        gameSpeed = 1f;
         souls = 0;
 
         // Game speed corroutine, can change later
