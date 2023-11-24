@@ -30,12 +30,12 @@ public class GameManager : MonoBehaviour
         // Setting stuff up
         player.DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
-        spawningGap = 15;
+        spawningGap = 18f;
         gameSpeed = 1f;
         souls = 0;
 
         // Game speed corroutine, can change later
-        // StartCoroutine(SpeedUp(1.5f));
+        StartCoroutine(SpeedUp(1.2f));
     }
 
     // Enumerator for the corroutine
@@ -43,8 +43,10 @@ public class GameManager : MonoBehaviour
     {
         while (gameSpeed < maxSpeed)
         {
-            gameSpeed += 0.10f;
             yield return new WaitForSeconds(2f);
+            gameSpeed += 0.02f;
+            spawningGap -= 0.4f;
+            Debug.Log($"Speedup! gameSpeed: {gameSpeed}, spawningGap: {spawningGap}");
         }
     }
 
@@ -58,7 +60,7 @@ public class GameManager : MonoBehaviour
             player.playerRB.mass = 0.6f;
             player.playerObject.layer = 7; // Top layer
             player.playerObject.transform.localScale = new Vector3(1f, 1f, 1f);
-            player.playerObject.transform.position = new Vector3(-6f, 2.5f, 4f);
+            player.playerObject.transform.position = new Vector3(-6f, 11f, 4f);
         } 
 
         // Change to bottom lane
@@ -66,7 +68,7 @@ public class GameManager : MonoBehaviour
             player.playerRB.mass = 0.5f;
             player.playerObject.layer = 6; // Bottom layer
             player.playerObject.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
-            player.playerObject.transform.position = new Vector3(-8f, -5f, 0f);
+            player.playerObject.transform.position = new Vector3(-8f, 11f, 0f);
         }
     }
 
