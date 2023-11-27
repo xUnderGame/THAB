@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private int magnetTimer = 0;
 
-    private float coyoteTime = 0.2f;
+    private readonly float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
 
     // Start is called before the first frame update
@@ -69,28 +69,23 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Enable forcefield
-        if (Input.GetKeyDown(KeyCode.U)) {
-            GameManager.Instance.EnableShield();
-        }
+        if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.EnableShield();
 
         // Shoot fireballs
-        if (Input.GetKeyDown(KeyCode.Space)) { 
-            GameManager.Instance.player.fireballCD = GameManager.Instance.SpawnBullet(GameManager.Instance.player.fireballCD, GameManager.Instance.player.fireballPrefab, gameObject.transform.GetChild(0).transform.position);
-        }   
-        
-        if (IsGrounded())
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            GameManager.Instance.player.fireballCD = GameManager.Instance.SpawnBullet(
+            GameManager.Instance.player.fireballCD,
+            GameManager.Instance.player.fireballPrefab,
+            gameObject.transform.GetChild(0).transform.position);
         }
 
+        // Coyote time
+        if (IsGrounded()) coyoteTimeCounter = coyoteTime;
+        else coyoteTimeCounter -= Time.deltaTime;
     }
 
     // Checks if the player is grounded.
-    bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; }
+    bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; } // Should make a better grounded check in the future
 
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)
