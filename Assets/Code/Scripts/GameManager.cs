@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour
     public GameObject shieldObject;
     public GameObject fireballPrefab;
     [DoNotSerialize] public TMP_Text soulsDisplay;
+    [DoNotSerialize] public TMP_Text distanceDisplay;
     [DoNotSerialize] public float gameSpeed;
 
     private readonly float globalCD = 0.5f;
     private bool currentLane;
     public int souls;
+    public float meters;
 
     void Awake()
     {
@@ -32,9 +34,35 @@ public class GameManager : MonoBehaviour
         // Setting stuff up
         DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
+        distanceDisplay = GameObject.Find("DistanceDisplay").GetComponent<TMP_Text>();
         gameSpeed = 0.5f;
         souls = 0;
+
+        // Game speed corroutine, can change later
+        StartCoroutine(SpeedUp(1.5f));
+        StartCoroutine(Distance());
     }
+
+    // Enumerator for the corroutine
+    IEnumerator SpeedUp(float maxSpeed)
+    {
+        while (gameSpeed < maxSpeed)
+        {
+            gameSpeed += 0.125f;
+            yield return new WaitForSeconds(3);
+        }
+    }
+
+    IEnumerator Distance()
+    {
+        while (true)
+        {
+            meters += 1f * gameSpeed;
+            GameManager.Instance.distanceDisplay.text = Instance.meters.ToString();
+            yield return new WaitForSeconds(1);
+        }
+    } 
+
 
     // Swap current lanes
     public void SwapLane() 
