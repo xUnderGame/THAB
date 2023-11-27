@@ -12,12 +12,16 @@ public class PlayerMovement : MonoBehaviour
 
     private readonly float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
+    private ShootingBehaviour gun;
 
     // Start is called before the first frame update
     void Start()
     {
+        gun = GetComponent<ShootingBehaviour>();
+        gun.cooldown = Time.time;
         boxCollider = GetComponent<BoxCollider2D>();
         GameManager.Instance.player.playerRB = GetComponent<Rigidbody2D>();
+        gun.projectile = Resources.Load<GameObject>("Projectiles/Fireball");
     }
 
     // Update is called once per frame
@@ -28,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
             GameManager.Instance.player.playerRB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
             coyoteTimeCounter = 0f;
         }
+
         // Makes the player "slide"
         if (Input.GetKey(KeyCode.DownArrow) && IsGrounded()) {
             // Resizes hitbox to be lower
@@ -98,12 +103,17 @@ public class PlayerMovement : MonoBehaviour
 
         // Bullets
         else if (collision.CompareTag("Bullet")) {
-            GameManager.Instance.player.HurtPlayer(collision, "Fireball");
+            GameManager.Instance.player.HurtPlayer(collision);
         }
 
         // Obstacles
         else if (collision.CompareTag("Obstacle")) {
             GameManager.Instance.player.HurtPlayer(collision);
+        }
+
+        // Fire
+        else if (collision.CompareTag("Fire")) {
+            GameManager.Instance.player.Kill();
         }
     }
 }

@@ -13,6 +13,6 @@ public class Shield : MonoBehaviour
     {
         // Disable shield after x "frames"
         if (frameCounter > 0) frameCounter--;
-        else GameManager.Instance.DisableShield();
+        else GameManager.Instance.player.DisableShield();
     }
 }

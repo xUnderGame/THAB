@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StillEnemy : MonoBehaviour
+public class StillEnemy : MonoBehaviour, ICollission
 {
-    [SerializeField] private GameObject projectile;
-    private float shootCD;
+    private ShootingBehaviour gun;
 
-    void Start() { shootCD = Time.time; }
+    // Start is called before the first frame update
+    void Start()
+    {
+        gun = GetComponent<ShootingBehaviour>();
+        gun.cooldown = Time.time;
+        gun.projectile = Resources.Load<GameObject>("Projectiles/Feather");
+    }
 
     void FixedUpdate()
     {
         // Makes the enemy shoot every x seconds, depending on the cooldown 
-        shootCD = GameManager.Instance.SpawnBullet(shootCD, projectile, gameObject.transform.GetChild(0).transform.position, projectile.transform);
+        gun.cooldown = gun.Shoot(gun.cooldown, gun.projectile, gameObject.transform.GetChild(0).transform.position, gun.projectile.transform);
+    }
+
+    public void Kill() {
+        Debug.Log($"{gameObject.name} was killed!");
+        Destroy(gameObject);
     }
 }

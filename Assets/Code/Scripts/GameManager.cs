@@ -8,13 +8,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
-    public GameObject shieldObject;
-    public GameObject fireballPrefab;
+    [DoNotSerialize] public readonly float globalCD = 0.5f;
     [DoNotSerialize] public TMP_Text soulsDisplay;
     [DoNotSerialize] public TMP_Text distanceDisplay;
     [DoNotSerialize] public float gameSpeed;
+    [DoNotSerialize] public float spawningGap;
 
-    private readonly float globalCD = 0.5f;
     private bool currentLane;
     public int souls;
     public float meters;
@@ -29,17 +28,17 @@ public class GameManager : MonoBehaviour
         player.playerObject = GameObject.Find("Player");
         player.shield = player.playerObject.transform.Find("Shield").gameObject;
         player.isShieldEnabled = false;
-        player.fireballCD = Time.time;
 
         // Setting stuff up
-        DisableShield();
+        player.DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
         distanceDisplay = GameObject.Find("DistanceDisplay").GetComponent<TMP_Text>();
-        gameSpeed = 0.5f;
+        spawningGap = 18f;
+        gameSpeed = 1f;
         souls = 0;
 
         // Game speed corroutine, can change later
-        StartCoroutine(SpeedUp(1.5f));
+        StartCoroutine(SpeedUp(1.2f));
         StartCoroutine(Distance());
     }
 
@@ -48,8 +47,10 @@ public class GameManager : MonoBehaviour
     {
         while (gameSpeed < maxSpeed)
         {
-            gameSpeed += 0.125f;
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(2f);
+            gameSpeed += 0.02f;
+            spawningGap -= 0.4f;
+            Debug.Log($"Speedup! gameSpeed: {gameSpeed}, spawningGap: {spawningGap}");
         }
     }
 
@@ -71,10 +72,10 @@ public class GameManager : MonoBehaviour
 
         // Change to top lane
         if (currentLane) {
-            player.playerRB.mass = 0.7f;
+            player.playerRB.mass = 0.6f;
             player.playerObject.layer = 7; // Top layer
             player.playerObject.transform.localScale = new Vector3(1f, 1f, 1f);
-            player.playerObject.transform.position = new Vector3(-5f, 2.5f, 4f);
+            player.playerObject.transform.position = new Vector3(-6f, 11f, 4f);
         } 
 
         // Change to bottom lane
@@ -82,39 +83,19 @@ public class GameManager : MonoBehaviour
             player.playerRB.mass = 0.5f;
             player.playerObject.layer = 6; // Bottom layer
             player.playerObject.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
-            player.playerObject.transform.position = new Vector3(-8f, -5f, 0f);
+            player.playerObject.transform.position = new Vector3(-8f, 11f, 0f);
         }
     }
 
-    // Turns on the player shield
-    public void EnableShield() { player.isShieldEnabled = true; player.shield.SetActive(true); }
-
-    // Turns off the player shield
-    public void DisableShield() { player.isShieldEnabled = false; player.shield.SetActive(false); }
-    
     // Adds to the player amount of souls
     public void ChangeSouls(int amount, bool forceSet = false)
     {
         if (forceSet) souls = amount;
         else souls += amount;
     }
+}
 
-    // Shoots a bullet with a cooldown
-    public float SpawnBullet(float cooldown, GameObject projectile, Vector3 shootingPoint, Transform rotateFragment = null)
-    {
-        // Cooldown before shooting
-        if (cooldown <= Time.time)
-        {
-            GameObject fragment = Instantiate(projectile, shootingPoint, Quaternion.identity);
-            if (rotateFragment) fragment.transform.rotation = rotateFragment.rotation;
-            return Time.time + globalCD;
-        }
-        return cooldown;
-    }
-
-    // Kills an enemy
-    public void KillEnemy(GameObject enemy) {
-        Debug.Log($"{enemy.name} was killed!");
-        Destroy(enemy);
-    }
+// Kill interface
+interface ICollission {
+    public void Kill();
 }

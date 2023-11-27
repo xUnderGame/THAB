@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7730272337150648122}
   - component: {fileID: 5468389734448428572}
   - component: {fileID: 5704520211356704120}
+  - component: {fileID: 8268274090985055704}
+  - component: {fileID: 2847831514655634424}
   m_Layer: 0
   m_Name: StillEnemy
   m_TagString: Enemy
@@ -114,7 +116,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &5468389734448428572
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -172,7 +174,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7699a094c98d12e46af72497e10a2896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 7566975623693098253, guid: ca6c1372f26f62d4aad9f2552a65e9c4, type: 3}
+--- !u!114 &8268274090985055704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958000768899361759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7eefad2a7a0494a96367acb77950cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2847831514655634424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958000768899361759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c008a3faa026a469083ea7ab3fe552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 0}
+  cooldown: 0
 --- !u!1 &6682395222336614033
 GameObject:
   m_ObjectHideFlags: 0

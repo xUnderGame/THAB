@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class MoveObstacle : MonoBehaviour
 {
-    void FixedUpdate() { transform.Translate(-GameManager.Instance.gameSpeed, 0, 0, Space.World); }
+    private readonly float penalty = 0.75f;
+    void FixedUpdate() { transform.Translate(-(GameManager.Instance.gameSpeed - penalty), 0, 0, Space.World); }
 
     // Destroys GameObject after it leaves the screen (only works in build/game mode)
-    public void OnBecameInvisible() { Destroy(gameObject); }
+    public void OnBecameInvisible() { if (!gameObject.CompareTag("Fire")) Destroy(gameObject); }
 }
