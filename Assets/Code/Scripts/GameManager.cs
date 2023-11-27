@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour
     public PlayerScriptable player;
     [DoNotSerialize] public readonly float globalCD = 0.5f;
     [DoNotSerialize] public TMP_Text soulsDisplay;
+    [DoNotSerialize] public TMP_Text distanceDisplay;
     [DoNotSerialize] public float gameSpeed;
     [DoNotSerialize] public float spawningGap;
 
     private bool currentLane;
     public int souls;
+    public float meters;
 
     void Awake()
     {
@@ -30,12 +32,14 @@ public class GameManager : MonoBehaviour
         // Setting stuff up
         player.DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
+        distanceDisplay = GameObject.Find("DistanceDisplay").GetComponent<TMP_Text>();
         spawningGap = 18f;
         gameSpeed = 1f;
         souls = 0;
 
         // Game speed corroutine, can change later
         StartCoroutine(SpeedUp(1.2f));
+        StartCoroutine(Distance());
     }
 
     // Enumerator for the corroutine
@@ -49,6 +53,17 @@ public class GameManager : MonoBehaviour
             Debug.Log($"Speedup! gameSpeed: {gameSpeed}, spawningGap: {spawningGap}");
         }
     }
+
+    IEnumerator Distance()
+    {
+        while (true)
+        {
+            meters += 1f * gameSpeed;
+            GameManager.Instance.distanceDisplay.text = Instance.meters.ToString();
+            yield return new WaitForSeconds(1);
+        }
+    } 
+
 
     // Swap current lanes
     public void SwapLane() 
