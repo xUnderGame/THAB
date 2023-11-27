@@ -74,14 +74,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Enable forcefield
-        if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.EnableShield();
+        if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.player.EnableShield();
 
         // Shoot fireballs
         if (Input.GetKeyDown(KeyCode.Space)) {
-            GameManager.Instance.player.fireballCD = GameManager.Instance.SpawnBullet(
-            GameManager.Instance.player.fireballCD,
-            GameManager.Instance.player.fireballPrefab,
-            gameObject.transform.GetChild(0).transform.position);
+            gun.cooldown = gun.Shoot(
+            gun.cooldown,
+            gun.projectile,
+            gameObject.transform.GetChild(0).transform.position); 
         }
 
         // Coyote time
