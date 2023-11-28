@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             meters += 1f * gameSpeed;
-            GameManager.Instance.distanceDisplay.text = Instance.meters.ToString();
+            distanceDisplay.text = Instance.meters.ToString();
             yield return new WaitForSeconds(1);
         }
     } 
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     }
 }
 
-// Kill interface
+// Kill interface (REMOVE LATER REMOVE LATER REMOVE LATER REMOVE LATER)
 interface ICollission {
     public void Kill();
 }

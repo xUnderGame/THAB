@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1902804854319323993}
   - component: {fileID: 1061264417800142864}
-  - component: {fileID: 2411887501539255490}
-  - component: {fileID: 4316514181274352747}
   - component: {fileID: -5883324683842595227}
+  - component: {fileID: 2077579662425895966}
   m_Layer: 0
   m_Name: Soul
-  m_TagString: Coin
+  m_TagString: Soul
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,8 +86,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &2411887501539255490
-PolygonCollider2D:
+--- !u!114 &-5883324683842595227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603108980107105783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7eefad2a7a0494a96367acb77950cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &2077579662425895966
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,54 +130,6 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.2, y: 3.2}
-    newSize: {x: 0.64, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.13, y: 0.19999999}
-      - {x: 0.049999997, y: 0.26999998}
-      - {x: 0, y: 0.26999998}
-      - {x: -0.04, y: 0.25}
-      - {x: -0.13, y: 0.17}
-      - {x: -0.19, y: 0.01}
-      - {x: -0.19, y: -0.22999999}
-      - {x: -0.07, y: -0.31}
-      - {x: 0.07, y: -0.31}
-      - {x: 0.13, y: -0.29999998}
-      - {x: 0.19999999, y: -0.19999999}
-      - {x: 0.19999999, y: -0.089999996}
-      - {x: 0.17999999, y: -0.02}
-  m_UseDelaunayMesh: 0
---- !u!114 &4316514181274352747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7603108980107105783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b17fdabbbf65584192380249fdde5dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: 1
---- !u!114 &-5883324683842595227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7603108980107105783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c7eefad2a7a0494a96367acb77950cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Offset: {x: 0.02, y: -0.6}
+  serializedVersion: 2
+  m_Radius: 0.8

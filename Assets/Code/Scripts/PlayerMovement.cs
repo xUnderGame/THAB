@@ -8,8 +8,6 @@ public class PlayerMovement : MonoBehaviour
     public float fallForce = 0.5f;
 
     private BoxCollider2D boxCollider;
-    private int magnetTimer = 0;
-
     private readonly float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
     private ShootingBehaviour gun;
@@ -58,21 +56,6 @@ public class PlayerMovement : MonoBehaviour
         // Switch lanes
         if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.SwapLane();
 
-        // Temporary magnet powerup test (Should move this to fixedUpdate!)
-        if (Input.GetKeyDown(KeyCode.P)) { magnetTimer = 720; }
-        if (magnetTimer > 0)
-        {
-            magnetTimer--;
-            GameObject[] souls = GameObject.FindGameObjectsWithTag("Coin");
-            foreach (GameObject soul in souls)
-            {
-                Vector3 direction = transform.position - soul.transform.position;
-                direction /= 10;
-                soul.layer = GameManager.Instance.player.playerObject.layer;
-                soul.transform.position = soul.transform.position + direction;
-            }
-        }
-
         // Enable forcefield
         if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.player.EnableShield();
 
@@ -95,25 +78,6 @@ public class PlayerMovement : MonoBehaviour
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Powerups
-        if (collision.CompareTag("Powerup")) {
-            magnetTimer = 720;
-            Destroy(collision.gameObject);
-        }
-
-        // Bullets
-        else if (collision.CompareTag("Bullet")) {
-            GameManager.Instance.player.HurtPlayer(collision);
-        }
-
-        // Obstacles
-        else if (collision.CompareTag("Obstacle")) {
-            GameManager.Instance.player.HurtPlayer(collision);
-        }
-
-        // Fire
-        else if (collision.CompareTag("Fire")) {
-            GameManager.Instance.player.Kill();
-        }
+        if (collision.TryGetComponent(out IInteractable test2)) test2?.Interact();
     }
 }
