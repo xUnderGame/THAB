@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [DoNotSerialize] public float gameSpeed;
     [DoNotSerialize] public float spawningGap;
 
-    private bool currentLane;
+    public bool currentLane;
     public int souls;
     public float meters;
 
@@ -58,32 +58,9 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            meters += 1f * gameSpeed;
-            GameManager.Instance.distanceDisplay.text = Instance.meters.ToString();
-            yield return new WaitForSeconds(1);
-        }
-    } 
-
-
-    // Swap current lanes
-    public void SwapLane() 
-    {
-        currentLane = !currentLane;
-
-        // Change to top lane
-        if (currentLane) {
-            player.playerRB.mass = 0.6f;
-            player.playerObject.layer = 7; // Top layer
-            player.playerObject.transform.localScale = new Vector3(1f, 1f, 1f);
-            player.playerObject.transform.position = new Vector3(-6f, 11f, 4f);
-        } 
-
-        // Change to bottom lane
-        else {
-            player.playerRB.mass = 0.5f;
-            player.playerObject.layer = 6; // Bottom layer
-            player.playerObject.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
-            player.playerObject.transform.position = new Vector3(-8f, 11f, 0f);
+            meters += 1f;
+            distanceDisplay.text = Instance.meters.ToString();
+            yield return new WaitForSeconds(1 / gameSpeed);
         }
     }
 
@@ -93,9 +70,4 @@ public class GameManager : MonoBehaviour
         if (forceSet) souls = amount;
         else souls += amount;
     }
-}
-
-// Kill interface
-interface ICollission {
-    public void Kill();
 }

@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player Scriptable", menuName = "Player Scriptable")]
-public class PlayerScriptable : ScriptableObject, ICollission
+public class PlayerScriptable : ScriptableObject, IDamageable
 {
     public bool isShieldEnabled;
     [DoNotSerialize] public GameObject playerObject;
@@ -13,13 +13,13 @@ public class PlayerScriptable : ScriptableObject, ICollission
     [DoNotSerialize] public GameObject shield;
 
     // Checks if you are allowed to kill the player or disable the shield
-    public void HurtPlayer(Collider2D collision) {
-        if (!collision.name.Contains("Fireball") && !isShieldEnabled) { Destroy(collision.gameObject); GameManager.Instance.player.Kill(); }
-        else if (!collision.name.Contains("Fireball") && isShieldEnabled) { Destroy(collision.gameObject); DisableShield(); }
+    public void HurtPlayer(GameObject go) {
+        if (isShieldEnabled) DisableShield();
+        else Kill(go);
     }
 
     // Kills the player and optionally shows the game over GUI
-    public void Kill() {
+    public void Kill(GameObject go) {
         Debug.Log("Player was killed!");
 
         // // Play death animation

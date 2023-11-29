@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : LaneBehaviour
 {
     public int force = 20;
     public float fallForce = 0.5f;
@@ -56,7 +56,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Switch lanes
-        if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.SwapLane();
+        if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.currentLane = SwapLane(
+            GameManager.Instance.currentLane,
+            GameManager.Instance.player.playerRB, 
+            GameManager.Instance.player.playerObject
+            );
 
         // Temporary magnet powerup test (Should move this to fixedUpdate!)
         if (Input.GetKeyDown(KeyCode.P)) { magnetTimer = 720; }
@@ -95,25 +99,6 @@ public class PlayerMovement : MonoBehaviour
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Powerups
-        if (collision.CompareTag("Powerup")) {
-            magnetTimer = 720;
-            Destroy(collision.gameObject);
-        }
-
-        // Bullets
-        else if (collision.CompareTag("Bullet")) {
-            GameManager.Instance.player.HurtPlayer(collision);
-        }
-
-        // Obstacles
-        else if (collision.CompareTag("Obstacle")) {
-            GameManager.Instance.player.HurtPlayer(collision);
-        }
-
-        // Fire
-        else if (collision.CompareTag("Fire")) {
-            GameManager.Instance.player.Kill();
-        }
+        if (collision.TryGetComponent(out IDamageable test)) test?.Kill(gameObject);
     }
 }
