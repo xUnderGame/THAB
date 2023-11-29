@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Magnet : Powerup, IInteractable
@@ -10,16 +9,14 @@ public class Magnet : Powerup, IInteractable
     void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.P)) Activate();
-        if (!active) return;
+        if (!PowerupTimer()) return;
 
-        GameObject[] souls = GameObject.FindGameObjectsWithTag("Soul");
-        foreach (GameObject soul in souls)
+        foreach (GameObject soul in GameObject.FindGameObjectsWithTag("Soul"))
         {
             Vector3 direction = GameManager.Instance.player.playerObject.transform.position - soul.transform.position;
             direction /= 10;
             soul.layer = GameManager.Instance.player.playerObject.layer;
             soul.transform.position = soul.transform.position + direction;
         }
-        PowerupTimer();
     }
 }

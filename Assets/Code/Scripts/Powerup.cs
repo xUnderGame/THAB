@@ -7,13 +7,12 @@ public class Powerup : MonoBehaviour, IInteractable
 {
     [DoNotSerialize] public float activationTime;
     [DoNotSerialize] public float duration;
-    protected bool active = false;
     
-    protected virtual void Activate() { active = true; }
+    protected virtual void Activate() { activationTime = Time.time; Debug.Log(activationTime); }
 
-    protected virtual void Deactivate() { active = false; }
+    protected virtual void Deactivate() {  }
 
-    public virtual void Interact() { Activate(); activationTime = Time.time; }
+    public virtual void Interact() { Activate(); }
 
-    protected void PowerupTimer() { if (Time.time >= activationTime + duration) Deactivate(); }
+    protected bool PowerupTimer() { Debug.Log($"{activationTime}, {Time.time}, {activationTime + duration}"); return Time.time <= activationTime + duration && activationTime != 0f; }
 }

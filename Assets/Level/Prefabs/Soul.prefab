@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1902804854319323993}
   - component: {fileID: 1061264417800142864}
-  - component: {fileID: -5883324683842595227}
   - component: {fileID: 2077579662425895966}
+  - component: {fileID: 8755877265162174262}
+  - component: {fileID: -5883324683842595227}
   m_Layer: 0
   m_Name: Soul
   m_TagString: Soul
@@ -86,18 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5883324683842595227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7603108980107105783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c7eefad2a7a0494a96367acb77950cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &2077579662425895966
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,3 +122,28 @@ CircleCollider2D:
   m_Offset: {x: 0.02, y: -0.6}
   serializedVersion: 2
   m_Radius: 0.8
+--- !u!114 &8755877265162174262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603108980107105783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c1acbbe28cf3b46879f88b04545684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 1
+--- !u!114 &-5883324683842595227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603108980107105783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7eefad2a7a0494a96367acb77950cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
