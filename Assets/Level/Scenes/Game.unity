@@ -795,9 +795,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Eye of Ender
       objectReference: {fileID: 0}
+    - target: {fileID: 1444711051941297651, guid: 9fd987f37867dc8469c1fa830f07ad14, type: 3}
+      propertyPath: test
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3861806132318637762, guid: 9fd987f37867dc8469c1fa830f07ad14, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: 11.3
       objectReference: {fileID: 0}
     - target: {fileID: 3861806132318637762, guid: 9fd987f37867dc8469c1fa830f07ad14, type: 3}
       propertyPath: m_LocalPosition.y

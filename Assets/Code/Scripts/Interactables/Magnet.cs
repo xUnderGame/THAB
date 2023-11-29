@@ -8,15 +8,15 @@ public class Magnet : Powerup, IInteractable
 
     void FixedUpdate()
     {
+        // Guard cases for the powerup & debug activate
         if (Input.GetKeyDown(KeyCode.P)) Activate();
         if (!PowerupTimer()) return;
 
+        // Attracts all souls to your location
         foreach (GameObject soul in GameObject.FindGameObjectsWithTag("Soul"))
         {
-            Vector3 direction = GameManager.Instance.player.playerObject.transform.position - soul.transform.position;
-            direction /= 10;
+            soul.transform.position = soul.transform.position + (GameManager.Instance.player.playerObject.transform.position - soul.transform.position / 5);
             soul.layer = GameManager.Instance.player.playerObject.layer;
-            soul.transform.position = soul.transform.position + direction;
         }
     }
 }

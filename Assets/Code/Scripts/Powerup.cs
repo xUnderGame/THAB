@@ -7,12 +7,23 @@ public class Powerup : MonoBehaviour, IInteractable
 {
     [DoNotSerialize] public float activationTime;
     [DoNotSerialize] public float duration;
-    
-    protected virtual void Activate() { activationTime = Time.time; Debug.Log(activationTime); }
 
+    public enum PowerupTypes { Magnet, Shield };
+    public PowerupTypes selectedPowerup;
+    
+    // Activate the powerup
+    protected virtual void Activate() { activationTime = Time.time; }
+
+    // Deactivate the powerup
     protected virtual void Deactivate() {  }
 
-    public virtual void Interact() { Activate(); }
+    // Interact with the object
+    public virtual void Interact() {
+        var thing = (Powerup)GameManager.Instance.player.playerObject.GetComponent(selectedPowerup.ToString());
+        thing.Activate();
+        Destroy(gameObject);
+    }
 
-    protected bool PowerupTimer() { Debug.Log($"{activationTime}, {Time.time}, {activationTime + duration}"); return Time.time <= activationTime + duration && activationTime != 0f; }
+    // Check for the remaining powerup time
+    protected bool PowerupTimer() { return Time.time <= activationTime + duration && activationTime != 0f; }
 }
