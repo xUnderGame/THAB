@@ -68,7 +68,8 @@ public class PlayerMovement : LaneBehaviour
             gun.cooldown = gun.Shoot(
             gun.cooldown,
             gun.projectile,
-            gameObject.transform.GetChild(0).transform.position); 
+            gameObject.transform.GetChild(0).transform.position,
+            gameObject); 
         }
 
         // Coyote time
@@ -82,7 +83,7 @@ public class PlayerMovement : LaneBehaviour
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out IDamageable test)) test?.Kill(gameObject);
-        if (collision.TryGetComponent(out IInteractable test2)) test2?.Interact();
+        if (collision.TryGetComponent(out IDamageable damageables)) damageables?.Kill(gameObject);
+        if (collision.TryGetComponent(out IInteractable interactables)) interactables?.Interact();
     }
 }

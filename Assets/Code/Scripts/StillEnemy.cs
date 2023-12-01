@@ -17,7 +17,7 @@ public class StillEnemy : MonoBehaviour, IDamageable
     void FixedUpdate()
     {
         // Makes the enemy shoot every x seconds, depending on the cooldown 
-        gun.cooldown = gun.Shoot(gun.cooldown, gun.projectile, gameObject.transform.GetChild(0).transform.position, gun.projectile.transform);
+        gun.cooldown = gun.Shoot(gun.cooldown, gun.projectile, gameObject.transform.GetChild(0).transform.position, gameObject, gun.projectile.transform);
     }
 
     // Collision actions
