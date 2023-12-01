@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3861806132318637762}
   - component: {fileID: 4920130896666486703}
   - component: {fileID: 9208730413487181416}
-  - component: {fileID: 1071640274204828495}
   - component: {fileID: 8232423406929671703}
   m_Layer: 0
   m_Name: Eye of Ender
@@ -122,18 +121,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.325
---- !u!114 &1071640274204828495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103426341689263439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c7eefad2a7a0494a96367acb77950cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8232423406929671703
 MonoBehaviour:
   m_ObjectHideFlags: 0

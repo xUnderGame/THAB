@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4257867454401664034}
   - component: {fileID: 8888823579020740752}
   - component: {fileID: 3918375747008983249}
-  - component: {fileID: 6957434517782556701}
   - component: {fileID: 4956181068714081117}
   m_Layer: 0
   m_Name: ShieldToggle
@@ -122,18 +121,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6957434517782556701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5329538554298564865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c7eefad2a7a0494a96367acb77950cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4956181068714081117
 MonoBehaviour:
   m_ObjectHideFlags: 0

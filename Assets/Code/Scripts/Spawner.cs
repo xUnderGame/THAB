@@ -33,6 +33,9 @@ public class Spawner : MonoBehaviour
         // Spawn two platforms
         MakePlatform(true);
         MakePlatform(false);
+
+        // testing
+        StartCoroutine(SelectPowerup());
     }
 
     // Spawns a platform every fixed time
@@ -44,9 +47,6 @@ public class Spawner : MonoBehaviour
             if (shouldSpawn == 8) MakePlatform(true);
             else MakePlatform(false);
         }
-
-        // Marks the next platform, now it MUST spawn a powerup in one of the available locations.
-        nextPowerup = Random.Range(1, 3);
     }
 
     // Creates an obstacle
@@ -83,11 +83,15 @@ public class Spawner : MonoBehaviour
             GameObject tempPowerup = Instantiate(powerupPrefabs[nextPowerup - 1],
             powerupPositions[Random.Range(0, powerupPositions.Count - 1)].transform.position,
             Quaternion.identity,
-            grids[System.Convert.ToInt32(!position)].transform);
+            tempPlatform.transform);
 
             // Sets the correct layer / material
             tempPowerup.GetComponent<Renderer>().material.color = tempPlatform.GetComponent<TilemapRenderer>().material.color;
             tempPowerup.layer = laneTags[System.Convert.ToInt32(!position)];
+
+            // Marks the next platform, now it MUST spawn a powerup in one of the available locations.
+            StartCoroutine(SelectPowerup());
+            nextPowerup = 0;
         }
 
         // Adds the spawned platform to a list with all the currently spawned ones and moves it a bit
@@ -106,5 +110,10 @@ public class Spawner : MonoBehaviour
             return foundPlatform.layer;
         }
         else return 0;
+    }
+
+    public IEnumerator SelectPowerup() {
+        yield return new WaitForSeconds(10f);
+        nextPowerup = Random.Range(1, 3);
     }
 }
