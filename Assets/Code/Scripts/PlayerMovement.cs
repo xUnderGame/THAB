@@ -8,8 +8,6 @@ public class PlayerMovement : LaneBehaviour
     public float fallForce = 0.5f;
 
     private BoxCollider2D boxCollider;
-    private int magnetTimer = 0;
-
     private readonly float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
     private ShootingBehaviour gun;
@@ -60,22 +58,7 @@ public class PlayerMovement : LaneBehaviour
             GameManager.Instance.currentLane,
             GameManager.Instance.player.playerRB, 
             GameManager.Instance.player.playerObject
-            );
-
-        // Temporary magnet powerup test (Should move this to fixedUpdate!)
-        if (Input.GetKeyDown(KeyCode.P)) { magnetTimer = 720; }
-        if (magnetTimer > 0)
-        {
-            magnetTimer--;
-            GameObject[] souls = GameObject.FindGameObjectsWithTag("Coin");
-            foreach (GameObject soul in souls)
-            {
-                Vector3 direction = transform.position - soul.transform.position;
-                direction /= 10;
-                soul.layer = GameManager.Instance.player.playerObject.layer;
-                soul.transform.position = soul.transform.position + direction;
-            }
-        }
+        );
 
         // Enable forcefield
         if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.player.EnableShield();
@@ -100,5 +83,6 @@ public class PlayerMovement : LaneBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out IDamageable test)) test?.Kill(gameObject);
+        if (collision.TryGetComponent(out IInteractable test2)) test2?.Interact();
     }
 }

@@ -6,12 +6,13 @@ TagManager:
   tags:
   - Obstacle
   - DestroyObstacles
-  - Coin
   - Powerup
   - Enemy
   - Bullet
   - Fire
   - Marked
+  - Soul
+  - PowerupPosition
   layers:
   - Default
   - TransparentFX

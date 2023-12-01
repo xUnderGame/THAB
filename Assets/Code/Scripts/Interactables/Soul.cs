@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoulCollect : MonoBehaviour
+public class Soul : MonoBehaviour, IInteractable
 {
     [SerializeField] private int value;
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Player")) return;
-
+    public void Interact() {
         // Da el alma al jugador
         GameManager.Instance.ChangeSouls(value);
         GameManager.Instance.soulsDisplay.text = GameManager.Instance.souls.ToString();

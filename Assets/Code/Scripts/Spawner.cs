@@ -1,36 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Spawner : MonoBehaviour
 {
-    [DoNotSerialize] public List<GameObject> grids;
-    [DoNotSerialize] public List<GameObject> markedPlatforms;
+    [HideInInspector] public List<GameObject> grids;
+    [HideInInspector] public List<GameObject> markedPlatforms;
+    [HideInInspector] public List<GameObject> platformPrefabs;
+    [HideInInspector] public List<GameObject> powerupPrefabs;
 
-    public List<GameObject> platformPrefabs;
-
-    private float minimumSpawnPosition;
+    private int nextPowerup = 0;
+    private readonly float minimumSpawnPosition = 25f;
     private readonly int[] laneTags = { 8, 9 };
 
-    void Awake() { platformPrefabs = Resources.LoadAll<GameObject>("Platforms").ToList(); }
+    void Awake()
+    {
+        platformPrefabs = Resources.LoadAll<GameObject>("Platforms").ToList();
+        powerupPrefabs = Resources.LoadAll<GameObject>("Powerups").ToList();
+    }
 
     void Start()
     {
-        minimumSpawnPosition = 25f;
-
         // Add lanes where to spawn
         grids.Add(GameObject.Find("Spawns Top"));
         grids.Add(GameObject.Find("Spawns Bottom"));
+
+        // Compresses the bounds of the tilemaps
+        platformPrefabs.ForEach(platform => platform.GetComponent<Tilemap>().CompressBounds());
 
         // Spawn two platforms
         MakePlatform(true);
         MakePlatform(false);
 
-        // Compresses the bounds of the tilemaps
-        platformPrefabs.ForEach(platform => platform.GetComponent<Tilemap>().CompressBounds());
+        // testing
+        StartCoroutine(SelectPowerup());
     }
 
     // Spawns a platform every fixed time
@@ -45,7 +50,7 @@ public class Spawner : MonoBehaviour
     }
 
     // Creates an obstacle
-    private void MakePlatform(bool position = true)
+    private void MakePlatform(bool position)
     {
         GameObject tempPlatform;
         int rand;
@@ -68,11 +73,33 @@ public class Spawner : MonoBehaviour
             tempPlatform.layer = laneTags[1];
         }
 
+        // Adds a powerup to one of the valid powerup locations
+        if (nextPowerup != 0) {
+            List<GameObject> powerupPositions = tempPlatform.transform.GetComponentsInChildren<Transform>()
+            .Where(isValid => isValid.CompareTag("PowerupPosition"))
+            .Select(position => position.gameObject).ToList();
+
+            // Instantiates it
+            GameObject tempPowerup = Instantiate(powerupPrefabs[nextPowerup - 1],
+            powerupPositions[Random.Range(0, powerupPositions.Count - 1)].transform.position,
+            Quaternion.identity,
+            tempPlatform.transform);
+
+            // Sets the correct layer / material
+            tempPowerup.GetComponent<Renderer>().material.color = tempPlatform.GetComponent<TilemapRenderer>().material.color;
+            tempPowerup.layer = laneTags[System.Convert.ToInt32(!position)];
+
+            // Marks the next platform, now it MUST spawn a powerup in one of the available locations.
+            StartCoroutine(SelectPowerup());
+            nextPowerup = 0;
+        }
+
         // Adds the spawned platform to a list with all the currently spawned ones and moves it a bit
         tempPlatform.transform.position = new Vector3(minimumSpawnPosition + tempPlatform.GetComponent<Renderer>().bounds.size.x / 2, tempPlatform.transform.position.y, tempPlatform.transform.position.z); 
         markedPlatforms.Add(tempPlatform);
     }
 
+    // Finds the next platform where one should spawn
     public int FindNextSpawn() {
         GameObject foundPlatform = markedPlatforms.FirstOrDefault(platform => platform.transform.position.x + (platform.GetComponent<Renderer>().bounds.size.x / 2) < GameManager.Instance.spawningGap);
 
@@ -83,5 +110,10 @@ public class Spawner : MonoBehaviour
             return foundPlatform.layer;
         }
         else return 0;
+    }
+
+    public IEnumerator SelectPowerup() {
+        yield return new WaitForSeconds(10f);
+        nextPowerup = Random.Range(1, 3);
     }
 }
