@@ -12,6 +12,7 @@ TagManager:
   - Fire
   - Marked
   - Soul
+  - PowerupPosition
   layers:
   - Default
   - TransparentFX

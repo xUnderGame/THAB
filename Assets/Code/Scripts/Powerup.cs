@@ -1,26 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Powerup : MonoBehaviour, IInteractable
 {
-    [DoNotSerialize] public float activationTime;
-    [DoNotSerialize] public float duration;
+    [HideInInspector] public float activationTime;
+    [HideInInspector] public float duration;
 
     public enum PowerupTypes { Magnet, Shield };
     public PowerupTypes selectedPowerup;
     
     // Activate the powerup
-    protected virtual void Activate() { activationTime = Time.time; }
+    public virtual void Activate() { activationTime = Time.time; }
 
     // Deactivate the powerup
-    protected virtual void Deactivate() {  }
+    public virtual void Deactivate() {  }
 
     // Interact with the object
     public virtual void Interact() {
-        var thing = (Powerup)GameManager.Instance.player.playerObject.GetComponent(selectedPowerup.ToString());
-        thing.Activate();
+        ((Powerup)GameManager.Instance.player.playerObject.GetComponent(selectedPowerup.ToString())).Activate();
         Destroy(gameObject);
     }
 

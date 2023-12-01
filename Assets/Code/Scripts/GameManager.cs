@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.VisualScripting;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
-    [DoNotSerialize] public readonly float globalCD = 0.5f;
-    [DoNotSerialize] public TMP_Text soulsDisplay;
-    [DoNotSerialize] public TMP_Text distanceDisplay;
-    [DoNotSerialize] public float gameSpeed;
-    [DoNotSerialize] public float spawningGap;
+    [HideInInspector] public readonly float globalCD = 0.5f;
+    [HideInInspector] public TMP_Text soulsDisplay;
+    [HideInInspector] public TMP_Text distanceDisplay;
+    [HideInInspector] public float gameSpeed;
+    [HideInInspector] public float spawningGap;
 
     private bool currentLane;
     public int souls;

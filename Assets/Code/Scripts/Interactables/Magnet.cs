@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Magnet : Powerup, IInteractable
+public class Magnet : Powerup
 {
     void Start() { duration = 10f; }
 
@@ -15,7 +15,7 @@ public class Magnet : Powerup, IInteractable
         // Attracts all souls to your location
         foreach (GameObject soul in GameObject.FindGameObjectsWithTag("Soul"))
         {
-            soul.transform.position = soul.transform.position + (GameManager.Instance.player.playerObject.transform.position - soul.transform.position / 5);
+            soul.transform.position += (GameManager.Instance.player.playerObject.transform.position - soul.transform.position) / 5;
             soul.layer = GameManager.Instance.player.playerObject.layer;
         }
     }

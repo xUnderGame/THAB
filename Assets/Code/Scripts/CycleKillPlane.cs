@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CycleKillPlane : MonoBehaviour
 {
-    [DoNotSerialize] public List<GameObject> planes;
+    [HideInInspector] public List<GameObject> planes;
 
     void Start() { planes = GameObject.FindGameObjectsWithTag("Fire").ToList(); }
 
