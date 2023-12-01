@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : LaneBehaviour
 {
     public int force = 20;
     public float fallForce = 0.5f;
@@ -54,7 +54,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Switch lanes
-        if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.SwapLane();
+        if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.currentLane = SwapLane(
+            GameManager.Instance.currentLane,
+            GameManager.Instance.player.playerRB, 
+            GameManager.Instance.player.playerObject
+        );
 
         // Enable forcefield
         if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.player.EnableShield();
@@ -78,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.TryGetComponent(out IDamageable test)) test?.Kill(gameObject);
         if (collision.TryGetComponent(out IInteractable test2)) test2?.Interact();
     }
 }

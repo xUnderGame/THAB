@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StillEnemy : MonoBehaviour, ICollission
+public class StillEnemy : MonoBehaviour, IDamageable
 {
     private ShootingBehaviour gun;  
 
@@ -20,7 +20,13 @@ public class StillEnemy : MonoBehaviour, ICollission
         gun.cooldown = gun.Shoot(gun.cooldown, gun.projectile, gameObject.transform.GetChild(0).transform.position, gun.projectile.transform);
     }
 
-    public void Kill() {
+    // Collision actions
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out IDamageable test)) test?.Kill(gameObject);
+    }
+
+    public void Kill(GameObject go) {
         Debug.Log($"{gameObject.name} was killed!");
         Destroy(gameObject);
     }
