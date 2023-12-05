@@ -79,19 +79,22 @@ public class Spawner : MonoBehaviour
             .Where(isValid => isValid.CompareTag("PowerupPosition"))
             .Select(position => position.gameObject).ToList();
 
-            // Instantiates it
-            GameObject tempPowerup = Instantiate(powerupPrefabs[nextPowerup - 1],
-            powerupPositions[Random.Range(0, powerupPositions.Count - 1)].transform.position,
-            Quaternion.identity,
-            tempPlatform.transform);
+            // At least one powerup position available
+            if (powerupPositions.Count != 0) {
+                // Instantiates it
+                GameObject tempPowerup = Instantiate(powerupPrefabs[nextPowerup - 1],
+                powerupPositions[Random.Range(0, powerupPositions.Count - 1)].transform.position,
+                Quaternion.identity,
+                tempPlatform.transform);
 
-            // Sets the correct layer / material
-            tempPowerup.GetComponent<Renderer>().material.color = tempPlatform.GetComponent<TilemapRenderer>().material.color;
-            tempPowerup.layer = laneTags[System.Convert.ToInt32(!position)];
+                // Sets the correct layer / material
+                tempPowerup.GetComponent<Renderer>().material.color = tempPlatform.GetComponent<TilemapRenderer>().material.color;
+                tempPowerup.layer = laneTags[System.Convert.ToInt32(!position)];
 
-            // Marks the next platform, now it MUST spawn a powerup in one of the available locations.
-            StartCoroutine(SelectPowerup());
-            nextPowerup = 0;
+                // Marks the next platform, now it MUST spawn a powerup in one of the available locations.
+                StartCoroutine(SelectPowerup());
+                nextPowerup = 0;
+            } 
         }
 
         // Adds the spawned platform to a list with all the currently spawned ones and moves it a bit
