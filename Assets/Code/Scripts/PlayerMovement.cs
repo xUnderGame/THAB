@@ -54,17 +54,17 @@ public class PlayerMovement : LaneBehaviour
         }
 
         // Switch lanes
-        if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.currentLane = SwapLane(
+        if (Input.GetKeyDown(KeyCode.V) && Time.timeScale != 0)
+        {
+            GameManager.Instance.currentLane = SwapLane(
             GameManager.Instance.currentLane,
-            GameManager.Instance.player.playerRB, 
-            GameManager.Instance.player.playerObject
-        );
-
-        // Enable forcefield
-        if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.player.EnableShield();
+            GameManager.Instance.player.playerRB,
+            GameManager.Instance.player.playerObject);
+            GameManager.Instance.player.playerObject.transform.Find("Shield").gameObject.layer =GameManager.Instance.player.playerObject.layer;
+        }
 
         // Shoot fireballs
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space)  && Time.timeScale != 0) {
             gun.cooldown = gun.Shoot(
             gun.cooldown,
             gun.projectile,

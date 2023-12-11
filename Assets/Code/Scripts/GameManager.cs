@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public TMP_Text distanceDisplay;
     [HideInInspector] public float gameSpeed;
     [HideInInspector] public float spawningGap;
+    [HideInInspector] public GameObject UI;
+    [HideInInspector] public GameObject shopUI;
 
     public bool currentLane;
     public int souls;
@@ -32,6 +34,8 @@ public class GameManager : MonoBehaviour
         player.DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
         distanceDisplay = GameObject.Find("DistanceDisplay").GetComponent<TMP_Text>();
+        UI = GameObject.Find("Game UI");
+        shopUI = UI.transform.Find("Ingame Shop").gameObject;
         spawningGap = 18f;
         gameSpeed = 1f;
         souls = 0;
@@ -47,7 +51,7 @@ public class GameManager : MonoBehaviour
         while (gameSpeed < maxSpeed)
         {
             yield return new WaitForSeconds(2f);
-            gameSpeed += 0.02f;
+            gameSpeed += 0.025f;
             spawningGap -= 0.4f;
             Debug.Log($"Speedup! gameSpeed: {gameSpeed}, spawningGap: {spawningGap}");
         }
@@ -68,5 +72,13 @@ public class GameManager : MonoBehaviour
     {
         if (forceSet) souls = amount;
         else souls += amount;
+    }
+
+    public void EnableShopGUI() { shopUI.SetActive(true); }
+
+    public void DisableShopGUI()
+    {
+        shopUI.SetActive(false);
+        Time.timeScale = 1;
     }
 }
