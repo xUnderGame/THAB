@@ -11,7 +11,7 @@ public class LaneBehaviour : MonoBehaviour {
             rb.mass = 0.6f;
             character.layer = 7; // Top layer
             character.transform.localScale = new Vector3(1f, 1f, 1f);
-            character.transform.position = new Vector3(character.transform.position.x, 11f, 4f);
+            character.transform.position = new Vector3(character.transform.position.x, 5f, 4f);
         }
 
         // Change to bottom lane
@@ -20,7 +20,7 @@ public class LaneBehaviour : MonoBehaviour {
             rb.mass = 0.5f;
             character.layer = 6; // Bottom layer
             character.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
-            character.transform.position = new Vector3(character.transform.position.x, 11f, 0f);
+            character.transform.position = new Vector3(character.transform.position.x, 4f, 0f);
         }
 
         return !currentLane;
