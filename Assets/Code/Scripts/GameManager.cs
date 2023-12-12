@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public GameObject shopUI;
 
     public bool currentLane;
+    public IngameShopBehaviour currentShop;
     public int souls;
     public float meters;
 
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             meters += 1f;
-            distanceDisplay.text = Instance.meters.ToString();
+            distanceDisplay.text = $"{meters} m";
             yield return new WaitForSeconds(1 / gameSpeed);
         }
     }
