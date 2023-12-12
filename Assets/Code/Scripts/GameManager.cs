@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         // Game speed corroutine, can change later
         StartCoroutine(SpeedUp(1.2f));
         StartCoroutine(Distance());
+        StartCoroutine(BackToPosition());
     }
 
     // Enumerator for the corroutine
@@ -62,6 +63,28 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1 / gameSpeed);
         }
     }
+
+    IEnumerator BackToPosition()
+    {
+        while (true)
+        {
+            if (player.playerObject.transform.position.x < -8)
+            {
+                yield return new WaitForSeconds(3 / gameSpeed);
+                do
+                {
+                    player.playerRB.AddForce(Vector2.right * 8, ForceMode2D.Impulse);
+                    yield return new WaitForSeconds(0.005f);
+                } while (player.playerObject.transform.position.x < -8);
+            }
+            else if (player.playerObject.transform.position.x > -8)
+            {
+                player.playerObject.transform.position = new Vector3(-8, player.playerObject.transform.position.y, player.playerObject.transform.position.z);
+            }
+            yield return null;
+        }
+    }
+
 
     // Adds to the player amount of souls
     public void ChangeSouls(int amount, bool forceSet = false)

@@ -27,6 +27,7 @@ public class PlayerMovement : LaneBehaviour
     {
         // Jump
         if (Input.GetKey(KeyCode.UpArrow) && coyoteTimeCounter > 0f) {
+            GameManager.Instance.player.playerRB.velocity = Vector2.zero;
             GameManager.Instance.player.playerRB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
             coyoteTimeCounter = 0f;
         }
