@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class HigherJump : IngameItem
 {
-    public override void Effect() {}
+    public int minPrice = 25;
+    public int maxPrice = 150;
+    
+    public override void Effect()
+    {
+        GameManager.Instance.pm.force += 4f;
+    }
 }

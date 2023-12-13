@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class IngameShopBehaviour : MonoBehaviour, IInteractable
 {
+    public List<IngameItem> items;
+    public void Awake() { items = Resources.LoadAll<IngameItem>("Items").ToList(); }
+
     public void Interact() {
         Time.timeScale = 0;
         GameManager.Instance.currentShop = this;
@@ -12,7 +16,8 @@ public class IngameShopBehaviour : MonoBehaviour, IInteractable
         GameManager.Instance.EnableShopGUI();
     }
 
-    public void BuyItem() { }
-    public void RandomizeItems() { }
-    public void LoadItems() { }
+    public void RandomizeItems()
+    {
+
+    }
 }

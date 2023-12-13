@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : LaneBehaviour
 {
-    public int force = 20;
-    public float fallForce = 0.5f;
+    [HideInInspector] public float force = 20f;
+    [HideInInspector] public float fallForce = 0.5f;
+    [HideInInspector] public float coyoteTime = 0.2f;
 
-    private BoxCollider2D boxCollider;
-    private readonly float coyoteTime = 0.2f;
-    private float coyoteTimeCounter;
     private ShootingBehaviour gun;
+    private BoxCollider2D boxCollider;
+    private float coyoteTimeCounter;
 
     // Start is called before the first frame update
     void Start()

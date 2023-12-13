@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float spawningGap;
     [HideInInspector] public GameObject UI;
     [HideInInspector] public GameObject shopUI;
+    [HideInInspector] public PlayerMovement pm;
 
     public bool currentLane;
     public IngameShopBehaviour currentShop;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
 
         // Scriptables
         player.playerObject = GameObject.Find("Player");
+        pm = player.playerObject.GetComponent<PlayerMovement>();
         player.shield = player.playerObject.transform.Find("Shield").gameObject;
         player.isShieldEnabled = false;
 
