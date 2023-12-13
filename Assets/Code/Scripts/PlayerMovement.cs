@@ -9,7 +9,9 @@ public class PlayerMovement : LaneBehaviour
 
     private BoxCollider2D boxCollider;
     private readonly float coyoteTime = 0.2f;
+    private readonly float bufferTime = 0.2f;
     private float coyoteTimeCounter;
+    private float bufferTimeCounter;
     private ShootingBehaviour gun;
 
     // Start is called before the first frame update
@@ -26,14 +28,15 @@ public class PlayerMovement : LaneBehaviour
     void Update()
     {
         // Jump
-        if (Input.GetKey(KeyCode.UpArrow) && coyoteTimeCounter > 0f) {
+        if (bufferTimeCounter >= 0f && coyoteTimeCounter > 0f) {
             GameManager.Instance.player.playerRB.velocity = Vector2.zero;
             GameManager.Instance.player.playerRB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
             coyoteTimeCounter = 0f;
+            bufferTimeCounter = 0f;
         }
 
         // Makes the player "slide"
-        if (Input.GetKey(KeyCode.DownArrow) && IsGrounded()) {
+        if (Input.GetKeyDown(KeyCode.DownArrow) && IsGrounded()) {
             // Resizes hitbox to be lower
             boxCollider.offset = new Vector2(boxCollider.offset.x, -0.5f);
             boxCollider.size = new Vector2(boxCollider.size.x, 1);
@@ -48,14 +51,14 @@ public class PlayerMovement : LaneBehaviour
          
 
         // Revert back from sliding
-        if (!Input.GetKey(KeyCode.DownArrow)) {
+        if (!Input.GetKeyDown(KeyCode.DownArrow)) {
             // Resizes hitbox with the normal, default hitbox
             boxCollider.offset = new Vector2(boxCollider.offset.x, 0);
             boxCollider.size = new Vector2(boxCollider.size.x, 2);
         }
 
         // Switch lanes
-        if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.currentLane = SwapLane(
+        if (Input.GetKeyDown(KeyCode.V) && IsGrounded()) GameManager.Instance.currentLane = SwapLane(
             GameManager.Instance.currentLane,
             GameManager.Instance.player.playerRB, 
             GameManager.Instance.player.playerObject
@@ -76,10 +79,14 @@ public class PlayerMovement : LaneBehaviour
         // Coyote time
         if (IsGrounded()) coyoteTimeCounter = coyoteTime;
         else coyoteTimeCounter -= Time.deltaTime;
+
+        // Buffer time
+        if (Input.GetKeyDown(KeyCode.UpArrow)) { bufferTimeCounter = bufferTime; }
+        else { bufferTimeCounter -= Time.deltaTime; }
     }
 
     // Checks if the player is grounded.
-    bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; } // Should make a better grounded check in the future
+    public bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; } // Should make a better grounded check in the future
 
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)

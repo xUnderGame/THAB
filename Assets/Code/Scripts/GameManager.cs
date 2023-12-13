@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
+    [HideInInspector] PlayerMovement pm;
     [HideInInspector] public readonly float globalCD = 0.5f;
     [HideInInspector] public TMP_Text soulsDisplay;
     [HideInInspector] public TMP_Text distanceDisplay;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
 
         // Scriptables
         player.playerObject = GameObject.Find("Player");
+        pm = player.playerObject.GetComponent<PlayerMovement>();
         player.shield = player.playerObject.transform.Find("Shield").gameObject;
         player.isShieldEnabled = false;
 
@@ -73,8 +75,8 @@ public class GameManager : MonoBehaviour
                 yield return new WaitForSeconds(3 / gameSpeed);
                 do
                 {
-                    player.playerRB.AddForce(Vector2.right * 8, ForceMode2D.Impulse);
-                    yield return new WaitForSeconds(0.005f);
+                    if(pm.IsGrounded()) player.playerRB.AddForce(Vector2.right * 1.25f, ForceMode2D.Impulse);
+                    yield return new WaitForSeconds(0.02f);
                 } while (player.playerObject.transform.position.x < -8);
             }
             else if (player.playerObject.transform.position.x > -8)
