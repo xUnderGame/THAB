@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         // Only one GameManager on scene.
         if (!Instance) Instance = this;
         else { Destroy(gameObject); return; }
+        DontDestroyOnLoad(gameObject);
 
         // Scriptables
         player.playerObject = GameObject.Find("Player");
