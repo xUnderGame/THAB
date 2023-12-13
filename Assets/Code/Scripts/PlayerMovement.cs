@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : LaneBehaviour
+public class PlayerMovement : LaneBehaviour, IDamageable
 {
     public int force = 20;
     public float fallForce = 0.5f;
@@ -85,5 +85,33 @@ public class PlayerMovement : LaneBehaviour
     {
         if (collision.TryGetComponent(out IDamageable damageables)) damageables?.Kill(gameObject);
         if (collision.TryGetComponent(out IInteractable interactables)) interactables?.Interact();
+    }
+
+    public void Kill(GameObject go)
+    {
+        Debug.Log($"{gameObject.name} was killed!");
+        if (GameManager.Instance.lives > 1)
+        {
+            GameManager.Instance.lives--;
+            // Respawn on the current lane
+            if (GameManager.Instance.currentLane)
+            {
+                transform.position = new Vector3(-8f, 5f, 4f);
+            }
+
+            else
+            {
+                transform.position = new Vector3(-8f, 4f, 0f);
+            }
+
+            //change number of remaining lives
+            GameObject.Find("LivesDisplay").GetComponent<Lifebar>().Lives();
+        }
+        else
+        {
+            GameManager.Instance.LoadScene("Game Over");
+        }
+
+
     }
 }

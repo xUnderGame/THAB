@@ -6,21 +6,25 @@ public class LanEnemy : LaneBehaviour, IDamageable
 {
     public GameObject self;
     public GameObject child;
+    private GameObject playerChase;
+    private bool jumped;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerChase = GameObject.Find("Player");
+        jumped = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        if ((playerChase.layer != self.layer)&&(!jumped))
         {
             SwapLane(!GameManager.Instance.currentLane,
                 GetComponent<Rigidbody2D>(),
                 self);
             child.layer = self.layer;
+            jumped = true;
         }
     }
     // Collision actions
