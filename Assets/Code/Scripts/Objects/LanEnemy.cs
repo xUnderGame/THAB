@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class LanEnemy : LaneBehaviour, IDamageable
 {
-    public GameObject self;
     public GameObject child;
+    private double swapLCD;
+    private bool flag;
+    public double delay;
     // Start is called before the first frame update
     void Start()
     {
-        
+        swapLCD = Time.time + delay;
+        flag = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        if ((swapLCD<=Time.time)&&flag)
         {
-            SwapLane(!GameManager.Instance.currentLane,
-                GetComponent<Rigidbody2D>(),
-                self);
-            child.layer = self.layer;
+            bool lane;
+            if (gameObject.layer == 6) lane = false;
+            else lane = true;
+            SwapLane(lane,
+                GetComponent<Rigidbody2D>(),gameObject);
+            child.layer = gameObject.layer;
+            flag = false;
         }
     }
     // Collision actions
