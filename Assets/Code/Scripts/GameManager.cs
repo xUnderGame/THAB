@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         spawningGap = 18f;
         gameSpeed = 1f;
         souls = 0;
-        lives = 3;
+        lives = 7;
 
         // Game speed corroutine, can change later
         StartCoroutine(SpeedUp(1.2f));
