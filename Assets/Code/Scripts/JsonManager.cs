@@ -65,35 +65,35 @@ public class UserData
 
     public class L1
     {
-        public int nextUpgradeCost;
+        public int nextUpgradeCost = 300;
         public int duration;
         public int hits;
     }
 
     public class L2
     {
-        public int nextUpgradeCost;
+        public int nextUpgradeCost = 350;
         public double duration;
         public int hits;
     }
 
     public class L3
     {
-        public int nextUpgradeCost;
+        public int nextUpgradeCost = 400;
         public int duration;
         public int hits;
     }
 
     public class L4
     {
-        public int nextUpgradeCost;
+        public int nextUpgradeCost = 450;
         public double duration;
         public int hits;
     }
 
     public class L5
     {
-        public int nextUpgradeCost;
+        public int nextUpgradeCost = 500;
         public int duration;
         public int hits;
     }
