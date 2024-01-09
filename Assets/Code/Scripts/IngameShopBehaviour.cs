@@ -6,8 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class IngameShopBehaviour : MonoBehaviour, IInteractable
 {
-    public List<IngameItem> items;
-    public void Awake() { items = Resources.LoadAll<IngameItem>("Items").ToList(); }
+    public List<IngameItem> itemPool;
+    public List<IngameItem> shopItems = new(capacity: 4);
+    public void Awake() { itemPool = Resources.LoadAll<IngameItem>("Items").ToList(); }
 
     public void Interact() {
         Time.timeScale = 0;
