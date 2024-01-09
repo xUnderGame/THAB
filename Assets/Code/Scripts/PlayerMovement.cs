@@ -6,6 +6,8 @@ public class PlayerMovement : LaneBehaviour
 {
     public int force = 20;
     public float fallForce = 0.5f;
+    public Vector2 boxSize;
+    public float castDistance;
 
     private BoxCollider2D boxCollider;
     private readonly float coyoteTime = 0.2f;
@@ -87,6 +89,10 @@ public class PlayerMovement : LaneBehaviour
 
     // Checks if the player is grounded.
     public bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; } // Should make a better grounded check in the future
+    //public bool IsGrounded()
+    //{
+    //    return Physics2D.OverlapCircle(GameManager.Instance.putoSuelo.position, 0.6f, 9);
+    //}
 
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)

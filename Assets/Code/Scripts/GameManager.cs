@@ -13,11 +13,14 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public TMP_Text distanceDisplay;
     [HideInInspector] public float gameSpeed;
     [HideInInspector] public float spawningGap;
+    [HideInInspector] public Transform putoSuelo;
 
     public bool currentLane;
     public int souls;
     public float meters;
 
+    private readonly int maxFallSpd = -50;
+    
     void Awake()
     {
         // Only one GameManager on scene.
@@ -34,6 +37,12 @@ public class GameManager : MonoBehaviour
         player.DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
         distanceDisplay = GameObject.Find("DistanceDisplay").GetComponent<TMP_Text>();
+
+        // grounded check
+        putoSuelo = player.playerObject.transform.Find("PutoSuelo").transform;
+        Physics2D.IgnoreCollision(player.playerObject.GetComponent<Collider2D>(), putoSuelo.gameObject.GetComponent<Collider2D>());
+        
+        
         spawningGap = 18f;
         gameSpeed = 1f;
         souls = 0;
@@ -93,5 +102,14 @@ public class GameManager : MonoBehaviour
     {
         if (forceSet) souls = amount;
         else souls += amount;
+    }
+
+    public void Update()
+    {
+        if(player.playerRB.velocity.y < maxFallSpd)
+        {
+            player.playerRB.velocity = new Vector2(player.playerRB.velocity.x, maxFallSpd);
+        }
+        Debug.Log(player.playerRB.velocity.y);
     }
 }
