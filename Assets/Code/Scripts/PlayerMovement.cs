@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : LaneBehaviour
 {
-    public int force = 20;
-    public float fallForce = 0.5f;
+    [HideInInspector] public float force = 20f;
+    [HideInInspector] public float fallForce = 0.5f;
+    [HideInInspector] public float coyoteTime = 0.2f;
 
-    private BoxCollider2D boxCollider;
-    private readonly float coyoteTime = 0.2f;
-    private float coyoteTimeCounter;
     private ShootingBehaviour gun;
+    private BoxCollider2D boxCollider;
+    private float coyoteTimeCounter;
 
     // Start is called before the first frame update
     void Start()
@@ -54,17 +54,17 @@ public class PlayerMovement : LaneBehaviour
         }
 
         // Switch lanes
-        if (Input.GetKeyDown(KeyCode.V)) GameManager.Instance.currentLane = SwapLane(
+        if (Input.GetKeyDown(KeyCode.V) && Time.timeScale != 0)
+        {
+            GameManager.Instance.currentLane = SwapLane(
             GameManager.Instance.currentLane,
-            GameManager.Instance.player.playerRB, 
-            GameManager.Instance.player.playerObject
-        );
-
-        // Enable forcefield
-        if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.player.EnableShield();
+            GameManager.Instance.player.playerRB,
+            GameManager.Instance.player.playerObject);
+            GameManager.Instance.player.playerObject.transform.Find("Shield").gameObject.layer =GameManager.Instance.player.playerObject.layer;
+        }
 
         // Shoot fireballs
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space)  && Time.timeScale != 0) {
             gun.cooldown = gun.Shoot(
             gun.cooldown,
             gun.projectile,
