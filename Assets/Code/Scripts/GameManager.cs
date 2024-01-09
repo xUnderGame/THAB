@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public readonly float globalCD = 0.5f;
     [HideInInspector] public TMP_Text soulsDisplay;
     [HideInInspector] public TMP_Text distanceDisplay;
+    [HideInInspector] public GameObject lifebar;
     [HideInInspector] public float gameSpeed;
     [HideInInspector] public float spawningGap;
     [HideInInspector] public GameObject UI;
@@ -18,11 +20,14 @@ public class GameManager : MonoBehaviour
 
     public bool currentLane;
     public IngameShopBehaviour currentShop;
+    public bool alive;
     public int souls;
+    public int lives;
     public float meters;
 
     void Awake()
     {
+        alive = true;
         // Only one GameManager on scene.
         if (!Instance) Instance = this;
         else { Destroy(gameObject); return; }
@@ -43,12 +48,12 @@ public class GameManager : MonoBehaviour
         spawningGap = 18f;
         gameSpeed = 1f;
         souls = 0;
+        lives = 7;
 
         // Game speed corroutine, can change later
         StartCoroutine(SpeedUp(1.2f));
         StartCoroutine(Distance());
     }
-
     // Enumerator for the corroutine
     IEnumerator SpeedUp(float maxSpeed)
     {
@@ -84,5 +89,10 @@ public class GameManager : MonoBehaviour
     {
         shopUI.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
