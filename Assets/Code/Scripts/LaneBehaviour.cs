@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaneBehaviour : MonoBehaviour {
+public class LaneBehaviour : MonoBehaviour
+{
     public bool SwapLane(bool currentLane, Rigidbody2D rb, GameObject character)
     {
         // Change to top lane
