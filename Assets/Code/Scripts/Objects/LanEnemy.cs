@@ -8,6 +8,7 @@ public class LanEnemy : LaneBehaviour, IDamageable
     public GameObject child;
     private GameObject playerChase;
     private bool jumped;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +28,13 @@ public class LanEnemy : LaneBehaviour, IDamageable
             jumped = true;
         }
     }
+
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out IDamageable test)) test?.Kill(gameObject);
     }
+
     public void Kill(GameObject go)
     {
         Debug.Log($"{gameObject.name} was killed!");

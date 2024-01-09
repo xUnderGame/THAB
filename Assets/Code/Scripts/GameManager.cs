@@ -14,8 +14,12 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public GameObject lifebar;
     [HideInInspector] public float gameSpeed;
     [HideInInspector] public float spawningGap;
+    [HideInInspector] public GameObject UI;
+    [HideInInspector] public GameObject shopUI;
+    [HideInInspector] public PlayerMovement pm;
 
     public bool currentLane;
+    public IngameShopBehaviour currentShop;
     public bool alive;
     public int souls;
     public int lives;
@@ -27,9 +31,11 @@ public class GameManager : MonoBehaviour
         // Only one GameManager on scene.
         if (!Instance) Instance = this;
         else { Destroy(gameObject); return; }
+        DontDestroyOnLoad(gameObject);
 
         // Scriptables
         player.playerObject = GameObject.Find("Player");
+        pm = player.playerObject.GetComponent<PlayerMovement>();
         player.shield = player.playerObject.transform.Find("Shield").gameObject;
         player.isShieldEnabled = false;
 
@@ -37,6 +43,8 @@ public class GameManager : MonoBehaviour
         player.DisableShield();
         soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
         distanceDisplay = GameObject.Find("DistanceDisplay").GetComponent<TMP_Text>();
+        UI = GameObject.Find("Game UI");
+        shopUI = UI.transform.Find("Ingame Shop").gameObject;
         spawningGap = 18f;
         gameSpeed = 1f;
         souls = 0;
@@ -52,7 +60,7 @@ public class GameManager : MonoBehaviour
         while (gameSpeed < maxSpeed)
         {
             yield return new WaitForSeconds(2f);
-            gameSpeed += 0.02f;
+            gameSpeed += 0.025f;
             spawningGap -= 0.4f;
             Debug.Log($"Speedup! gameSpeed: {gameSpeed}, spawningGap: {spawningGap}");
         }
@@ -63,7 +71,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             meters += 1f;
-            distanceDisplay.text = Instance.meters.ToString();
+            distanceDisplay.text = $"{meters} m";
             yield return new WaitForSeconds(1 / gameSpeed);
         }
     }
@@ -73,6 +81,14 @@ public class GameManager : MonoBehaviour
     {
         if (forceSet) souls = amount;
         else souls += amount;
+    }
+
+    public void EnableShopGUI() { shopUI.SetActive(true); }
+
+    public void DisableShopGUI()
+    {
+        shopUI.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void LoadScene(string sceneName)

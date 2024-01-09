@@ -1,0 +1,63 @@
+{
+    "souls": 0,
+    "highscore": {
+        "total": 0
+    },
+    "upgrades": {
+        "magnet": {
+            "currentLevel": 1,
+            "L1": {
+                "nextUpgradeCost": 500,
+                "duration": 10
+            },
+            "L2": {
+                "nextUpgradeCost": 1000,
+                "duration": 12.5
+            },
+            "L3": {
+                "nextUpgradeCost": 2000,
+                "duration": 15
+            },
+            "L4": {
+                "nextUpgradeCost": 3500,
+                "duration": 17.5
+            },
+            "L5": {
+                "nextUpgradeCost": 6000,
+                "duration": 20
+            }
+        },
+        "forcefield": {
+            "currentLevel": 1,
+            "L1": {
+                "nextUpgradeCost": 1000,
+                "duration": 30,
+                "hits": 1
+            },
+            "L2": {
+                "nextUpgradeCost": 2500,
+                "duration": 45,
+                "hits": 1
+            },
+            "L3": {
+                "nextUpgradeCost": 6000,
+                "duration": 45,
+                "hits": 2
+            },
+            "L4": {
+                "nextUpgradeCost": 9500,
+                "duration": 60,
+                "hits": 2
+            },
+            "L5": {
+                "nextUpgradeCost": 15000,
+                "duration": 0,
+                "hits": 2
+            }
+        }
+    },
+    "achievements": {
+        "die": false,
+        "die100": false
+    }
+}
