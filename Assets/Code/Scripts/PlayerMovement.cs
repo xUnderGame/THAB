@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : LaneBehaviour
+public class PlayerMovement : LaneBehaviour, IDamageable
 {
     public int force = 20;
     public float fallForce = 0.5f;
     public Vector2 boxSize;
     public float castDistance;
 
+    private ShootingBehaviour gun;
     private BoxCollider2D boxCollider;
     private readonly float coyoteTime = 0.2f;
     private readonly float bufferTime = 0.2f;
@@ -60,17 +61,17 @@ public class PlayerMovement : LaneBehaviour
         }
 
         // Switch lanes
-        if (Input.GetKeyDown(KeyCode.V) && IsGrounded()) GameManager.Instance.currentLane = SwapLane(
+        if (Input.GetKeyDown(KeyCode.V) && IsGrounded() && Time.timeScale != 0)
+        {
+            GameManager.Instance.currentLane = SwapLane(
             GameManager.Instance.currentLane,
-            GameManager.Instance.player.playerRB, 
-            GameManager.Instance.player.playerObject
-        );
-
-        // Enable forcefield
-        if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.player.EnableShield();
+            GameManager.Instance.player.playerRB,
+            GameManager.Instance.player.playerObject);
+            GameManager.Instance.player.playerObject.transform.Find("Shield").gameObject.layer =GameManager.Instance.player.playerObject.layer;
+        }
 
         // Shoot fireballs
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space)  && Time.timeScale != 0) {
             gun.cooldown = gun.Shoot(
             gun.cooldown,
             gun.projectile,
@@ -99,5 +100,33 @@ public class PlayerMovement : LaneBehaviour
     {
         if (collision.TryGetComponent(out IDamageable damageables)) damageables?.Kill(gameObject);
         if (collision.TryGetComponent(out IInteractable interactables)) interactables?.Interact();
+    }
+
+    public void Kill(GameObject go)
+    {
+        Debug.Log($"{gameObject.name} was killed!");
+        if (GameManager.Instance.lives > 1)
+        {
+            GameManager.Instance.lives--;
+            // Respawn on the current lane
+            if (GameManager.Instance.currentLane)
+            {
+                transform.position = new Vector3(-8f, 5f, 4f);
+            }
+
+            else
+            {
+                transform.position = new Vector3(-8f, 4f, 0f);
+            }
+
+            //change number of remaining lives
+            GameObject.Find("LivesDisplay").GetComponent<Lifebar>().Lives();
+        }
+        else
+        {
+            GameManager.Instance.LoadScene("Game Over");
+        }
+
+
     }
 }

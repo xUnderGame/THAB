@@ -9,7 +9,7 @@ public class LaneBehaviour : MonoBehaviour
 
     public bool SwapLane(bool currentLane, Rigidbody2D rb, GameObject character)
     {
-        //El personaje salta antes del cambio de línea
+        //El personaje salta antes del cambio de lï¿½nea
         rb.AddForce(Vector2.up * 35, ForceMode2D.Impulse);
         //Evita un memory leak
         if (temp != null) StopCoroutine(temp); 

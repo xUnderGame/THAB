@@ -177,6 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372f5aa2196378c4cb21dfc705583143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fbSpeed: 0.5
+  projectileSpeed: 0.5
   direction: 0
   targetPlayer: 1
