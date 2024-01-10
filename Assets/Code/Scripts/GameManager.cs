@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
-    [HideInInspector] PlayerMovement pm;
     [HideInInspector] public readonly float globalCD = 0.5f;
-    [HideInInspector] public TMP_Text soulsDisplay;
-    [HideInInspector] public TMP_Text distanceDisplay;
+    [HideInInspector] public Text soulsDisplay;
+    [HideInInspector] public Text distanceDisplay;
     [HideInInspector] public GameObject lifebar;
     [HideInInspector] public float gameSpeed;
     [HideInInspector] public float spawningGap;
@@ -44,18 +43,18 @@ public class GameManager : MonoBehaviour
         player.shield = player.playerObject.transform.Find("Shield").gameObject;
         player.isShieldEnabled = false;
 
-        // Setting stuff up
-        player.DisableShield();
-        soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
-        distanceDisplay = GameObject.Find("DistanceDisplay").GetComponent<TMP_Text>();
+        // UI
+        UI = GameObject.Find("Game UI");
+        soulsDisplay = UI.transform.Find("SoulsDisplay").GetComponent<Text>();
+        distanceDisplay = UI.transform.Find("DistanceDisplay").GetComponent<Text>();
+        shopUI = UI.transform.Find("Ingame Shop").gameObject;
 
-        // grounded check
+        // Grounded check
         putoSuelo = player.playerObject.transform.Find("PutoSuelo").transform;
         Physics2D.IgnoreCollision(player.playerObject.GetComponent<Collider2D>(), putoSuelo.gameObject.GetComponent<Collider2D>());
         
-        
-        UI = GameObject.Find("Game UI");
-        shopUI = UI.transform.Find("Ingame Shop").gameObject;
+        // Setting stuff up
+        player.DisableShield();
         spawningGap = 18f;
         gameSpeed = 1f;
         souls = 0;

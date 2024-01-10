@@ -15,7 +15,6 @@ public class PlayerMovement : LaneBehaviour, IDamageable
     private readonly float bufferTime = 0.2f;
     private float coyoteTimeCounter;
     private float bufferTimeCounter;
-    private ShootingBehaviour gun;
 
     // Start is called before the first frame update
     void Start()

@@ -9,6 +9,6 @@ public class HigherJump : IngameItem
     
     public override void Effect()
     {
-        GameManager.Instance.pm.force += 4f;
+        GameManager.Instance.pm.force += 4;
     }
 }

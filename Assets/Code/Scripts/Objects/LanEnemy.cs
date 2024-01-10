@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LanEnemy : LaneBehaviour, IDamageable
 {
-    public GameObject self;
     public GameObject child;
     private GameObject playerChase;
     private bool jumped;
@@ -19,12 +18,11 @@ public class LanEnemy : LaneBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        if ((playerChase.layer != self.layer)&&(!jumped))
+        if ((playerChase.layer != gameObject.layer) && (!jumped))
         {
             SwapLane(!GameManager.Instance.currentLane,
                 GetComponent<Rigidbody2D>(),
-                self);
-            child.layer = self.layer;
+                gameObject);
             jumped = true;
         }
     }
