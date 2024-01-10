@@ -6,29 +6,24 @@ public class Lifebar : MonoBehaviour
 {
     private Vector3 heartPos;
     public GameObject heartPref;
-    private GameObject[] hearts;
+    private List<GameObject> hearts = new();
+
     // Start is called before the first frame update
     void Start()
     {
-        hearts = new GameObject[GameManager.Instance.lives];
-        Debug.Log(hearts.Length);
-        heartPos = transform.position;
-        for(int i=0;i< GameManager.Instance.lives; i++)
-        {
+        heartPos = GameManager.Instance.livesDisplay.transform.position;
 
-            hearts[i] = Instantiate(heartPref, heartPos, Quaternion.identity);
-            
+        // Creates the objects
+        for (int i = 0; i < GameManager.Instance.lives; i++)
+        {
+            hearts.Add(Instantiate(heartPref, heartPos, Quaternion.identity, GameManager.Instance.livesDisplay.transform));
             heartPos += new Vector3(2, 0, 0);
-            Debug.Log(hearts[i].transform.position);
         }
     }
+
     public void Lives()
     {
-
-        try
-        {
-            hearts[GameManager.Instance.lives].GetComponent<HeartDisplay>().SwapMySprite();
-        }catch { Debug.Log("cant find heart"); }
+        hearts[GameManager.Instance.lives].GetComponent<HeartDisplay>().SwapMySprite();
     }
 
 }

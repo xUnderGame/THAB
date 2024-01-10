@@ -1,29 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LanEnemy : LaneBehaviour, IDamageable
+public class LaneEnemy : LaneBehaviour, IDamageable
 {
-    public GameObject child;
-    private GameObject playerChase;
-    private bool jumped;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        playerChase = GameObject.Find("Player");
-        jumped = false;
-    }
+    private bool hasSwapped = false;
 
     // Update is called once per frame
     void Update()
     {
-        if ((playerChase.layer != gameObject.layer) && (!jumped))
+        if (gameObject.transform.position.x <= 4 && !hasSwapped)
         {
-            SwapLane(!GameManager.Instance.currentLane,
+            hasSwapped = true;
+            SwapLane(gameObject.layer == 7,
                 GetComponent<Rigidbody2D>(),
                 gameObject);
-            jumped = true;
         }
     }
 

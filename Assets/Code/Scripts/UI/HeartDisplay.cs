@@ -7,8 +7,6 @@ public class HeartDisplay : MonoBehaviour
     public SpriteRenderer heartRender;
     public Sprite emptyHeart;
 
-    void Start() {
-    }
     public void SwapMySprite()
     {
         heartRender.sprite = emptyHeart;

@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
     [HideInInspector] public readonly float globalCD = 0.5f;
-    [HideInInspector] public Text soulsDisplay;
-    [HideInInspector] public Text distanceDisplay;
-    [HideInInspector] public GameObject lifebar;
+    [HideInInspector] public TMP_Text soulsDisplay;
+    [HideInInspector] public TMP_Text distanceDisplay;
+    [HideInInspector] public GameObject livesDisplay;
     [HideInInspector] public float gameSpeed;
     [HideInInspector] public float spawningGap;
     [HideInInspector] public GameObject UI;
     [HideInInspector] public GameObject shopUI;
     [HideInInspector] public PlayerMovement pm;
     [HideInInspector] public Transform putoSuelo;
+    [HideInInspector] public int lives;
 
     public bool currentLane;
     public IngameShopBehaviour currentShop;
     public bool alive;
     public int souls;
-    public int lives;
     public float meters;
 
     private readonly int maxFallSpd = -50;
@@ -45,9 +46,10 @@ public class GameManager : MonoBehaviour
 
         // UI
         UI = GameObject.Find("Game UI");
-        soulsDisplay = UI.transform.Find("SoulsDisplay").GetComponent<Text>();
-        distanceDisplay = UI.transform.Find("DistanceDisplay").GetComponent<Text>();
+        soulsDisplay = UI.transform.Find("Displays").Find("SoulsDisplay").GetComponent<TMP_Text>();
+        distanceDisplay = UI.transform.Find("Displays").Find("DistanceDisplay").GetComponent<TMP_Text>();
         shopUI = UI.transform.Find("Ingame Shop").gameObject;
+        livesDisplay = UI.transform.Find("Displays").Find("LivesDisplay").gameObject;
 
         // Grounded check
         putoSuelo = player.playerObject.transform.Find("PutoSuelo").transform;
@@ -73,7 +75,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
             gameSpeed += 0.025f;
             spawningGap -= 0.4f;
-            Debug.Log($"Speedup! gameSpeed: {gameSpeed}, spawningGap: {spawningGap}");
+            // Debug.Log($"Speedup! gameSpeed: {gameSpeed}, spawningGap: {spawningGap}");
         }
     }
 
@@ -118,11 +120,11 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        // Velocity cap
         if(player.playerRB.velocity.y < maxFallSpd)
         {
             player.playerRB.velocity = new Vector2(player.playerRB.velocity.x, maxFallSpd);
         }
-        Debug.Log(player.playerRB.velocity.y);
     }
 
     public void EnableShopGUI() { shopUI.SetActive(true); }
@@ -136,5 +138,6 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        Destroy(gameObject); // Destroys GameManager after leaving the game scene
     }
 }

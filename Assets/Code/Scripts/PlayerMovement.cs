@@ -66,7 +66,7 @@ public class PlayerMovement : LaneBehaviour, IDamageable
             GameManager.Instance.currentLane,
             GameManager.Instance.player.playerRB,
             GameManager.Instance.player.playerObject);
-            GameManager.Instance.player.playerObject.transform.Find("Shield").gameObject.layer =GameManager.Instance.player.playerObject.layer;
+            GameManager.Instance.player.playerObject.transform.Find("Shield").gameObject.layer = GameManager.Instance.player.playerObject.layer;
         }
 
         // Shoot fireballs
@@ -97,35 +97,15 @@ public class PlayerMovement : LaneBehaviour, IDamageable
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out IDamageable damageables)) damageables?.Kill(gameObject);
+        // if (collision.TryGetComponent(out IDamageable damageables)) damageables?.Kill(gameObject);
         if (collision.TryGetComponent(out IInteractable interactables)) interactables?.Interact();
+
+        // Damage player (fire)
+        if (collision.CompareTag("Fire")) { Kill(collision.gameObject); }
     }
 
     public void Kill(GameObject go)
     {
-        Debug.Log($"{gameObject.name} was killed!");
-        if (GameManager.Instance.lives > 1)
-        {
-            GameManager.Instance.lives--;
-            // Respawn on the current lane
-            if (GameManager.Instance.currentLane)
-            {
-                transform.position = new Vector3(-8f, 5f, 4f);
-            }
-
-            else
-            {
-                transform.position = new Vector3(-8f, 4f, 0f);
-            }
-
-            //change number of remaining lives
-            GameObject.Find("LivesDisplay").GetComponent<Lifebar>().Lives();
-        }
-        else
-        {
-            GameManager.Instance.LoadScene("Game Over");
-        }
-
-
+        GameManager.Instance.player.HurtPlayer(go);
     }
 }

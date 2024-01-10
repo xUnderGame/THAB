@@ -11,3 +11,4 @@ public class CycleKillPlane : MonoBehaviour
 
     void FixedUpdate() { planes.ForEach(plane => { if (plane.transform.position.x <= -80f) plane.transform.position = new Vector3(40f, plane.transform.position.y, plane.transform.position.z); }); }
 }
+

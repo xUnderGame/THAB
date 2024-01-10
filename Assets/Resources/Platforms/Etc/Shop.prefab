@@ -15062,3 +15062,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7ce201dec2a8543b88568113a577d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemPool: []
+  shopItems: []
