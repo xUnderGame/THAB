@@ -20,17 +20,25 @@ public class PlayerScriptable : ScriptableObject, IDamageable
 
     // Kills the player and optionally shows the game over GUI
     public void Kill(GameObject go) {
-        Debug.Log("Player was killed!");
-
-        // // Play death animation
-        //playerObject.GetComponent<Animator>().Play("Death");
+        GameManager.Instance.lives--;
         
-        // Toggle GameOver GUI
-        ToggleGameOverGUI();
+        // Gameover condition
+        if (GameManager.Instance.lives < 1)
+        {
+            ToggleGameOverGUI();
+            return;
+        }
+
+        // Respawn on current lane
+        GameManager.Instance.player.playerObject.transform.position = new Vector3(GameManager.Instance.player.playerObject.transform.position.x + 2f, 12.5f, GameManager.Instance.player.playerObject.transform.position.z);
+
+        // Change number of remaining lives
+        GameManager.Instance.livesDisplay.GetComponent<Lifebar>().Lives();
     }
 
     // Toggles ON/OFF the game over GUI
     public void ToggleGameOverGUI() {
+        GameManager.Instance.LoadScene("Game Over");
         // Time.timeScale = 0;
         // throw new NotImplementedException();
     }
