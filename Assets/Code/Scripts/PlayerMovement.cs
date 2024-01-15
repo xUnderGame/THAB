@@ -15,13 +15,15 @@ public class PlayerMovement : LaneBehaviour, IDamageable
     private readonly float bufferTime = 0.2f;
     private float coyoteTimeCounter;
     private float bufferTimeCounter;
+    private LaneBehaviour lb;
 
     // Start is called before the first frame update
     void Start()
     {
         gun = GetComponent<ShootingBehaviour>();
-        gun.cooldown = Time.time;
         boxCollider = GetComponent<BoxCollider2D>();
+        lb = GetComponent<LaneBehaviour>();
+        gun.cooldown = Time.time;
         GameManager.Instance.player.playerRB = GetComponent<Rigidbody2D>();
         gun.projectile = Resources.Load<GameObject>("Projectiles/Fireball");
     }
@@ -30,7 +32,7 @@ public class PlayerMovement : LaneBehaviour, IDamageable
     void Update()
     {
         // Jump
-        if (bufferTimeCounter >= 0f && coyoteTimeCounter > 0f) {
+        if (bufferTimeCounter >= 0f && coyoteTimeCounter > 0f && lb.temp == null) {
             GameManager.Instance.player.playerRB.velocity = Vector2.zero;
             GameManager.Instance.player.playerRB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
             coyoteTimeCounter = 0f;
@@ -45,12 +47,11 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         }
 
         // Fast fall
-        if (Input.GetKey(KeyCode.DownArrow) && !IsGrounded())
+        if (Input.GetKey(KeyCode.DownArrow) && !IsGrounded() && boxCollider.enabled)
         {
             // Increase gravity while player is on air
             GameManager.Instance.player.playerRB.AddForce(Vector2.down * fallForce, ForceMode2D.Impulse);
         }
-         
 
         // Revert back from sliding
         if (!Input.GetKeyDown(KeyCode.DownArrow)) {
@@ -79,7 +80,7 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         }
 
         // Coyote time
-        if (IsGrounded()) coyoteTimeCounter = coyoteTime;
+        if (IsGrounded()) { lb.temp = null; coyoteTimeCounter = coyoteTime; }
         else coyoteTimeCounter -= Time.deltaTime;
 
         // Buffer time
