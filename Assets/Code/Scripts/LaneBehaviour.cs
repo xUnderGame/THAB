@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +12,9 @@ public class LaneBehaviour : MonoBehaviour
         // El personaje salta antes del cambio de linea
         rb.AddForce(Vector2.up * 40, ForceMode2D.Impulse);
 
-        // Evita un memory leak
+        // tf you talking about
         if (temp != null) StopCoroutine(temp);
+        character.GetComponent<Collider2D>().enabled = false;
         temp = StartCoroutine(LaneJump(currentLane, rb, character));
         return !currentLane;
     }
@@ -22,6 +24,8 @@ public class LaneBehaviour : MonoBehaviour
         do
         { yield return new WaitForSeconds(0.02f);
         } while (character.transform.position.y <= 12);
+
+        character.GetComponent<Collider2D>().enabled = true;
 
         // Change to top lane
         if (!currentLane)
@@ -42,6 +46,5 @@ public class LaneBehaviour : MonoBehaviour
         }
 
         rb.velocity = Vector3.zero;
-        yield return null;
     }
 }
