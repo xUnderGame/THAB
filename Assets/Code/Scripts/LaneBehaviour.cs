@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class LaneBehaviour : MonoBehaviour
 {
@@ -9,10 +9,12 @@ public class LaneBehaviour : MonoBehaviour
 
     public bool SwapLane(bool currentLane, Rigidbody2D rb, GameObject character)
     {
-        //El personaje salta antes del cambio de línea
-        rb.AddForce(Vector2.up * 35, ForceMode2D.Impulse);
-        //Evita un memory leak
-        if (temp != null) StopCoroutine(temp); 
+        // El personaje salta antes del cambio de linea
+        rb.AddForce(Vector2.up * 40, ForceMode2D.Impulse);
+
+        // tf you talking about
+        if (temp != null) StopCoroutine(temp);
+        character.GetComponent<Collider2D>().enabled = false;
         temp = StartCoroutine(LaneJump(currentLane, rb, character));
         return !currentLane;
     }
@@ -21,7 +23,9 @@ public class LaneBehaviour : MonoBehaviour
     {
         do
         { yield return new WaitForSeconds(0.02f);
-        } while (GameManager.Instance.player.playerObject.transform.position.y <= 12);
+        } while (character.transform.position.y <= 12);
+
+        character.GetComponent<Collider2D>().enabled = true;
 
         // Change to top lane
         if (!currentLane)
@@ -40,7 +44,7 @@ public class LaneBehaviour : MonoBehaviour
             character.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
             character.transform.position = new Vector3(character.transform.position.x, 12.5f, 0f);
         }
+
         rb.velocity = Vector3.zero;
-        yield return null;
     }
 }

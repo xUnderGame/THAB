@@ -2,27 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : LaneBehaviour
+public class PlayerMovement : LaneBehaviour, IDamageable
 {
     public int force = 20;
     public float fallForce = 0.5f;
     public Vector2 boxSize;
     public float castDistance;
 
+    private ShootingBehaviour gun;
     private BoxCollider2D boxCollider;
     private readonly float coyoteTime = 0.2f;
     private readonly float bufferTime = 0.2f;
     private float coyoteTimeCounter;
     private float bufferTimeCounter;
-    private ShootingBehaviour gun;
     private PutoSuelo putoSuelo;
+    private LaneBehaviour lb;
 
     // Start is called before the first frame update
     void Start()
     {
         gun = GetComponent<ShootingBehaviour>();
-        gun.cooldown = Time.time;
         boxCollider = GetComponent<BoxCollider2D>();
+        lb = GetComponent<LaneBehaviour>();
+        gun.cooldown = Time.time;
         GameManager.Instance.player.playerRB = GetComponent<Rigidbody2D>();
         gun.projectile = Resources.Load<GameObject>("Projectiles/Fireball");
         putoSuelo = transform.Find("PutoSuelo").GetComponent<PutoSuelo>();
@@ -32,7 +34,7 @@ public class PlayerMovement : LaneBehaviour
     void Update()
     {
         // Jump
-        if (bufferTimeCounter >= 0f && coyoteTimeCounter > 0f) {
+        if (bufferTimeCounter >= 0f && coyoteTimeCounter > 0f && lb.temp == null) {
             GameManager.Instance.player.playerRB.velocity = Vector2.zero;
             GameManager.Instance.player.playerRB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
             coyoteTimeCounter = 0f;
@@ -47,12 +49,11 @@ public class PlayerMovement : LaneBehaviour
         }
 
         // Fast fall
-        if (Input.GetKey(KeyCode.DownArrow) && !IsGrounded())
+        if (Input.GetKey(KeyCode.DownArrow) && !IsGrounded() && boxCollider.enabled)
         {
             // Increase gravity while player is on air
             GameManager.Instance.player.playerRB.AddForce(Vector2.down * fallForce, ForceMode2D.Impulse);
         }
-         
 
         // Revert back from sliding
         if (!Input.GetKeyDown(KeyCode.DownArrow)) {
@@ -62,7 +63,9 @@ public class PlayerMovement : LaneBehaviour
         }
 
         // Switch lanes
-        if (Input.GetKeyDown(KeyCode.V) && IsGrounded()) GameManager.Instance.currentLane = SwapLane(
+        if (Input.GetKeyDown(KeyCode.V) && IsGrounded() && Time.timeScale != 0)
+        {
+            GameManager.Instance.currentLane = SwapLane(
             GameManager.Instance.currentLane,
             GameManager.Instance.player.playerRB, 
             GameManager.Instance.player.playerObject
@@ -73,7 +76,7 @@ public class PlayerMovement : LaneBehaviour
         if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.player.EnableShield();
 
         // Shoot fireballs
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space)  && Time.timeScale != 0) {
             gun.cooldown = gun.Shoot(
             gun.cooldown,
             gun.projectile,
@@ -82,7 +85,7 @@ public class PlayerMovement : LaneBehaviour
         }
 
         // Coyote time
-        if (IsGrounded()) coyoteTimeCounter = coyoteTime;
+        if (IsGrounded()) { lb.temp = null; coyoteTimeCounter = coyoteTime; }
         else coyoteTimeCounter -= Time.deltaTime;
 
         // Buffer time
@@ -100,7 +103,15 @@ public class PlayerMovement : LaneBehaviour
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out IDamageable damageables)) damageables?.Kill(gameObject);
+        // if (collision.TryGetComponent(out IDamageable damageables)) damageables?.Kill(gameObject);
         if (collision.TryGetComponent(out IInteractable interactables)) interactables?.Interact();
+
+        // Damage player (fire)
+        if (collision.CompareTag("Fire")) { Kill(collision.gameObject); }
+    }
+
+    public void Kill(GameObject go)
+    {
+        GameManager.Instance.player.HurtPlayer(go);
     }
 }

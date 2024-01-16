@@ -1,21 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerScriptable player;
-    [HideInInspector] PlayerMovement pm;
     [HideInInspector] public readonly float globalCD = 0.5f;
     [HideInInspector] public TMP_Text soulsDisplay;
     [HideInInspector] public TMP_Text distanceDisplay;
+    [HideInInspector] public GameObject livesDisplay;
     [HideInInspector] public float gameSpeed;
     [HideInInspector] public float spawningGap;
+    [HideInInspector] public GameObject UI;
+    [HideInInspector] public GameObject shopUI;
+    [HideInInspector] public PlayerMovement pm;
     [HideInInspector] public Transform putoSuelo;
+    [HideInInspector] public int lives;
 
     public bool currentLane;
+    public IngameShopBehaviour currentShop;
+    public bool alive;
     public int souls;
     public float meters;
 
@@ -23,45 +31,51 @@ public class GameManager : MonoBehaviour
     
     void Awake()
     {
+        alive = true;
         // Only one GameManager on scene.
         if (!Instance) Instance = this;
         else { Destroy(gameObject); return; }
+        DontDestroyOnLoad(gameObject);
 
         // Scriptables
         player.playerObject = GameObject.Find("Player");
         pm = player.playerObject.GetComponent<PlayerMovement>();
+        pm = player.playerObject.GetComponent<PlayerMovement>();
         player.shield = player.playerObject.transform.Find("Shield").gameObject;
         player.isShieldEnabled = false;
 
-        // Setting stuff up
-        player.DisableShield();
-        soulsDisplay = GameObject.Find("SoulsDisplay").GetComponent<TMP_Text>();
-        distanceDisplay = GameObject.Find("DistanceDisplay").GetComponent<TMP_Text>();
+        // UI
+        UI = GameObject.Find("Game UI");
+        soulsDisplay = UI.transform.Find("Displays").Find("SoulsDisplay").GetComponent<TMP_Text>();
+        distanceDisplay = UI.transform.Find("Displays").Find("DistanceDisplay").GetComponent<TMP_Text>();
+        shopUI = UI.transform.Find("Ingame Shop").gameObject;
+        livesDisplay = UI.transform.Find("Displays").Find("LivesDisplay").gameObject;
 
-        // grounded check
+        // Grounded check
         putoSuelo = player.playerObject.transform.Find("PutoSuelo").transform;
         Physics2D.IgnoreCollision(player.playerObject.GetComponent<Collider2D>(), putoSuelo.gameObject.GetComponent<Collider2D>());
         
-        
+        // Setting stuff up
+        player.DisableShield();
         spawningGap = 18f;
         gameSpeed = 1f;
         souls = 0;
+        lives = 7;
 
         // Game speed corroutine, can change later
         StartCoroutine(SpeedUp(1.2f));
         StartCoroutine(Distance());
         StartCoroutine(BackToPosition());
     }
-
     // Enumerator for the corroutine
     IEnumerator SpeedUp(float maxSpeed)
     {
         while (gameSpeed < maxSpeed)
         {
             yield return new WaitForSeconds(2f);
-            gameSpeed += 0.02f;
+            gameSpeed += 0.025f;
             spawningGap -= 0.4f;
-            Debug.Log($"Speedup! gameSpeed: {gameSpeed}, spawningGap: {spawningGap}");
+            // Debug.Log($"Speedup! gameSpeed: {gameSpeed}, spawningGap: {spawningGap}");
         }
     }
 
@@ -70,7 +84,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             meters += 1f;
-            distanceDisplay.text = Instance.meters.ToString();
+            distanceDisplay.text = $"{meters} m";
             yield return new WaitForSeconds(1 / gameSpeed);
         }
     }
@@ -106,10 +120,24 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        // Velocity cap
         if(player.playerRB.velocity.y < maxFallSpd)
         {
             player.playerRB.velocity = new Vector2(player.playerRB.velocity.x, maxFallSpd);
         }
-        Debug.Log(player.playerRB.velocity.y);
+    }
+
+    public void EnableShopGUI() { shopUI.SetActive(true); }
+
+    public void DisableShopGUI()
+    {
+        shopUI.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+        Destroy(gameObject); // Destroys GameManager after leaving the game scene
     }
 }
