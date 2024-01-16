@@ -34,7 +34,8 @@ public class PlayerMovement : LaneBehaviour, IDamageable
     void Update()
     {
         // Jump
-        if (bufferTimeCounter >= 0f && coyoteTimeCounter > 0f && lb.temp == null) {
+        if (bufferTimeCounter >= 0f && coyoteTimeCounter > 0f && lb.temp == null)
+        {
             GameManager.Instance.player.playerRB.velocity = Vector2.zero;
             GameManager.Instance.player.playerRB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
             coyoteTimeCounter = 0f;
@@ -42,7 +43,8 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         }
 
         // Makes the player "slide"
-        if (Input.GetKeyDown(KeyCode.DownArrow) && IsGrounded()) {
+        if (Input.GetKeyDown(KeyCode.DownArrow) && IsGrounded())
+        {
             // Resizes hitbox to be lower
             boxCollider.offset = new Vector2(boxCollider.offset.x, -0.5f);
             boxCollider.size = new Vector2(boxCollider.size.x, 1);
@@ -56,7 +58,8 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         }
 
         // Revert back from sliding
-        if (!Input.GetKeyDown(KeyCode.DownArrow)) {
+        if (!Input.GetKeyDown(KeyCode.DownArrow))
+        {
             // Resizes hitbox with the normal, default hitbox
             boxCollider.offset = new Vector2(boxCollider.offset.x, 0);
             boxCollider.size = new Vector2(boxCollider.size.x, 2);
@@ -67,21 +70,23 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         {
             GameManager.Instance.currentLane = SwapLane(
             GameManager.Instance.currentLane,
-            GameManager.Instance.player.playerRB, 
+            GameManager.Instance.player.playerRB,
             GameManager.Instance.player.playerObject
-        );
-        putoSuelo.gameObject.layer = gameObject.layer;
+            );
+           putoSuelo.gameObject.layer = gameObject.layer;
+        }
 
         // Enable forcefield
         if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.player.EnableShield();
 
         // Shoot fireballs
-        if (Input.GetKeyDown(KeyCode.Space)  && Time.timeScale != 0) {
+        if (Input.GetKeyDown(KeyCode.Space) && Time.timeScale != 0)
+        {
             gun.cooldown = gun.Shoot(
             gun.cooldown,
             gun.projectile,
             gameObject.transform.GetChild(0).transform.position,
-            gameObject); 
+            gameObject);
         }
 
         // Coyote time
@@ -91,10 +96,11 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         // Buffer time
         if (Input.GetKeyDown(KeyCode.UpArrow)) { bufferTimeCounter = bufferTime; }
         else { bufferTimeCounter -= Time.deltaTime; }
+
     }
 
     // Checks if the player is grounded.
-    /*public bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; } */// Should make a better grounded check in the future
+    //public bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; }
     public bool IsGrounded()
     {
         return putoSuelo.isGrounded;
