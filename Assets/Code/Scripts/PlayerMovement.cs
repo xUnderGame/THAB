@@ -15,6 +15,7 @@ public class PlayerMovement : LaneBehaviour, IDamageable
     private readonly float bufferTime = 0.2f;
     private float coyoteTimeCounter;
     private float bufferTimeCounter;
+    private PutoSuelo putoSuelo;
     private LaneBehaviour lb;
 
     // Start is called before the first frame update
@@ -26,6 +27,7 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         gun.cooldown = Time.time;
         GameManager.Instance.player.playerRB = GetComponent<Rigidbody2D>();
         gun.projectile = Resources.Load<GameObject>("Projectiles/Fireball");
+        putoSuelo = transform.Find("PutoSuelo").GetComponent<PutoSuelo>();
     }
 
     // Update is called once per frame
@@ -65,10 +67,13 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         {
             GameManager.Instance.currentLane = SwapLane(
             GameManager.Instance.currentLane,
-            GameManager.Instance.player.playerRB,
-            GameManager.Instance.player.playerObject);
-            GameManager.Instance.player.playerObject.transform.Find("Shield").gameObject.layer = GameManager.Instance.player.playerObject.layer;
-        }
+            GameManager.Instance.player.playerRB, 
+            GameManager.Instance.player.playerObject
+        );
+        putoSuelo.gameObject.layer = gameObject.layer;
+
+        // Enable forcefield
+        if (Input.GetKeyDown(KeyCode.U)) GameManager.Instance.player.EnableShield();
 
         // Shoot fireballs
         if (Input.GetKeyDown(KeyCode.Space)  && Time.timeScale != 0) {
@@ -89,11 +94,11 @@ public class PlayerMovement : LaneBehaviour, IDamageable
     }
 
     // Checks if the player is grounded.
-    public bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; } // Should make a better grounded check in the future
-    //public bool IsGrounded()
-    //{
-    //    return Physics2D.OverlapCircle(GameManager.Instance.putoSuelo.position, 0.6f, 9);
-    //}
+    /*public bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; } */// Should make a better grounded check in the future
+    public bool IsGrounded()
+    {
+        return putoSuelo.isGrounded;
+    }
 
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)
