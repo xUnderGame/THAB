@@ -7,12 +7,16 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public Achievements achievements;
     public static GameManager Instance;
     public PlayerScriptable player;
     [HideInInspector] public readonly float globalCD = 0.5f;
     [HideInInspector] public TMP_Text soulsDisplay;
     [HideInInspector] public TMP_Text distanceDisplay;
     [HideInInspector] public GameObject livesDisplay;
+    [HideInInspector] public GameObject achievementPopUp;
+    [HideInInspector] public TMP_Text achDesc;
+    [HideInInspector] public TMP_Text achName;
     [HideInInspector] public float gameSpeed;
     [HideInInspector] public float spawningGap;
     [HideInInspector] public GameObject UI;
@@ -25,6 +29,7 @@ public class GameManager : MonoBehaviour
     public IngameShopBehaviour currentShop;
     public bool alive;
     public int souls;
+    private int lastSouls;
     public float meters;
 
     private readonly int maxFallSpd = -50;
@@ -50,7 +55,9 @@ public class GameManager : MonoBehaviour
         distanceDisplay = UI.transform.Find("Displays").Find("DistanceDisplay").GetComponent<TMP_Text>();
         shopUI = UI.transform.Find("Ingame Shop").gameObject;
         livesDisplay = UI.transform.Find("Displays").Find("LivesDisplay").gameObject;
-
+        achievementPopUp = UI.transform.Find("Displays").Find("AchievementPopUp").gameObject;
+        achName = UI.transform.Find("Displays").Find("AchievementPopUp").Find("AchName").GetComponent<TMP_Text>();
+        achDesc = UI.transform.Find("Displays").Find("AchievementPopUp").Find("AchDesc").GetComponent<TMP_Text>();
         // Grounded check
         putoSuelo = player.playerObject.transform.Find("PutoSuelo").transform;
         Physics2D.IgnoreCollision(player.playerObject.GetComponent<Collider2D>(), putoSuelo.gameObject.GetComponent<Collider2D>());
@@ -60,6 +67,7 @@ public class GameManager : MonoBehaviour
         spawningGap = 18f;
         gameSpeed = 1f;
         souls = 0;
+        lastSouls = 0;
         lives = 7;
 
         // Game speed corroutine, can change later
@@ -120,6 +128,8 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        if (lastSouls > souls + 20) achievements.Ach4Whaled();
+        lastSouls = souls;
         // Velocity cap
         if(player.playerRB.velocity.y < maxFallSpd)
         {
@@ -129,10 +139,25 @@ public class GameManager : MonoBehaviour
 
     public void EnableShopGUI() { shopUI.SetActive(true); }
 
+
+
     public void DisableShopGUI()
     {
         shopUI.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void EnablePopUp(string name, string descrip)
+    {
+        if(achName != null) achName.text = name;
+        if (achDesc != null) achDesc.text = descrip;
+        if (achievementPopUp != null) achievementPopUp.SetActive(true);
+        Debug.Log(achName+" "+achDesc+" "+achievementPopUp);
+    }
+    public void DisablePopUp()
+    {
+        if (achievementPopUp != null) achievementPopUp.SetActive(false);
+        Debug.Log(achName + " " + achDesc + " " + achievementPopUp);
     }
 
     public void LoadScene(string sceneName)
