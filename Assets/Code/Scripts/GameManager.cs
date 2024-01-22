@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public bool alive;
     public int souls;
     public float meters;
+    public float score;
 
     private readonly int maxFallSpd = -50;
     
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpeedUp(1.2f));
         StartCoroutine(Distance());
         StartCoroutine(BackToPosition());
+        StartCoroutine(ScoreByMeters());
     }
     // Enumerator for the corroutine
     IEnumerator SpeedUp(float maxSpeed)
@@ -110,6 +112,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator ScoreByMeters()
+    {
+        while (true)
+        {
+            score += 1f;
+            distanceDisplay.text = $"{score} m";
+            yield return new WaitForSeconds(5/gameSpeed);
+        }
+    }
+
 
     // Adds to the player amount of souls
     public void ChangeSouls(int amount, bool forceSet = false)
@@ -125,6 +137,7 @@ public class GameManager : MonoBehaviour
         {
             player.playerRB.velocity = new Vector2(player.playerRB.velocity.x, maxFallSpd);
         }
+        Debug.Log(score);
     }
 
     public void EnableShopGUI() { shopUI.SetActive(true); }

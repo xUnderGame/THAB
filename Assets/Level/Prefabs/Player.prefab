@@ -236,13 +236,13 @@ GameObject:
   - component: {fileID: 8442662049685830628}
   - component: {fileID: 3093260308158055728}
   - component: {fileID: 5166662470327383087}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PutoSuelo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8442662049685830628
 Transform:
   m_ObjectHideFlags: 0
