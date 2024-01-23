@@ -1241,6 +1241,10 @@ PrefabInstance:
       value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8956527070613596395, guid: a8feb7b9c29e90748805eccfbfb541ca, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 470930964}
+    - target: {fileID: 8956527070613596395, guid: a8feb7b9c29e90748805eccfbfb541ca, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 0
       objectReference: {fileID: 0}
