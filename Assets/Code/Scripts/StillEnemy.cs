@@ -28,6 +28,7 @@ public class StillEnemy : MonoBehaviour, IDamageable
 
     public void Kill(GameObject go) {
         Debug.Log($"{gameObject.name} was killed!");
+        GameManager.Instance.achievements.Ach5Shoot();
         Destroy(gameObject);
     }
 }

@@ -8,8 +8,9 @@ public class Achievements : MonoBehaviour
     private string[] achNames = new string[5] { "Survivor", "Consolation Prize", "Persistent", "Gift Ticket", "Marksman" };
 
     private string[] achDescs = new string[5] { "You travelled 150 m", "You died twice in quick succession", "You travelled 25 m without changing lanes", "You spent 100 souls in the shop", "You shot 3 enemies" };
-    public float travel;
-    public float traveLane;
+    private float travel;
+    private float traveLane;
+    private int shot;
     private bool respawned;
     public float quickDeath;
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class Achievements : MonoBehaviour
             travel = 0;
             traveLane = 0;
             quickDeath = 0;
+            shot = 0;
         }
     }
 
@@ -64,12 +66,24 @@ public class Achievements : MonoBehaviour
         }
         else respawned = true;
     }
-    public void Ach4Whaled()
+    public void Ach4Whaled()//call from shop if spent a lot of money
     {
         if (!achTracker[3])
         {
-            achTracker[3] = true;
-            GameManager.Instance.EnablePopUp(achNames[3], achDescs[3]);
+                achTracker[3] = true;
+                GameManager.Instance.EnablePopUp(achNames[3], achDescs[3]);
+        }
+    }
+    public void Ach5Shoot()
+    {
+        if (!achTracker[4])
+        {
+            if (shot < 3) shot++;
+            else
+            {
+                achTracker[3] = true;
+                GameManager.Instance.EnablePopUp(achNames[3], achDescs[3]);
+            }
         }
     }
 }
