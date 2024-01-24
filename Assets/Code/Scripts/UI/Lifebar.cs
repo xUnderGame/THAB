@@ -21,9 +21,9 @@ public class Lifebar : MonoBehaviour
         }
     }
 
-    public void Lives()
+    public void Lives(bool status)
     {
-        hearts[GameManager.Instance.lives].GetComponent<HeartDisplay>().SwapMySprite();
+        if (status) hearts[GameManager.Instance.lives].GetComponent<HeartDisplay>().SwapMySprite(true);
+        else hearts[GameManager.Instance.lives].GetComponent<HeartDisplay>().SwapMySprite(false);
     }
-
 }

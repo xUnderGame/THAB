@@ -6,9 +6,11 @@ public class HeartDisplay : MonoBehaviour
 {
     public SpriteRenderer heartRender;
     public Sprite emptyHeart;
+    public Sprite filledHeart;
 
-    public void SwapMySprite()
+    public void SwapMySprite(bool status)
     {
-        heartRender.sprite = emptyHeart;
+        if (status) heartRender.sprite = filledHeart;
+        else heartRender.sprite = emptyHeart;
     }
 }
