@@ -1,0 +1,721 @@
+fileFormatVersion: 2
+guid: 1f99c204eb33cbc4fba44d874e2160be
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 880
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20c741cf88bf705449315439c2b5401a
+      internalID: 1494237642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_1
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 880
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04464e460a1e16b42b16dd7fbf8b0667
+      internalID: 1399211345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_2
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 880
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c1bd9336999fe849976cae1645748fd
+      internalID: 1815754700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 781
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d639e22f3ad6ee04b83f9660a1a03d8c
+      internalID: 656469135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_4
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 781
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a47b376356f8364780b8d0d38012f03
+      internalID: -169261706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_5
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 781
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aa5896aebd95ae4e866ef70caee4752
+      internalID: -1895340029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 682
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb93d4e2d2149624596612bffc9a8889
+      internalID: -1226460515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_7
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 682
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ec10740a594c7c4d90f8565008bdcc3
+      internalID: -104885420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_8
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 682
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b2a7a2ef24e8974398feb233c6b5901
+      internalID: 118379823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 583
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c00b6a55fbcda60448143413ecbf78c8
+      internalID: 294010025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_10
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 583
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69d11b7cb44d29041ae538371e2ef383
+      internalID: -1006815279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_11
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 583
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe5c72edb48d5d1469dfe370dd0bd063
+      internalID: -1502957541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 484
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc6c09a2b039eb242975150487a11194
+      internalID: -177672528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_13
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 484
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b940e24b41012b4e8cae80025a43905
+      internalID: -993042833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_14
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 484
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f8181bbac565f24da8f4336c7c2f355
+      internalID: -906142062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 385
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07c8c51ab01913488fa34733c15120e
+      internalID: 436812781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_16
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 385
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f87e0afcb1a876844bba64f633a48e47
+      internalID: -566843665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_17
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 385
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebc9c163515c46046a4129a3182a6814
+      internalID: -910267012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 286
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6762953da3185554d8106fa771c6b1fc
+      internalID: -94243662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_19
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 286
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8b8acd3238c3a540956a198f702d2a5
+      internalID: 1960583606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_20
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 286
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 499b8b4191883a44f8b5e9810a365fea
+      internalID: -1792935714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 187
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea671e01422c3f0418cc7a5e9b89ff1f
+      internalID: 1546846838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_22
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 187
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb4f4535077bf3043a9036158a0e0b14
+      internalID: 1520762763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_23
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 187
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 726c1e4b395a357458f96300b91d0f7e
+      internalID: -894412302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 88
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef7932b1c9cabe043adbd1317f7f6e04
+      internalID: 1977450282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_25
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 88
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbe1bf33cf57e014e8d1a9b1ab70baff
+      internalID: -1099680551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolcanoTiles16x16Offset0Padding0_26
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 88
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6655110c63989094488aac63949c3872
+      internalID: -454153275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      VolcanoTiles16x16Offset0Padding0_0: 1494237642
+      VolcanoTiles16x16Offset0Padding0_1: 1399211345
+      VolcanoTiles16x16Offset0Padding0_10: -1006815279
+      VolcanoTiles16x16Offset0Padding0_11: -1502957541
+      VolcanoTiles16x16Offset0Padding0_12: -177672528
+      VolcanoTiles16x16Offset0Padding0_13: -993042833
+      VolcanoTiles16x16Offset0Padding0_14: -906142062
+      VolcanoTiles16x16Offset0Padding0_15: 436812781
+      VolcanoTiles16x16Offset0Padding0_16: -566843665
+      VolcanoTiles16x16Offset0Padding0_17: -910267012
+      VolcanoTiles16x16Offset0Padding0_18: -94243662
+      VolcanoTiles16x16Offset0Padding0_19: 1960583606
+      VolcanoTiles16x16Offset0Padding0_2: 1815754700
+      VolcanoTiles16x16Offset0Padding0_20: -1792935714
+      VolcanoTiles16x16Offset0Padding0_21: 1546846838
+      VolcanoTiles16x16Offset0Padding0_22: 1520762763
+      VolcanoTiles16x16Offset0Padding0_23: -894412302
+      VolcanoTiles16x16Offset0Padding0_24: 1977450282
+      VolcanoTiles16x16Offset0Padding0_25: -1099680551
+      VolcanoTiles16x16Offset0Padding0_26: -454153275
+      VolcanoTiles16x16Offset0Padding0_3: 656469135
+      VolcanoTiles16x16Offset0Padding0_4: -169261706
+      VolcanoTiles16x16Offset0Padding0_5: -1895340029
+      VolcanoTiles16x16Offset0Padding0_6: -1226460515
+      VolcanoTiles16x16Offset0Padding0_7: -104885420
+      VolcanoTiles16x16Offset0Padding0_8: 118379823
+      VolcanoTiles16x16Offset0Padding0_9: 294010025
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
