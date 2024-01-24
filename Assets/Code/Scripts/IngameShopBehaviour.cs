@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +7,7 @@ public class IngameShopBehaviour : MonoBehaviour, IInteractable
 {
     public List<IngameItem> itemPool;
     public List<IngameItem> shopItems = new(capacity: 4);
-    public void Awake() { itemPool = new() { new HigherJump(), new Regenerate() }; }
+    public void Awake() { itemPool = new() { new HigherJump(), new Regenerate(), new BonusScore() }; }
 
     public void Interact()
     {
@@ -29,7 +27,9 @@ public class IngameShopBehaviour : MonoBehaviour, IInteractable
             randomItem.Init();
 
             GameObject mainItem = GameManager.Instance.shopUI.transform.Find($"Item {i}").gameObject;
-            mainItem.transform.Find("Panel").Find("Button").GetComponent<Button>().onClick.AddListener(() => randomItem.Click());
+            Button button = mainItem.transform.Find("Panel").Find("Button").GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() => randomItem.Click());
             mainItem.transform.Find("Item Text").GetComponent<Text>().text = randomItem.powerupName;
             mainItem.transform.Find("Price").GetComponent<Text>().text = randomItem.price.ToString();
         }

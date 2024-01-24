@@ -139,7 +139,6 @@ public class GameManager : MonoBehaviour
         {
             player.playerRB.velocity = new Vector2(player.playerRB.velocity.x, maxFallSpd);
         }
-        Debug.Log(score);
     }
 
     public void EnableShopGUI() { shopUI.SetActive(true); }
