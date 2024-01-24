@@ -10,5 +10,6 @@ public class HeartDisplay : MonoBehaviour
     public void SwapMySprite()
     {
         heartRender.sprite = emptyHeart;
+        GameManager.Instance.bonus = 1;
     }
 }

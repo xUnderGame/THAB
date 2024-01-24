@@ -100,11 +100,11 @@ public class PlayerMovement : LaneBehaviour, IDamageable
     }
 
     // Checks if the player is grounded.
-    //public bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; }
-    public bool IsGrounded()
-    {
-        return putoSuelo.isGrounded;
-    }
+    public bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; }
+    //public bool IsGrounded()
+    //{
+    //    return putoSuelo.isGrounded;
+    //}
 
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)

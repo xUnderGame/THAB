@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public int souls;
     public float meters;
     public float score;
+    public int bonus = 1;
 
     private readonly int maxFallSpd = -50;
     
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Distance());
         StartCoroutine(BackToPosition());
         StartCoroutine(ScoreByMeters());
+        StartCoroutine(NoHitBonus());
     }
     // Enumerator for the corroutine
     IEnumerator SpeedUp(float maxSpeed)
@@ -116,12 +118,20 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            score += 1f;
+            ChangeScore(1);
             distanceDisplay.text = $"{score} m";
             yield return new WaitForSeconds(5/gameSpeed);
         }
     }
 
+    IEnumerator NoHitBonus()
+    {
+        while(bonus < 6)
+        {
+            bonus += 1;
+            yield return new WaitForSeconds(15/gameSpeed);
+        }
+    }
 
     // Adds to the player amount of souls
     public void ChangeSouls(int amount, bool forceSet = false)
@@ -152,5 +162,12 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
         Destroy(gameObject); // Destroys GameManager after leaving the game scene
+    }
+
+    // Adds to the player amount of souls
+    public void ChangeScore(int amount, bool forceSet = false)
+    {
+        if (forceSet) score = amount;
+        else score += amount * bonus;
     }
 }
