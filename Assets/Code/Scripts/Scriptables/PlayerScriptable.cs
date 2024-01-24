@@ -14,6 +14,7 @@ public class PlayerScriptable : ScriptableObject, IDamageable
 
     // Checks if you are allowed to kill the player or disable the shield
     public void HurtPlayer(GameObject go) {
+        GameManager.Instance.bonus = 1;
         if (isShieldEnabled) DisableShield();
         else Kill(go);
     }
