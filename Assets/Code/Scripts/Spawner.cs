@@ -10,8 +10,11 @@ public class Spawner : MonoBehaviour
     [HideInInspector] public List<GameObject> markedPlatforms;
     [HideInInspector] public List<GameObject> platformPrefabs;
     [HideInInspector] public List<GameObject> powerupPrefabs;
+    [HideInInspector] public List<GameObject> enemyPrefabs;
+    [HideInInspector] public GameObject soulPrefab;
 
     private int nextPowerup = 0;
+    private int nextEnemy = 0;
     private readonly float minimumSpawnPosition = 25f;
     private readonly int[] laneTags = { 8, 9 };
 
@@ -19,6 +22,7 @@ public class Spawner : MonoBehaviour
     {
         platformPrefabs = Resources.LoadAll<GameObject>("Platforms").ToList();
         powerupPrefabs = Resources.LoadAll<GameObject>("Powerups").ToList();
+        enemyPrefabs = Resources.LoadAll<GameObject>("Enemies").ToList();
     }
 
     void Start()
@@ -32,6 +36,7 @@ public class Spawner : MonoBehaviour
 
         // Spawn two platforms
         StartCoroutine(SelectPowerup());
+        StartCoroutine(SelectEnemy());
         MakePlatform(true);
         MakePlatform(false);
     }
@@ -94,6 +99,26 @@ public class Spawner : MonoBehaviour
             }
         }
 
+        // Spawn enemies on the platform
+        if (nextEnemy != 0) {
+            List<GameObject> enemyPositions = tempPlatform.transform.GetComponentsInChildren<Transform>()
+            .Where(isValid => isValid.name.Contains("EnemyPosition"))
+            .Select(position => position.gameObject).ToList();
+
+            // At least one powerup position available
+            if (enemyPositions.Count != 0) {
+                // Instantiates it
+                Instantiate(enemyPrefabs[nextEnemy - 1], 
+                enemyPositions[Random.Range(0, enemyPrefabs.Count - 1)].transform.position,
+                Quaternion.identity,
+                tempPlatform.transform);
+
+                // Marks the next platform, now it MUST spawn a powerup in one of the available locations.
+                StartCoroutine(SelectEnemy());
+                nextEnemy = 0;
+            }
+        }
+
         // Changes layer of all children
         foreach (var child in tempPlatform.GetComponentsInChildren<Transform>()) { child.transform.gameObject.layer = tempPlatform.layer; }
 
@@ -117,6 +142,12 @@ public class Spawner : MonoBehaviour
 
     public IEnumerator SelectPowerup() {
         yield return new WaitForSeconds(10f);
-        nextPowerup = Random.Range(1, 3);
+        nextPowerup = Random.Range(1, powerupPrefabs.Count);
     }
+
+    public IEnumerator SelectEnemy() {
+        yield return new WaitForSeconds(12f);
+        nextEnemy = Random.Range(1, enemyPrefabs.Count);
+    }
+
 }

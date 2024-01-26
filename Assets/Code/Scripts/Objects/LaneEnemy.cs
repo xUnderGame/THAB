@@ -11,7 +11,7 @@ public class LaneEnemy : LaneBehaviour, IDamageable
     void Update()
     {
         // Swaps lanes when position passes a threshold
-        if (transform.position.x <= 4 && !hasSwapped)
+        if (transform.position.x <= 20 && !hasSwapped)
         {
             hasSwapped = true;
             SwapLane(gameObject.layer == 7,

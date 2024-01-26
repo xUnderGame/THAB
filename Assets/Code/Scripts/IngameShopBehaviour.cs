@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Collider2D))]
 public class IngameShopBehaviour : MonoBehaviour, IInteractable
 {
     public List<IngameItem> itemPool;

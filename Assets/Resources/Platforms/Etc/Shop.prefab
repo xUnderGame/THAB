@@ -14977,8 +14977,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7484610212938731233}
   - component: {fileID: 5772826731423304127}
-  - component: {fileID: 503042393111491100}
-  - component: {fileID: 1540613083813718029}
+  - component: {fileID: 809746903623916984}
+  - component: {fileID: 3950722489182287660}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -15053,7 +15053,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &503042393111491100
+--- !u!61 &809746903623916984
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15098,7 +15098,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1540613083813718029
+--- !u!114 &3950722489182287660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15110,5 +15110,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7ce201dec2a8543b88568113a577d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPool: []
-  shopItems: []
