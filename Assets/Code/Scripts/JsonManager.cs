@@ -38,16 +38,18 @@ public class JsonManager : MonoBehaviour
 public class UserData
 {
     public int souls;
-    public Highscore highscore;
-    public Upgrades upgrades;
-    public Achievements achievements;
+    [SerializeField] public Highscore highscore;
+    [SerializeField] public Upgrades upgrades;
+    [SerializeField] public Achievements achievements;
 
+    [Serializable]
     public class Achievements
     {
         public bool die;
         public bool die100;
     }
 
+    [Serializable]
     public class Forcefield
     {
         public int currentLevel;
@@ -58,46 +60,53 @@ public class UserData
         public L5 L5;
     }
 
+    [Serializable]
     public class Highscore
     {
         public int total;
     }
 
+    [Serializable]
     public class L1
     {
-        public int nextUpgradeCost = 300;
+        public int nextUpgradeCost;
         public int duration;
         public int hits;
     }
 
+    [Serializable]
     public class L2
     {
-        public int nextUpgradeCost = 350;
+        public int nextUpgradeCost;
         public double duration;
         public int hits;
     }
 
+    [Serializable]
     public class L3
     {
-        public int nextUpgradeCost = 400;
+        public int nextUpgradeCost;
         public int duration;
         public int hits;
     }
 
+    [Serializable]
     public class L4
     {
-        public int nextUpgradeCost = 450;
+        public int nextUpgradeCost;
         public double duration;
         public int hits;
     }
 
+    [Serializable]
     public class L5
     {
-        public int nextUpgradeCost = 500;
+        public int nextUpgradeCost;
         public int duration;
         public int hits;
     }
 
+    [Serializable]
     public class Magnet
     {
         public int currentLevel;
@@ -108,6 +117,7 @@ public class UserData
         public L5 L5;
     }
 
+    [Serializable]
     public class Root
     {
         public int souls;
@@ -116,6 +126,7 @@ public class UserData
         public Achievements achievements;
     }
 
+    [Serializable]
     public class Upgrades
     {
         public Magnet magnet;

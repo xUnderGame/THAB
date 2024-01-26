@@ -103,3 +103,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartRender: {fileID: 8215070626315759712}
   emptyHeart: {fileID: 21300000, guid: 9918840eb58b23544b67679851c4f546, type: 3}
+  filledHeart: {fileID: 21300000, guid: 7520c78f976073c46929bf25cd4f3d12, type: 3}

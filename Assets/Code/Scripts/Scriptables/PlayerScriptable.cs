@@ -14,6 +14,7 @@ public class PlayerScriptable : ScriptableObject, IDamageable
 
     // Checks if you are allowed to kill the player or disable the shield
     public void HurtPlayer(GameObject go) {
+        GameManager.Instance.bonus = 1;
         if (isShieldEnabled) DisableShield();
         else Kill(go);
     }
@@ -33,7 +34,7 @@ public class PlayerScriptable : ScriptableObject, IDamageable
         GameManager.Instance.player.playerObject.transform.position = new Vector3(GameManager.Instance.player.playerObject.transform.position.x + 2f, 12.5f, GameManager.Instance.player.playerObject.transform.position.z);
 
         // Change number of remaining lives
-        GameManager.Instance.livesDisplay.GetComponent<Lifebar>().Lives();
+        GameManager.Instance.livesDisplay.GetComponent<Lifebar>().Lives(false);
     }
 
     // Toggles ON/OFF the game over GUI
