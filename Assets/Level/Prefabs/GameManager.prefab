@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4450033039894841511}
   - component: {fileID: 2660657952552351274}
   - component: {fileID: 3779494366347034895}
+  - component: {fileID: -5481828142296447824}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,12 +47,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027b767920ce49943a7bd959bfc59366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  achievements: {fileID: -5481828142296447824}
   player: {fileID: 11400000, guid: 43f05ecda872d7e4a8ea729f0e7c01c7, type: 2}
-  shieldObject: {fileID: 0}
-  fireballPrefab: {fileID: 7566975623693098253, guid: 442b421b813d99f488a0bf60bf00a6d5, type: 3}
   soulsDisplay: {fileID: 0}
+  distanceDisplay: {fileID: 0}
+  livesDisplay: {fileID: 0}
   gameSpeed: 0
+  spawningGap: 0
+  UI: {fileID: 0}
+  shopUI: {fileID: 0}
+  pm: {fileID: 0}
+  putoSuelo: {fileID: 0}
+  lives: 0
+  currentLane: 0
+  currentShop: {fileID: 0}
+  alive: 0
   souls: 0
+  meters: 0
 --- !u!114 &2660657952552351274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,6 +89,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15f9d29cb2adb34eb4ea22c66707d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameCounter: 0
-  defaultCounter: 0
   grids: []
+  markedPlatforms: []
+  platformPrefabs: []
+  powerupPrefabs: []
+--- !u!114 &-5481828142296447824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4965776230141255807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95596119701c50445b03ac95d6524af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
