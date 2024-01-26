@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,22 +17,23 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float spawningGap;
     [HideInInspector] public GameObject UI;
     [HideInInspector] public GameObject shopUI;
+    [HideInInspector] public List<IngameItem> ingameItems;
     [HideInInspector] public PlayerMovement pm;
     [HideInInspector] public Transform putoSuelo;
+    [HideInInspector] public int maxLives;
     [HideInInspector] public int lives;
 
     public bool currentLane;
     public IngameShopBehaviour currentShop;
-    public bool alive;
     public int souls;
     public float meters;
     public float score;
+    public int bonus = 1;
 
     private readonly int maxFallSpd = -50;
     
     void Awake()
     {
-        alive = true;
         // Only one GameManager on scene.
         if (!Instance) Instance = this;
         else { Destroy(gameObject); return; }
@@ -57,17 +58,20 @@ public class GameManager : MonoBehaviour
         Physics2D.IgnoreCollision(player.playerObject.GetComponent<Collider2D>(), putoSuelo.gameObject.GetComponent<Collider2D>());
         
         // Setting stuff up
+        Resources.LoadAll<GameObject>("Items").ToList().ForEach(item => { ingameItems.Add(item.GetComponent<IngameItem>()); });
         player.DisableShield();
         spawningGap = 18f;
         gameSpeed = 1f;
-        souls = 0;
+        maxLives = 7;
         lives = 7;
+        souls = 0;
 
         // Game speed corroutine, can change later
         StartCoroutine(SpeedUp(1.2f));
         StartCoroutine(Distance());
         StartCoroutine(BackToPosition());
         StartCoroutine(ScoreByMeters());
+        StartCoroutine(NoHitBonus());
     }
     // Enumerator for the corroutine
     IEnumerator SpeedUp(float maxSpeed)
@@ -116,12 +120,20 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            score += 1f;
+            ChangeScore(1);
             distanceDisplay.text = $"{score} m";
             yield return new WaitForSeconds(5/gameSpeed);
         }
     }
 
+    IEnumerator NoHitBonus()
+    {
+        while(bonus < 6)
+        {
+            bonus += 1;
+            yield return new WaitForSeconds(15/gameSpeed);
+        }
+    }
 
     // Adds to the player amount of souls
     public void ChangeSouls(int amount, bool forceSet = false)
@@ -137,7 +149,6 @@ public class GameManager : MonoBehaviour
         {
             player.playerRB.velocity = new Vector2(player.playerRB.velocity.x, maxFallSpd);
         }
-        Debug.Log(score);
     }
 
     public void EnableShopGUI() { shopUI.SetActive(true); }
@@ -152,5 +163,12 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
         Destroy(gameObject); // Destroys GameManager after leaving the game scene
+    }
+
+    // Adds to the player amount of souls
+    public void ChangeScore(int amount, bool forceSet = false)
+    {
+        if (forceSet) score = amount;
+        else score += amount * bonus;
     }
 }

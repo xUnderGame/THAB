@@ -18,6 +18,8 @@ public class PlayerMovement : LaneBehaviour, IDamageable
     private PutoSuelo putoSuelo;
     private LaneBehaviour lb;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,8 @@ public class PlayerMovement : LaneBehaviour, IDamageable
             GameManager.Instance.player.playerRB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
             coyoteTimeCounter = 0f;
             bufferTimeCounter = 0f;
+
+            animator.SetBool("Jump", true);
         }
 
         // Makes the player "slide"
@@ -90,7 +94,12 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         }
 
         // Coyote time
-        if (IsGrounded()) { lb.temp = null; coyoteTimeCounter = coyoteTime; }
+        if (IsGrounded()) 
+        {
+            animator.SetBool("Jump", false);
+
+            lb.temp = null; coyoteTimeCounter = coyoteTime; 
+        }
         else coyoteTimeCounter -= Time.deltaTime;
 
         // Buffer time
@@ -101,10 +110,10 @@ public class PlayerMovement : LaneBehaviour, IDamageable
 
     // Checks if the player is grounded.
     public bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; }
-    /*public bool IsGrounded()
-    {
-        return putoSuelo.isGrounded;
-    }*/
+    //public bool IsGrounded()
+    //{
+    //    return putoSuelo.isGrounded;
+    //}
 
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)

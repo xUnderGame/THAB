@@ -19,6 +19,7 @@ public class Powerup : MonoBehaviour, IInteractable
     // Interact with the object
     public virtual void Interact() {
         ((Powerup)GameManager.Instance.player.playerObject.GetComponent(selectedPowerup.ToString())).Activate();
+        GameManager.Instance.ChangeScore(3);
         Destroy(gameObject);
     }
 
