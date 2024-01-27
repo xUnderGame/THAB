@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, IDamageable
+public class Bullet : MonoBehaviour
 {
     public float projectileSpeed = 0.5f;
     public bool direction = true;
@@ -19,9 +16,9 @@ public class Bullet : MonoBehaviour, IDamageable
     // Borrar bala al salir de la pantalla (solo funciona en game/build mode)
     private void OnBecameInvisible() { Destroy(gameObject); }
 
-    public void Kill(GameObject go)
+    public void OnTriggerEnter2D(Collider2D go)
     {
-        if (go.CompareTag("Player") && !gameObject.name.Contains("Fireball")) { GameManager.Instance.player.HurtPlayer(go); Destroy(gameObject); }
+        Debug.Log(go.name);
         if (go.TryGetComponent(out IDamageable test)) { test?.Kill(gameObject); Destroy(gameObject); }
     }
 }

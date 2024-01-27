@@ -21,9 +21,13 @@ public class LaneEnemy : LaneBehaviour, IDamageable
     }
 
     // Collision actions
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.TryGetComponent(out IDamageable test)) test?.Kill(gameObject);
+        if (collision.gameObject.TryGetComponent(out IDamageable test))
+        {
+            test?.Kill(gameObject);
+            Destroy(gameObject);
+        }
     }
 
     public void Kill(GameObject go)

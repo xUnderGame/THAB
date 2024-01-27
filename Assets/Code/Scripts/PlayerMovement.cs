@@ -58,7 +58,6 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         if (Input.GetKey(KeyCode.DownArrow) && !IsGrounded() && boxCollider.enabled)
         {
             // Increase gravity while player is on air
-            Debug.Log(fallForce * Time.deltaTime * Vector2.down);
             GameManager.Instance.player.playerRB.AddForce(fallForce * Time.deltaTime * Vector2.down, ForceMode2D.Impulse);
         }
 
@@ -111,10 +110,10 @@ public class PlayerMovement : LaneBehaviour, IDamageable
 
     // Checks if the player is grounded.
     public bool IsGrounded() { return GameManager.Instance.player.playerRB.velocity.y == 0; }
-    //public bool IsGrounded()
-    //{
+    // public bool IsGrounded()
+    // {
     //    return putoSuelo.isGrounded;
-    //}
+    // }
 
     // Collision actions
     private void OnTriggerEnter2D(Collider2D collision)

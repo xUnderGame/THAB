@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -23,6 +20,7 @@ public class PlayerScriptable : ScriptableObject, IDamageable
     public void Kill(GameObject go) {
         GameManager.Instance.lives--;
         GameManager.Instance.achievements.Ach2DoubleDeath();
+        
         // Gameover condition
         if (GameManager.Instance.lives < 1)
         {

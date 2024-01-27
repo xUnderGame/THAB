@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public readonly float globalCD = 0.5f;
     [HideInInspector] public TMP_Text soulsDisplay;
     [HideInInspector] public TMP_Text distanceDisplay;
+    [HideInInspector] public TMP_Text scoreDisplay;
     [HideInInspector] public GameObject livesDisplay;
     [HideInInspector] public GameObject achievementPopUp;
     [HideInInspector] public TMP_Text achDesc;
@@ -55,11 +56,13 @@ public class GameManager : MonoBehaviour
         UI = GameObject.Find("Game UI");
         soulsDisplay = UI.transform.Find("Displays").Find("SoulsDisplay").GetComponent<TMP_Text>();
         distanceDisplay = UI.transform.Find("Displays").Find("DistanceDisplay").GetComponent<TMP_Text>();
+        scoreDisplay = UI.transform.Find("Displays").Find("ScoreDisplay").GetComponent<TMP_Text>();
         shopUI = UI.transform.Find("Ingame Shop").gameObject;
         livesDisplay = UI.transform.Find("Displays").Find("LivesDisplay").gameObject;
         achievementPopUp = UI.transform.Find("Displays").Find("AchievementPopUp").gameObject;
         achName = UI.transform.Find("Displays").Find("AchievementPopUp").Find("AchName").GetComponent<TMP_Text>();
         achDesc = UI.transform.Find("Displays").Find("AchievementPopUp").Find("AchDesc").GetComponent<TMP_Text>();
+        
         // Grounded check
         putoSuelo = player.playerObject.transform.Find("PutoSuelo").transform;
         Physics2D.IgnoreCollision(player.playerObject.GetComponent<Collider2D>(), putoSuelo.gameObject.GetComponent<Collider2D>());
@@ -73,12 +76,13 @@ public class GameManager : MonoBehaviour
         lastSouls = 0;
         maxLives = 7;
         lives = 7;
+        meters = 0;
 
         // Game speed corroutine, can change later
         StartCoroutine(SpeedUp(1.2f));
-        StartCoroutine(Distance());
+        StartCoroutine(UpdateDistance());
         StartCoroutine(BackToPosition());
-        StartCoroutine(ScoreByMeters());
+        StartCoroutine(PassiveScore());
         StartCoroutine(NoHitBonus());
     }
     // Enumerator for the corroutine
@@ -93,7 +97,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator Distance()
+    IEnumerator UpdateDistance()
     {
         while (true)
         {
@@ -124,13 +128,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator ScoreByMeters()
+    IEnumerator PassiveScore()
     {
         while (true)
         {
             ChangeScore(1);
-            distanceDisplay.text = $"{score} m";
-            yield return new WaitForSeconds(5/gameSpeed);
+            scoreDisplay.text = $"{score} x{bonus}";
+            yield return new WaitForSeconds(1 / gameSpeed);
         }
     }
 
@@ -139,7 +143,7 @@ public class GameManager : MonoBehaviour
         while(bonus < 6)
         {
             bonus += 1;
-            yield return new WaitForSeconds(15/gameSpeed);
+            yield return new WaitForSeconds(15 / gameSpeed);
         }
     }
 
@@ -163,8 +167,6 @@ public class GameManager : MonoBehaviour
 
     public void EnableShopGUI() { shopUI.SetActive(true); }
 
-
-
     public void DisableShopGUI()
     {
         shopUI.SetActive(false);
@@ -176,7 +178,7 @@ public class GameManager : MonoBehaviour
         if(achName != null) achName.text = name;
         if (achDesc != null) achDesc.text = descrip;
         if (achievementPopUp != null) achievementPopUp.SetActive(true);
-        Debug.Log(achName+" "+achDesc+" "+achievementPopUp);
+        // Debug.Log(achName+" "+achDesc+" "+achievementPopUp);
     }
     public void DisablePopUp()
     {

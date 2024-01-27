@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,22 +17,17 @@ public class Achievements : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Array.Fill(achTracker, false);
         respawned = false;
-
-        for (int i = 0;i<achTracker.Length;i++)
-        {
-            achTracker[i] = false;
-            travel = 0;
-            traveLane = 0;
-            quickDeath = 0;
-            shot = 0;
-        }
+        travel = 0;
+        traveLane = 0;
+        quickDeath = 0;
+        shot = 0;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if (!achTracker[0]) {
             //to be replaced with exact distance travelled
             if (travel+150 < GameManager.Instance.meters) {

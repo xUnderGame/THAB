@@ -147,7 +147,7 @@ public class Spawner : MonoBehaviour
 
     public IEnumerator SelectEnemy() {
         yield return new WaitForSeconds(12f);
-        nextEnemy = Random.Range(1, enemyPrefabs.Count);
+        nextEnemy = Random.Range(1, enemyPrefabs.Count + 1);
     }
 
 }
