@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : LaneBehaviour, IDamageable
 {
-    public int force = 20;
-    public float fallForce = 0.5f;
+    [HideInInspector] public float fallForce;
+    [HideInInspector] public int force;
     public Vector2 boxSize;
     public float castDistance;
 
@@ -23,6 +21,8 @@ public class PlayerMovement : LaneBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        fallForce = 100f;
+        force = 20;
         gun = GetComponent<ShootingBehaviour>();
         boxCollider = GetComponent<BoxCollider2D>();
         lb = GetComponent<LaneBehaviour>();
@@ -58,7 +58,8 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         if (Input.GetKey(KeyCode.DownArrow) && !IsGrounded() && boxCollider.enabled)
         {
             // Increase gravity while player is on air
-            GameManager.Instance.player.playerRB.AddForce(Vector2.down * fallForce, ForceMode2D.Impulse);
+            Debug.Log(fallForce * Time.deltaTime * Vector2.down);
+            GameManager.Instance.player.playerRB.AddForce(fallForce * Time.deltaTime * Vector2.down, ForceMode2D.Impulse);
         }
 
         // Revert back from sliding
@@ -77,7 +78,7 @@ public class PlayerMovement : LaneBehaviour, IDamageable
             GameManager.Instance.player.playerRB,
             GameManager.Instance.player.playerObject
             );
-           putoSuelo.gameObject.layer = gameObject.layer;
+            putoSuelo.gameObject.layer = gameObject.layer;
         }
 
         // Enable forcefield
@@ -98,14 +99,14 @@ public class PlayerMovement : LaneBehaviour, IDamageable
         {
             animator.SetBool("Jump", false);
 
-            lb.temp = null; coyoteTimeCounter = coyoteTime; 
+            coyoteTimeCounter = coyoteTime; 
+            lb.temp = null;
         }
         else coyoteTimeCounter -= Time.deltaTime;
 
         // Buffer time
         if (Input.GetKeyDown(KeyCode.UpArrow)) { bufferTimeCounter = bufferTime; }
         else { bufferTimeCounter -= Time.deltaTime; }
-
     }
 
     // Checks if the player is grounded.

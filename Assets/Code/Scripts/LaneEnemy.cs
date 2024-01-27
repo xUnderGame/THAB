@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LaneEnemy : LaneBehaviour, IDamageable
@@ -14,7 +11,7 @@ public class LaneEnemy : LaneBehaviour, IDamageable
         if (transform.position.x <= 20 && !hasSwapped)
         {
             hasSwapped = true;
-            SwapLane(gameObject.layer == 7,
+            SwapLane(gameObject.layer == 8,
                 GetComponent<Rigidbody2D>(),
                 gameObject);
         }

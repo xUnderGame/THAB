@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeartDisplay : MonoBehaviour
 {
-    public SpriteRenderer heartRender;
     public Sprite emptyHeart;
     public Sprite filledHeart;
+    
+    private SpriteRenderer heartRender;
+
+    public void Start() { heartRender = GetComponent<SpriteRenderer>(); }
 
     public void SwapMySprite(bool status)
     {

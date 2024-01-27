@@ -108,7 +108,7 @@ public class Spawner : MonoBehaviour
             // At least one powerup position available
             if (enemyPositions.Count != 0) {
                 // Instantiates it
-                Instantiate(enemyPrefabs[nextEnemy - 1], 
+                GameObject enemy = Instantiate(enemyPrefabs[nextEnemy - 1], 
                 enemyPositions[Random.Range(0, enemyPrefabs.Count - 1)].transform.position,
                 Quaternion.identity,
                 tempPlatform.transform);
