@@ -14,6 +14,7 @@ public class IngameShopBehaviour : MonoBehaviour, IInteractable
         Time.timeScale = 0;
         GameManager.Instance.currentShop = this;
         GetComponent<Collider2D>().enabled = false;
+        GameManager.Instance.ChangeScore(10);
         GameManager.Instance.EnableShopGUI();
         RandomizeItems();
     }

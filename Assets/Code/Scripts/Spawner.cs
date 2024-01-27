@@ -64,15 +64,16 @@ public class Spawner : MonoBehaviour
             rand = Random.Range(0, platformPrefabs.Count - 1);
             tempPlatform = Instantiate(platformPrefabs[rand], new Vector3(100, -3.5f, 2), Quaternion.identity, grids[0].transform);
             tempPlatform.GetComponent<TilemapRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-            // tempPlatform.transform.localScale = new Vector3(0.8f, 0.8f, tempPlatform.transform.localScale.z);
-            // tempPlatform.GetComponent<TilemapCollider2D>().ProcessTilemapChanges();
-            // tempPlatform.GetComponent<CompositeCollider2D>().GenerateGeometry();
             tempPlatform.layer = laneTags[0];
+
+            // Soul colors to match lane
+            tempPlatform.transform.GetComponentsInChildren<SpriteRenderer>()
+            .Where(isValid => isValid.gameObject.name.Contains("Soul")).ToList()
+            .ForEach(soul => soul.color = new Color(0.5f, 0.5f, 0.5f, 1f));
         } else {
             // Bottom platform
             rand = Random.Range(0, platformPrefabs.Count - 1);
             tempPlatform = Instantiate(platformPrefabs[rand], new Vector3(100, -5, 0), Quaternion.identity, grids[1].transform);
-            // tempPlatform.GetComponent<TilemapRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
             tempPlatform.layer = laneTags[1];
         }
 

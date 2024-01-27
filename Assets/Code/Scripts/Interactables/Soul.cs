@@ -9,7 +9,7 @@ public class Soul : MonoBehaviour, IInteractable
         // Da el alma al jugador
         GameManager.Instance.ChangeSouls(value);
         GameManager.Instance.soulsDisplay.text = GameManager.Instance.souls.ToString();
-        GameManager.Instance.ChangeScore(3);
+        GameManager.Instance.ChangeScore(2);
         Destroy(gameObject);
     }
 }

@@ -8,8 +8,9 @@ public abstract class IngameItem
     public abstract void Init();
     public void Click()
     {
-        // if (price > GameManager.Instance.souls) return;
-        GameManager.Instance.souls -= price;
+        if (price > GameManager.Instance.souls) return;
+        GameManager.Instance.ChangeSouls(-price);
+        GameManager.Instance.soulsDisplay.text = GameManager.Instance.souls.ToString();
         Effect();
     }
 }
