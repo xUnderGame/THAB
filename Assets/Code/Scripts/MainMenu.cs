@@ -11,6 +11,11 @@ public class MainMenu : MonoBehaviour
 
     public void MenuShop()
     {
+        SceneManager.LoadScene(3);
+    }
+
+    public void Tutorial()
+    {
         SceneManager.LoadScene(4);
     }
 
