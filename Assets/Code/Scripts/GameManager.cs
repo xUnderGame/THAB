@@ -69,10 +69,17 @@ public class GameManager : MonoBehaviour
         
         // Setting stuff up
         Resources.LoadAll<GameObject>("Items").ToList().ForEach(item => { ingameItems.Add(item.GetComponent<IngameItem>()); });
+        if (JsonManager.Instance)
+        {
+            JsonManager.Instance.LoadDataJSON();
+            souls = JsonManager.Instance.userData.souls;
+            soulsDisplay.text = souls.ToString();
+        }
+        else souls = 0;
+        
         player.DisableShield();
         spawningGap = 18f;
         gameSpeed = 1f;
-        souls = 0;
         lastSouls = 0;
         maxLives = 7;
         lives = 7;
@@ -183,7 +190,7 @@ public class GameManager : MonoBehaviour
     public void DisablePopUp()
     {
         if (achievementPopUp != null) achievementPopUp.SetActive(false);
-        Debug.Log(achName + " " + achDesc + " " + achievementPopUp);
+        // Debug.Log(achName + " " + achDesc + " " + achievementPopUp);
     }
 
     public void LoadScene(string sceneName)

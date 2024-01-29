@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -26,12 +24,14 @@ public class JsonManager : MonoBehaviour
         if (!File.Exists(jsonpath)) SaveDataJSON(defaultData);
 
         // Load the user's json file
-        userData = JsonUtility.FromJson<UserData>(File.ReadAllText(jsonpath));
+        LoadDataJSON();
     }
 
     // Saves the user data with new values
     public void SaveDataJSON(UserData save) { File.WriteAllText(jsonpath, JsonUtility.ToJson(save)); }
+    public void LoadDataJSON() { userData = JsonUtility.FromJson<UserData>(File.ReadAllText(jsonpath)); }
 }
+
 
 // User data json serializable class
 [Serializable]

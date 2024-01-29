@@ -24,6 +24,8 @@ public class PlayerScriptable : ScriptableObject, IDamageable
         // Gameover condition
         if (GameManager.Instance.lives < 1)
         {
+            JsonManager.Instance.userData.souls = GameManager.Instance.souls;
+            JsonManager.Instance.SaveDataJSON(JsonManager.Instance.userData);
             ToggleGameOverGUI();
             return;
         }
@@ -38,8 +40,6 @@ public class PlayerScriptable : ScriptableObject, IDamageable
     // Toggles ON/OFF the game over GUI
     public void ToggleGameOverGUI() {
         GameManager.Instance.LoadScene("Game Over");
-        // Time.timeScale = 0;
-        // throw new NotImplementedException();
     }
 
     // Turns on the player shield
